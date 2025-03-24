@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c11cb5ad-741d-4854-aa81-c986a0d194f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/INSA/TD/Equipement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/INSA/TD/Poste.java" afterDir="false" />
-    </list>
+    <list default="true" id="c11cb5ad-741d-4854-aa81-c986a0d194f5" name="Changes" comment="création classe Equipement et Poste" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,6 +59,19 @@
       <option name="presentableId" value="Default" />
       <updated>1742829733910</updated>
     </task>
+    <task id="LOCAL-00001" summary="création classe Equipement et Poste">
+      <option name="closed" value="true" />
+      <created>1742831041380</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742831041380</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="création classe Equipement et Poste" />
+    <option name="LAST_COMMIT_MESSAGE" value="création classe Equipement et Poste" />
   </component>
 </project>
