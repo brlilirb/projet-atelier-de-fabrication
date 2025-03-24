@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c11cb5ad-741d-4854-aa81-c986a0d194f5" name="Changes" comment="création classe Equipement et Poste" />
+    <list default="true" id="c11cb5ad-741d-4854-aa81-c986a0d194f5" name="Changes" comment="création classe Equipement et Poste">
+      <change beforePath="$PROJECT_DIR$/src/main/java/INSA/TD/Equipement.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/INSA/TD/Poste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/INSA/TD/Poste.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +35,9 @@
     "accountId": "e39f6bbf-9d80-4110-b554-8cf65b3fab09"
   }
 }]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 0
 }]]></component>
@@ -67,7 +73,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742831041380</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="création classe Equipement et Poste">
+      <option name="closed" value="true" />
+      <created>1742831076803</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742831076803</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
