@@ -6,4 +6,6 @@ public class Poste {
     private String refPoste;
     private String dPoste;
     private ArrayList<Machine> listeMachines;
+
+
 }
