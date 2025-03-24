@@ -7,5 +7,8 @@ public class Gamme {
     private ArrayList<Operation> listeOperations = new ArrayList<>();
     private ArrayList<Equipement> listeEquipements = new ArrayList<>();
 
+    public Gamme (){
+
+    }
 
 }
