@@ -7,5 +7,5 @@ public class Poste extends Equipement {
     private String dPoste;
     private ArrayList<Machine> listeMachines;
 
-
+    //
 }

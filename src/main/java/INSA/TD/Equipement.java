@@ -20,4 +20,5 @@ public abstract class Equipement {
     public void setdEquipement(String dEquipement) {
         this.dEquipement = dEquipement;
     }
+    //
 }

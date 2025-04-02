@@ -7,4 +7,6 @@ public class Machine extends Equipement {
     private float cout;
     private float abscisse;
     private float ordonnee;
+
+    //
 }
