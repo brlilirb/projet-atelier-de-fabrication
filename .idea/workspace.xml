@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c11cb5ad-741d-4854-aa81-c986a0d194f5" name="Changes" comment="branche clément" />
+    <list default="true" id="c11cb5ad-741d-4854-aa81-c986a0d194f5" name="Changes" comment="héritage équipement fait">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/INSA/TD/Poste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/INSA/TD/Poste.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -139,7 +142,23 @@
       <option name="project" value="LOCAL" />
       <updated>1743582577086</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="héritage équipement">
+      <option name="closed" value="true" />
+      <created>1743583433674</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1743583433674</updated>
+    </task>
+    <task id="LOCAL-00011" summary="héritage équipement fait">
+      <option name="closed" value="true" />
+      <created>1743583461061</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1743583461061</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -150,6 +169,8 @@
     <MESSAGE value="classe Gamme début constructeur" />
     <MESSAGE value="classe Gamme constructeur" />
     <MESSAGE value="branche clément" />
-    <option name="LAST_COMMIT_MESSAGE" value="branche clément" />
+    <MESSAGE value="héritage équipement" />
+    <MESSAGE value="héritage équipement fait" />
+    <option name="LAST_COMMIT_MESSAGE" value="héritage équipement fait" />
   </component>
 </project>
