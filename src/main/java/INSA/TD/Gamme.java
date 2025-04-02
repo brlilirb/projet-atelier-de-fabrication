@@ -8,9 +8,9 @@ public class Gamme {
     private ArrayList<Equipement> listeEquipements = new ArrayList<>();
 
     public Gamme (String ref, ArrayList<Operation> ope, ArrayList<Equipement> equipement){
-    ref=this.refGamme;
-    ope=this.listeOperations;
-    equipement=this.listeEquipements;
+    this.refGamme=ref;
+    this.listeOperations=ope;
+    this.listeEquipements=equipement;
     }
 
     public String getRefGamme() {
