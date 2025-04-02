@@ -1,6 +1,6 @@
 package INSA.TD;
 
-public class Machine {
+public class Machine extends Equipement {
     private String refMachine;
     private String dMachine;
     private String type;
