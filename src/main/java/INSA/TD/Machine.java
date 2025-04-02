@@ -8,5 +8,5 @@ public class Machine extends Equipement {
     private float abscisse;
     private float ordonnee;
 
-    //
+
 }
