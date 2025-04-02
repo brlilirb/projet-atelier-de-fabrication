@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c11cb5ad-741d-4854-aa81-c986a0d194f5" name="Changes" comment="héritage équipement fait">
+    <list default="true" id="c11cb5ad-741d-4854-aa81-c986a0d194f5" name="Changes" comment="classe lire + parti classe Poste">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/INSA/TD/Poste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/INSA/TD/Poste.java" afterDir="false" />
     </list>
@@ -54,13 +54,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Clément&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Clément",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Utilisateur/Desktop/Strasbourg/insa/s2/info/TP/TP 2/projet-atelier-de-fabrication/src/main/java/INSA/TD"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Utilisateur\Desktop\Strasbourg\insa\s2\info\TP\TP 2\projet-atelier-de-fabrication\src\main\java\INSA\TD" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -158,7 +164,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743583461061</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="classe lire + parti classe Poste">
+      <option name="closed" value="true" />
+      <created>1743585095716</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1743585095716</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -171,6 +185,7 @@
     <MESSAGE value="branche clément" />
     <MESSAGE value="héritage équipement" />
     <MESSAGE value="héritage équipement fait" />
-    <option name="LAST_COMMIT_MESSAGE" value="héritage équipement fait" />
+    <MESSAGE value="classe lire + parti classe Poste" />
+    <option name="LAST_COMMIT_MESSAGE" value="classe lire + parti classe Poste" />
   </component>
 </project>
