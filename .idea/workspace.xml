@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c11cb5ad-741d-4854-aa81-c986a0d194f5" name="Changes" comment="classe Gamme plus attributs">
+    <list default="true" id="c11cb5ad-741d-4854-aa81-c986a0d194f5" name="Changes" comment="classe Gamme début constructeur">
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/INSA/TD/Gamme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/INSA/TD/Gamme.java" afterDir="false" />
     </list>
@@ -113,7 +114,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742833117495</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="classe Gamme début constructeur">
+      <option name="closed" value="true" />
+      <created>1742833835078</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742833835078</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -121,6 +130,7 @@
     <MESSAGE value="création classe Poste" />
     <MESSAGE value="test" />
     <MESSAGE value="classe Gamme plus attributs" />
-    <option name="LAST_COMMIT_MESSAGE" value="classe Gamme plus attributs" />
+    <MESSAGE value="classe Gamme début constructeur" />
+    <option name="LAST_COMMIT_MESSAGE" value="classe Gamme début constructeur" />
   </component>
 </project>
