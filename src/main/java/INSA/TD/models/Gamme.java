@@ -1,13 +1,15 @@
-package INSA.TD;
+package INSA.TD.models;
 
 import java.util.ArrayList;
 
 public class Gamme {
     private String refGamme;
-    private ArrayList<Operation> listeOperations = new ArrayList<>();
-    private ArrayList<Equipement> listeEquipements = new ArrayList<>();
+    private ArrayList<Operation> listeOperations;
+    private ArrayList<Equipement> listeEquipements;
 
-    public Gamme (String ref, ArrayList<Operation> ope, ArrayList<Equipement> equipement){
+    public Gamme(String ref,
+                 ArrayList<Operation> ope,
+                 ArrayList<Equipement> equipement) {
     this.refGamme=ref;
     this.listeOperations=ope;
     this.listeEquipements=equipement;

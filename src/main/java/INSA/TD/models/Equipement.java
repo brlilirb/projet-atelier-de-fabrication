@@ -1,4 +1,4 @@
-package INSA.TD;
+package INSA.TD.models;
 
 public abstract class Equipement {
 
@@ -19,6 +19,11 @@ public abstract class Equipement {
 
     public void setdEquipement(String dEquipement) {
         this.dEquipement = dEquipement;
+    }
+
+    public void setEquipementProperties(String dEquipement, String refEquipement) {
+        this.dEquipement = dEquipement;
+        this.refEquipement = refEquipement;
     }
 
 }
