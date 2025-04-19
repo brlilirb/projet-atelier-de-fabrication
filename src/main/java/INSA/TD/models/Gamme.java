@@ -2,14 +2,14 @@ package INSA.TD.models;
 
 import java.util.ArrayList;
 
-public class Gamme {
+public class Gamme extends AbstractIdentity {
     private String refGamme;
     private ArrayList<Operation> listeOperations;
 
     public Gamme(String ref,
                  ArrayList<Operation> ope,
                  ArrayList<AbstractIdentity> equipement) {
-        this.refGamme = ref;
+        this.setId(ref);
         this.listeOperations = ope;
     }
 

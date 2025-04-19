@@ -1,6 +1,6 @@
 package INSA.TD.models;
 
-public class Operation extends AbstractIdentity {
+public class Operation extends AbstractDescription {
     private String refEquipement;
     private float dureeOperation; //unite : heure
 

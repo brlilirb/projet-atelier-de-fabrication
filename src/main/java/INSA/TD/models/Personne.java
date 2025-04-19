@@ -1,17 +1,10 @@
 package INSA.TD.models;
 
-public abstract class Personne {
-    private String idPersonne;
+public abstract class Personne extends AbstractIdentity {
+
     private String nom;
+
     private String prenom;
-
-    public String getIdPersonne() {
-        return idPersonne;
-    }
-
-    public void setIdPersonne(String idPersonne) {
-        this.idPersonne = idPersonne;
-    }
 
     public String getNom() {
         return nom;

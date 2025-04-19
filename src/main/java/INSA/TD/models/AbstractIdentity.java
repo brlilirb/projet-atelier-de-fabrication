@@ -2,28 +2,14 @@ package INSA.TD.models;
 
 public abstract class AbstractIdentity {
 
-    private String reference;
-    private String designation;
+    private String id;
 
-    public String getReference() {
-        return reference;
+    public String getId() {
+        return id;
     }
 
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
-
-    public void setProperties(String designation, String reference) {
-        this.designation = designation;
-        this.reference = reference;
+    public void setId(String id) {
+        this.id = id;
     }
 
 }
