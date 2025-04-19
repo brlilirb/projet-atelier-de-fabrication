@@ -10,4 +10,12 @@ public class Operateur extends Personne {
         this.setPrenom(prenom);
         this.libre = true;
     }
+
+    public boolean isLibre() {
+        return libre;
+    }
+
+    public void setLibre(boolean libre) {
+        this.libre = libre;
+    }
 }

@@ -1,43 +1,24 @@
 package INSA.TD.models;
 
-public class Operation {
-    private String refOperation;
-    private String dOperation;
-    private String refequipement;
+public class Operation extends AbstractIdentity {
+    private String refEquipement;
     private float dureeOperation; //unite : heure
 
     public Operation(String refOperation,
                      String dOperation,
                      String refequipement,
                      float dureeOperation) {
-        this.refOperation = refOperation;
-        this.dOperation = dOperation;
-        this.refequipement = refequipement;
+        this.setProperties(dOperation, refOperation);
+        this.refEquipement = refequipement;
         this.dureeOperation = dureeOperation;
     }
 
-    public String getRefOperation() {
-        return refOperation;
+    public String getRefEquipement() {
+        return refEquipement;
     }
 
-    public void setRefOperation(String refOperation) {
-        this.refOperation = refOperation;
-    }
-
-    public String getdOperation() {
-        return dOperation;
-    }
-
-    public void setdOperation(String dOperation) {
-        this.dOperation = dOperation;
-    }
-
-    public String getRefequipement() {
-        return refequipement;
-    }
-
-    public void setRefequipement(String refequipement) {
-        this.refequipement = refequipement;
+    public void setRefEquipement(String refEquipement) {
+        this.refEquipement = refEquipement;
     }
 
     public float getDureeOperation() {

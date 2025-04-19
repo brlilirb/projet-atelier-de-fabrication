@@ -5,14 +5,12 @@ import java.util.ArrayList;
 public class Gamme {
     private String refGamme;
     private ArrayList<Operation> listeOperations;
-    private ArrayList<Equipement> listeEquipements;
 
     public Gamme(String ref,
                  ArrayList<Operation> ope,
-                 ArrayList<Equipement> equipement) {
-    this.refGamme=ref;
-    this.listeOperations=ope;
-    this.listeEquipements=equipement;
+                 ArrayList<AbstractIdentity> equipement) {
+        this.refGamme = ref;
+        this.listeOperations = ope;
     }
 
     public String getRefGamme() {
@@ -29,13 +27,5 @@ public class Gamme {
 
     public void setListeOperations(ArrayList<Operation> listeOperations) {
         this.listeOperations = listeOperations;
-    }
-
-    public ArrayList<Equipement> getListeEquipements() {
-        return listeEquipements;
-    }
-
-    public void setListeEquipements(ArrayList<Equipement> listeEquipements) {
-        this.listeEquipements = listeEquipements;
     }
 }

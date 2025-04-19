@@ -3,8 +3,7 @@ package INSA.TD.models;
 public class Machine extends Equipement {
     private String type;
     private float cout;
-    private float abscisse;
-    private float ordonnee;
+    private Coordonnee coordonnee;
 
     public Machine(String type,
                    float ordonnee,
@@ -13,10 +12,9 @@ public class Machine extends Equipement {
                    String dEquipement,
                    String refEquipement) {
         this.type = type;
-        this.ordonnee = ordonnee;
-        this.abscisse = abscisse;
         this.cout = cout;
-        this.setEquipementProperties(dEquipement, refEquipement);
+        this.setProperties(dEquipement, refEquipement);
+        this.coordonnee = new Coordonnee(abscisse, ordonnee);
     }
 
     public String getType() {
@@ -35,19 +33,11 @@ public class Machine extends Equipement {
         this.cout = cout;
     }
 
-    public float getAbscisse() {
-        return abscisse;
+    public Coordonnee getCoordonnee() {
+        return coordonnee;
     }
 
-    public void setAbscisse(float abscisse) {
-        this.abscisse = abscisse;
-    }
-
-    public float getOrdonnee() {
-        return ordonnee;
-    }
-
-    public void setOrdonnee(float ordonnee) {
-        this.ordonnee = ordonnee;
+    public void setCoordonnee(Coordonnee coordonnee) {
+        this.coordonnee = coordonnee;
     }
 }

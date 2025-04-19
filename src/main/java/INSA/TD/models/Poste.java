@@ -9,7 +9,7 @@ public class Poste extends Equipement {
                  String dEquipement,
                  String refEquipement) {
         this.listeMachines = listeMachines;
-        this.setEquipementProperties(dEquipement, refEquipement);
+        this.setProperties(dEquipement, refEquipement);
     }
 
     public ArrayList<Machine> getListeMachines() {
