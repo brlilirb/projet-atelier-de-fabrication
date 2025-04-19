@@ -1,5 +1,5 @@
 package INSA.TD.views;
 
 public interface View {
-    void afficherMachine();
+    void afficherMachine(String reference);
 }

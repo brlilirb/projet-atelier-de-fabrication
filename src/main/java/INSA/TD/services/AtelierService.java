@@ -1,5 +1,7 @@
 package INSA.TD.services;
 
+import INSA.TD.models.Machine;
+
 public interface AtelierService {
-    String getMachine();
+    Machine getMachine(String reference);
 }

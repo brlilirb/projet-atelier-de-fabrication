@@ -12,7 +12,7 @@ public class AtelierViewImpl implements View {
 
 
     @Override
-    public void afficherMachine() {
-        System.out.println(atelierController.getMachine());
+    public void afficherMachine(String reference) {
+        System.out.println(atelierController.getMachine(reference));
     }
 }

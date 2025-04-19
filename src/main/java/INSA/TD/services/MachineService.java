@@ -1,5 +1,7 @@
 package INSA.TD.services;
 
-public interface MachineService extends Service {
+import INSA.TD.models.Machine;
+
+public interface MachineService extends Service<Machine> {
 
 }

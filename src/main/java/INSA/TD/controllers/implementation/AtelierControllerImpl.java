@@ -2,6 +2,7 @@ package INSA.TD.controllers.implementation;
 
 import INSA.TD.controllers.Controller;
 import INSA.TD.controllers.InitController;
+import INSA.TD.models.Machine;
 import INSA.TD.services.AtelierService;
 import INSA.TD.services.implementation.AtelierServiceImpl;
 import INSA.TD.views.View;
@@ -16,12 +17,12 @@ public class AtelierControllerImpl implements InitController, Controller {
     }
 
     @Override
-    public String getMachine() {
-        return atelierService.getMachine();
+    public Machine getMachine(String reference) {
+        return atelierService.getMachine(reference);
     }
 
     @Override
     public void init() {
-        atelierView.afficherMachine();
+        //atelierView.afficherMachine();
     }
 }
