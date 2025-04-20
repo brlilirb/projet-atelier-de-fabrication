@@ -28,6 +28,11 @@ public class GammeServiceImpl extends IdentityService<Gamme> implements GammeSer
     }
 
     @Override
+    public Gamme update(Gamme entity) {
+        return update(entity, listeGammes);
+    }
+
+    @Override
     public void delete(String id) {
         listeGammes = deleteById(listeGammes, id);
     }

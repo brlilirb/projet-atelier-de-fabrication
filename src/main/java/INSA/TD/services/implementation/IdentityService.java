@@ -45,4 +45,23 @@ public abstract class IdentityService<E extends AbstractIdentity> {
         return entity;
 
     }
+
+    public int getIndexById(List<E> list, E entity) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getId().equals(entity.getId())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public E update(E entity, List<E> list) {
+        int index = getIndexById(list, entity);
+        if (index != -1) {
+            list.set(index, entity);
+            return entity;
+        }
+        list.add(entity);
+        return entity;
+    }
 }

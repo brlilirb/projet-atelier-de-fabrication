@@ -29,6 +29,11 @@ public class OperationServiceImpl extends IdentityService<Operation> implements 
     }
 
     @Override
+    public Operation update(Operation entity) {
+        return update(entity, listeOperations);
+    }
+
+    @Override
     public void delete(String id) {
         listeOperations = deleteById(listeOperations, id);
     }

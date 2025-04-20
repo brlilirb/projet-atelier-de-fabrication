@@ -13,6 +13,10 @@ public class MachineServiceImpl extends IdentityService<Machine> implements Mach
 
     private List<Machine> listeMachines = new ArrayList<>();
 
+    public MachineServiceImpl() {
+        listeMachines.add(new Machine("soudeuse", 2, 3, 300, "soudeuse3000", "fvqergvfk.2324"));
+    }
+
     @Override
     public List<Machine> getAll() {
         return listeMachines;
@@ -26,6 +30,11 @@ public class MachineServiceImpl extends IdentityService<Machine> implements Mach
     @Override
     public Machine add(Machine entity) throws ExistException {
         return add(entity, listeMachines, EXISTE_DEJA);
+    }
+
+    @Override
+    public Machine update(Machine entity) {
+        return update(entity, listeMachines);
     }
 
     @Override

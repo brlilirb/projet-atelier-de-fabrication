@@ -29,6 +29,11 @@ public class PosteServiceImpl extends IdentityService<Poste> implements PosteSer
     }
 
     @Override
+    public Poste update(Poste entity) {
+        return update(entity, listePostes);
+    }
+
+    @Override
     public void delete(String id) {
         listePostes = deleteById(listePostes, id);
     }

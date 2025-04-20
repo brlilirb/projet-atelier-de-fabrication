@@ -12,6 +12,8 @@ public interface Service<E> {
 
     E add(E entity) throws ExistException;
 
+    E update(E entity);
+
     void delete(String id);
 
 }
