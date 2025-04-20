@@ -16,4 +16,16 @@ public abstract class AbstractDescription extends AbstractIdentity {
         this.designation = designation;
         this.setId(id);
     }
+
+    @Override
+    public String toString() {
+        return toString(" ");
+    }
+
+    public String toString(String delimiter) {
+        return super.toString() + delimiter
+                + designation;
+    }
+
+
 }

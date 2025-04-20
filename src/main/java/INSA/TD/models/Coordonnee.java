@@ -26,4 +26,13 @@ public class Coordonnee {
     public void setOrdonnee(float ordonnee) {
         this.ordonnee = ordonnee;
     }
+
+    @Override
+    public String toString() {
+        return toString(" ");
+    }
+
+    public String toString(String delimiter) {
+        return abscisse + delimiter + ordonnee;
+    }
 }

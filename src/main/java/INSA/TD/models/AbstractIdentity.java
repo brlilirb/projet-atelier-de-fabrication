@@ -12,4 +12,8 @@ public abstract class AbstractIdentity {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return id;
+    }
 }

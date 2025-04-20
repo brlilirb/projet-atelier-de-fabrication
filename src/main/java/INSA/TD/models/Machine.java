@@ -40,4 +40,16 @@ public class Machine extends Equipement {
     public void setCoordonnee(Coordonnee coordonnee) {
         this.coordonnee = coordonnee;
     }
+
+    @Override
+    public String toString() {
+        return toString(" ");
+    }
+
+    public String toString(String delimiter) {
+        return super.toString(delimiter) + delimiter
+                + this.type + delimiter
+                + this.cout + delimiter
+                + this.coordonnee;
+    }
 }
