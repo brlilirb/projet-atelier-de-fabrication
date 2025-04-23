@@ -6,11 +6,23 @@ import INSA.TD.services.GammeService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GammeServiceImpl extends IdentityService<Gamme> implements GammeService {
-    private static final String EXISTE_DEJA = "La référence de gamme existe déjà.";
 
+    private static GammeServiceImpl instance;
+    private static final String EXISTE_DEJA = "La référence de gamme existe déjà.";
     private List<Gamme> listeGammes = new ArrayList<>();
+
+    private GammeServiceImpl() {
+    }
+
+    public static GammeService getInstance() {
+        if (Objects.isNull(instance)) {
+            instance = new GammeServiceImpl();
+        }
+        return instance;
+    }
 
     @Override
     public List<Gamme> getAll() {

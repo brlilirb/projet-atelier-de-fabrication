@@ -1,9 +1,31 @@
 package INSA.TD.models;
 
+import INSA.TD.models.etat.machine.Disponible;
+import INSA.TD.models.etat.machine.EtatMachine;
+
 public class Machine extends Equipement {
     private String type;
     private float cout;
     private Coordonnee coordonnee;
+    private EtatMachine etatMachine;
+
+    public Machine(String type,
+                   float ordonnee,
+                   float abscisse,
+                   float cout,
+                   String dEquipement,
+                   String refEquipement,
+                   EtatMachine etatMachine) {
+        this(
+                type,
+                ordonnee,
+                abscisse,
+                cout,
+                dEquipement,
+                refEquipement
+        );
+        this.etatMachine = etatMachine;
+    }
 
     public Machine(String type,
                    float ordonnee,
@@ -15,6 +37,7 @@ public class Machine extends Equipement {
         this.cout = cout;
         this.setProperties(dEquipement, refEquipement);
         this.coordonnee = new Coordonnee(abscisse, ordonnee);
+        this.etatMachine = new Disponible();
     }
 
     public String getType() {
@@ -39,6 +62,14 @@ public class Machine extends Equipement {
 
     public void setCoordonnee(Coordonnee coordonnee) {
         this.coordonnee = coordonnee;
+    }
+
+    public EtatMachine getEtatMachine() {
+        return etatMachine;
+    }
+
+    public void setEtatMachine(EtatMachine etatMachine) {
+        this.etatMachine = etatMachine;
     }
 
     @Override

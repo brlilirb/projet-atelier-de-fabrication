@@ -6,7 +6,7 @@ import INSA.TD.services.MachineService;
 
 public class AtelierServiceImpl implements AtelierService {
 
-    private final MachineService machineService = new MachineServiceImpl();
+    private final MachineService machineService = MachineServiceImpl.getInstance();
 
     @Override
     public Machine getMachine(String reference) {

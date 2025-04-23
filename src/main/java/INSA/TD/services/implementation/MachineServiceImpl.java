@@ -6,15 +6,23 @@ import INSA.TD.services.MachineService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MachineServiceImpl extends IdentityService<Machine> implements MachineService {
 
+    private static MachineServiceImpl instance;
     private static final String EXISTE_DEJA = "La référence de machine existe déjà.";
-
     private List<Machine> listeMachines = new ArrayList<>();
 
-    public MachineServiceImpl() {
-        listeMachines.add(new Machine("soudeuse", 2, 3, 300, "soudeuse3000", "fvqergvfk.2324"));
+    private MachineServiceImpl() {
+        //listeMachines.add(new Machine("soudeuse", 2, 3, 300, "soudeuse3000", "fvqergvfk.2324"));
+    }
+
+    public static MachineService getInstance() {
+        if (Objects.isNull(instance)) {
+            instance = new MachineServiceImpl();
+        }
+        return instance;
     }
 
     @Override
