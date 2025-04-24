@@ -9,7 +9,7 @@ import INSA.TD.views.AtelierView;
 import INSA.TD.views.implementation.AtelierViewImpl;
 
 public class AtelierControllerImpl implements InitController, Controller {
-    private final AtelierService atelierService = new AtelierServiceImpl();
+    private final AtelierService atelierService = AtelierServiceImpl.getInstance();
     private final AtelierView atelierView;
 
     public AtelierControllerImpl() {
