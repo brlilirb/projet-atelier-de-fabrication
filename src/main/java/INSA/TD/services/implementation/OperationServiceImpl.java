@@ -19,4 +19,8 @@ public class OperationServiceImpl extends EntityService<Operation> implements Op
         return instance;
     }
 
+    @Override
+    public String getExistMessage() {
+        return "La référence de l'opération existe déjà.";
+    }
 }

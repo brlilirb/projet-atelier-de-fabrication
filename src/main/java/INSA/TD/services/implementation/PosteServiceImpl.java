@@ -19,4 +19,8 @@ public class PosteServiceImpl extends EntityService<Poste> implements PosteServi
         return instance;
     }
 
+    @Override
+    public String getExistMessage() {
+        return "La référence du poste existe déjà.";
+    }
 }

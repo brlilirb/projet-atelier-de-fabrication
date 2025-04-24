@@ -19,4 +19,8 @@ public class ProduitServiceImpl extends EntityService<Produit> implements Produi
         return instance;
     }
 
+    @Override
+    public String getExistMessage() {
+        return "La référence du produit existe déjà.";
+    }
 }

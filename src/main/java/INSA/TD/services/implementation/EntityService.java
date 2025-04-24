@@ -24,7 +24,7 @@ public class EntityService<T extends AbstractIdentity> extends IdentityService<T
 
     @Override
     public T add(T entity) throws ExistException {
-        return add(entity, entities, EXISTE_DEJA);
+        return add(entity, entities);
     }
 
     @Override
@@ -35,5 +35,10 @@ public class EntityService<T extends AbstractIdentity> extends IdentityService<T
     @Override
     public void delete(String id) {
         entities = deleteById(entities, id);
+    }
+
+    @Override
+    public String getExistMessage() {
+        return EXISTE_DEJA;
     }
 }

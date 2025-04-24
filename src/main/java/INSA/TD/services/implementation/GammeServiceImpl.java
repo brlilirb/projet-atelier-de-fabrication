@@ -19,5 +19,9 @@ public class GammeServiceImpl extends EntityService<Gamme> implements GammeServi
         return instance;
     }
 
+    @Override
+    public String getExistMessage() {
+        return "La référence de la gamme existe déjà.";
+    }
 
 }

@@ -1,5 +1,6 @@
 package INSA.TD.services.implementation;
 
+import INSA.TD.exceptions.ExistException;
 import INSA.TD.models.Machine;
 import INSA.TD.services.MachineService;
 
@@ -10,7 +11,13 @@ public class MachineServiceImpl extends EntityService<Machine> implements Machin
     private static MachineServiceImpl instance;
 
     private MachineServiceImpl() {
-        //listeMachines.add(new Machine("soudeuse", 2, 3, 300, "soudeuse3000", "fvqergvfk.2324"));
+        try {
+            add(new Machine("soudeuse", 2, 3, 300, "soudeuse3000", "fvqergvfk.2324"));
+            add(new Machine("soudeuse", 2, 3, 300, "soudeuse3000", "fvqergvfk.2324"));
+        } catch (ExistException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public static MachineService getInstance() {
@@ -20,5 +27,8 @@ public class MachineServiceImpl extends EntityService<Machine> implements Machin
         return instance;
     }
 
-
+    @Override
+    public String getExistMessage() {
+        return "La référence de la machine existe déjà.";
+    }
 }

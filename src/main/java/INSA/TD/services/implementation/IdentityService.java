@@ -46,6 +46,10 @@ public abstract class IdentityService<E extends AbstractIdentity> {
 
     }
 
+    public E add(E entity, List<E> list) throws ExistException {
+        return add(entity, list, getExistMessage());
+    }
+
     public int getIndexById(List<E> list, E entity) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getId().equals(entity.getId())) {
@@ -64,4 +68,6 @@ public abstract class IdentityService<E extends AbstractIdentity> {
         list.add(entity);
         return entity;
     }
+
+    public abstract String getExistMessage();
 }
