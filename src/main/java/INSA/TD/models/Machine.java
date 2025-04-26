@@ -84,4 +84,9 @@ public class Machine extends Equipement {
                 + this.cout + delimiter
                 + this.coordonnee;
     }
+
+    @Override
+    public double calculerCoutHoraire() {
+        return getCout();
+    }
 }

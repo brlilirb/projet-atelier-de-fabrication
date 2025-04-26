@@ -32,4 +32,11 @@ public class Poste extends Equipement {
         return super.toString(delimiter) + delimiter
                 + ListUtils.listToString(listeMachines);
     }
+
+    @Override
+    public double calculerCoutHoraire() {
+        return listeMachines.stream()
+                .mapToDouble(Machine::getCout)
+                .sum();
+    }
 }
