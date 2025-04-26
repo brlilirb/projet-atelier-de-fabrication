@@ -1,5 +1,7 @@
 package INSA.TD.models;
 
+import INSA.TD.utils.ConstantesUtils;
+
 public class Operation extends AbstractDescription {
     private String refEquipement;
     private float dureeOperation; //unite : heure
@@ -27,5 +29,16 @@ public class Operation extends AbstractDescription {
 
     public void setDureeOperation(float dureeOperation) {
         this.dureeOperation = dureeOperation;
+    }
+
+    @Override
+    public String toString() {
+        return toString(ConstantesUtils.SPACE);
+    }
+
+    public String toString(String delimiter) {
+        return super.toString(delimiter) + delimiter
+                + refEquipement + delimiter
+                + dureeOperation;
     }
 }

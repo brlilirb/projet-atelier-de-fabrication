@@ -1,5 +1,7 @@
 package INSA.TD.models;
 
+import INSA.TD.utils.ConstantesUtils;
+
 public class Operateur extends Personne {
 
     private boolean libre;
@@ -17,5 +19,15 @@ public class Operateur extends Personne {
 
     public void setLibre(boolean libre) {
         this.libre = libre;
+    }
+
+    @Override
+    public String toString() {
+        return toString(ConstantesUtils.SPACE);
+    }
+
+    public String toString(String delimiter) {
+        return super.toString(delimiter) + delimiter
+                + libre;
     }
 }

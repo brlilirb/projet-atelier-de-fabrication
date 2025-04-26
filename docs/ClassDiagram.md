@@ -55,7 +55,9 @@ classDiagram
         -List~Operation~ listeOperations
     }
 
-    class Produit
+    class Produit {
+        -Gamme gamme
+    }
 
     class Equipement {
         <<abstract>>
@@ -98,6 +100,7 @@ classDiagram
         -String type
         -float cout
         -Coordonnee position
+        -EtatMachine etatMachine
     }
     class Poste {
         -List~Machine~ listeMachines
@@ -124,6 +127,8 @@ classDiagram
     Coordonnee --* Machine
     Machine --* "1..." Poste
     Machine *-- EtatMachine
-    Gamme --* "1.." Operation
+    Gamme "1.." *-- Operation
+    Gamme "1.." -- "1.." Produit
+
 ```
 

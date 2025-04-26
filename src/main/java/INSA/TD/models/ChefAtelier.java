@@ -7,4 +7,5 @@ public class ChefAtelier extends Personne {
         this.setNom(nom);
         this.setPrenom(prenom);
     }
+
 }
