@@ -1,5 +1,7 @@
 package INSA.TD.models;
 
+import INSA.TD.utils.ConstantesUtils;
+
 public abstract class Personne extends AbstractIdentity {
 
     private String nom;
@@ -21,4 +23,18 @@ public abstract class Personne extends AbstractIdentity {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
+    @Override
+    public String toString() {
+        return toString(ConstantesUtils.SPACE);
+    }
+
+    public String toString(String delimiter) {
+        return super.toString() + delimiter
+                + nom + delimiter
+                + prenom;
+
+    }
+
+
 }

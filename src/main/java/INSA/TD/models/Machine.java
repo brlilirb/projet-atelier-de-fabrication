@@ -2,6 +2,7 @@ package INSA.TD.models;
 
 import INSA.TD.models.etat.machine.Disponible;
 import INSA.TD.models.etat.machine.EtatMachine;
+import INSA.TD.utils.ConstantesUtils;
 
 public class Machine extends Equipement {
     private String type;
@@ -74,7 +75,7 @@ public class Machine extends Equipement {
 
     @Override
     public String toString() {
-        return toString(" ");
+        return toString(ConstantesUtils.SPACE);
     }
 
     public String toString(String delimiter) {
@@ -82,5 +83,10 @@ public class Machine extends Equipement {
                 + this.type + delimiter
                 + this.cout + delimiter
                 + this.coordonnee;
+    }
+
+    @Override
+    public double calculerCoutHoraire() {
+        return getCout();
     }
 }

@@ -1,5 +1,7 @@
 package INSA.TD.models;
 
+import INSA.TD.utils.ConstantesUtils;
+
 public class Coordonnee {
 
     private float abscisse;
@@ -29,7 +31,7 @@ public class Coordonnee {
 
     @Override
     public String toString() {
-        return toString(" ");
+        return toString(ConstantesUtils.SPACE);
     }
 
     public String toString(String delimiter) {

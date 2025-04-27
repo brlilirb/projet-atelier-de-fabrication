@@ -1,5 +1,7 @@
 package INSA.TD.models;
 
+import INSA.TD.utils.ConstantesUtils;
+
 public abstract class AbstractDescription extends AbstractIdentity {
 
     private String designation;
@@ -19,7 +21,7 @@ public abstract class AbstractDescription extends AbstractIdentity {
 
     @Override
     public String toString() {
-        return toString(" ");
+        return toString(ConstantesUtils.SPACE);
     }
 
     public String toString(String delimiter) {
