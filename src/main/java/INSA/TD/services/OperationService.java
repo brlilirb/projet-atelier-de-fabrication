@@ -8,4 +8,6 @@ public interface OperationService extends Service<Operation> {
     double calculerCout(Operation operation);
 
     double calculerCout(List<Operation> operations);
+
+    double calculerDuree(List<Operation> operations);
 }

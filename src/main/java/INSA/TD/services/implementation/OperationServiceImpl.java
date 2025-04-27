@@ -44,6 +44,13 @@ public class OperationServiceImpl extends EntityService<Operation> implements Op
     }
 
     @Override
+    public double calculerDuree(List<Operation> operations) {
+        return operations.stream()
+                .mapToDouble(Operation::getDureeOperation)
+                .sum();
+    }
+
+    @Override
     public String getExistMessage() {
         return "La référence de l'opération existe déjà.";
     }

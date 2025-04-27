@@ -31,4 +31,9 @@ public class GammeServiceImpl extends EntityService<Gamme> implements GammeServi
     public double calculerCout(Gamme gamme) {
         return operationService.calculerCout(gamme.getListeOperations());
     }
+
+    @Override
+    public double calculerDuree(Gamme gamme) {
+        return operationService.calculerDuree(gamme.getListeOperations());
+    }
 }
