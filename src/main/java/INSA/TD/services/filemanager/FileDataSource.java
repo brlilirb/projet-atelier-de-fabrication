@@ -4,29 +4,50 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class FileDataSource {
 
     private Path path;
 
-    public void checkDirectory() throws IOException {
+    private void checkDirectory() throws IOException {
         Files.createDirectories(path.getParent());
     }
 
-    public abstract <E> void writeData(List<E> data);
+    protected abstract <E> void writeValue(List<E> data) throws Exception;
 
-    public abstract <E> List<E> readData();
+    protected abstract <E> List<E> readValue() throws Exception;
 
-    public Path getPath() {
+    public <E> void writeData(List<E> data) {
+        try {
+            checkDirectory();
+            writeValue(data);
+            System.out.println("Object successfully written to file.");
+        } catch (Exception e) {
+            System.err.println("Error writing object to file: " + e.getMessage());
+        }
+    }
+
+    public <E> List<E> readData() {
+        try {
+            checkDirectory();
+            return readValue();
+        } catch (Exception e) {
+            System.err.println("Error while reading file: " + e.getMessage());
+        }
+        return new ArrayList<>();
+    }
+
+    protected Path getPath() {
         return path;
     }
 
-    public File getPathToFile() {
+    protected File getPathToFile() {
         return getPath().toFile();
     }
 
-    public void setPath(String path) {
+    protected void setPath(String path) {
         this.path = Path.of(path);
     }
 }

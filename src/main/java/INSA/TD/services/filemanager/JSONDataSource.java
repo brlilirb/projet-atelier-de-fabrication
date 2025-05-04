@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 public class JSONDataSource extends FileDataSource {
@@ -16,26 +16,13 @@ public class JSONDataSource extends FileDataSource {
     }
 
     @Override
-    public <E> void writeData(List<E> data) {
-        try {
-            checkDirectory();
-            objectMapper.writeValue(getPathToFile(), data);
-            System.out.println("Object successfully written to file.");
-        } catch (Exception e) {
-            System.err.println("Error writing object to file: " + e.getMessage());
-        }
+    protected <E> void writeValue(List<E> data) throws IOException {
+        objectMapper.writeValue(getPathToFile(), data);
     }
 
     @Override
-    public <E> List<E> readData() {
-        try {
-            checkDirectory();
-            return objectMapper.readValue(getPathToFile(), new TypeReference<>() {
-            });
-        } catch (Exception e) {
-            System.err.println("Erreur lors de la lecture du fichier JSON: " + e.getMessage());
-        }
-        return new ArrayList<>();
+    protected <E> List<E> readValue() throws Exception {
+        return objectMapper.readValue(getPathToFile(), new TypeReference<>() {
+        });
     }
-    //TODO pousser plus loin (refactor)
 }
