@@ -14,9 +14,15 @@ public abstract class EntityService<T extends AbstractIdentity> extends Identity
 
     private static final String EXISTE_DEJA = "La référence existe déjà.";
     private List<T> entities = new ArrayList<>();
-    private DataSource entityDataSource = new EntityDataSource(getFileName());
+    private final DataSource entityDataSource;
 
-    protected abstract String getFileName();
+    EntityService(Class<T> clazz) {
+        entityDataSource = new EntityDataSource(getFileName(clazz), clazz);
+    }
+
+    private String getFileName(Class<T> clazz) {
+        return clazz.getSimpleName().toLowerCase();
+    }
 
     @Override
     public List<T> getAll() {

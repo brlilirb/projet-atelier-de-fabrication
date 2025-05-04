@@ -11,6 +11,7 @@ public class MachineServiceImpl extends EntityService<Machine> implements Machin
     private static MachineServiceImpl instance;
 
     private MachineServiceImpl() {
+        super(Machine.class);
         try {
             add(new Machine("soudeuse", 2, 3, 300, "soudeuse3000", "fvqergvfk.2324"));
             add(new Machine("soudeuse", 2, 3, 300, "soudeuse3000", "uqheguiq.2325")); //TODO à supprimer
@@ -25,11 +26,6 @@ public class MachineServiceImpl extends EntityService<Machine> implements Machin
             instance = new MachineServiceImpl();
         }
         return instance;
-    }
-
-    @Override
-    protected String getFileName() {
-        return Machine.class.getSimpleName().toLowerCase();
     }
 
     @Override

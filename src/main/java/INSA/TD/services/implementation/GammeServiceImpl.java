@@ -13,6 +13,7 @@ public class GammeServiceImpl extends EntityService<Gamme> implements GammeServi
     private final OperationService operationService = OperationServiceImpl.getInstance();
 
     private GammeServiceImpl() {
+        super(Gamme.class);
     }
 
     public static GammeService getInstance() {
@@ -20,11 +21,6 @@ public class GammeServiceImpl extends EntityService<Gamme> implements GammeServi
             instance = new GammeServiceImpl();
         }
         return instance;
-    }
-
-    @Override
-    protected String getFileName() {
-        return Gamme.class.getSimpleName().toLowerCase();
     }
 
     @Override

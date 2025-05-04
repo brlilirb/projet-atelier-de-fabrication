@@ -16,6 +16,7 @@ public class OperationServiceImpl extends EntityService<Operation> implements Op
     private final EquipementService equipementService = EquipementServiceImpl.getInstance();
 
     private OperationServiceImpl() {
+        super(Operation.class);
     }
 
     public static OperationService getInstance() {
@@ -48,11 +49,6 @@ public class OperationServiceImpl extends EntityService<Operation> implements Op
         return operations.stream()
                 .mapToDouble(Operation::getDureeOperation)
                 .sum();
-    }
-
-    @Override
-    protected String getFileName() {
-        return Operation.class.getSimpleName().toLowerCase();
     }
 
     @Override

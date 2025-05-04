@@ -1,18 +1,20 @@
 package INSA.TD.services.files.filemanager;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import INSA.TD.config.ObjectMapperConfig;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.IOException;
 import java.util.List;
 
 public class JSONDataSource extends FileDataSource {
 
-    private final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    private final ObjectMapper objectMapper = ObjectMapperConfig.getObjectMapper();
+    private final Class<?> clazz;
 
-    public JSONDataSource(String path) {
+    public JSONDataSource(String path, Class<?> clazz) {
         setPath(path);
+        this.clazz = clazz;
     }
 
     @Override
@@ -22,12 +24,16 @@ public class JSONDataSource extends FileDataSource {
 
     @Override
     protected <E> List<E> readValue() throws Exception {
-        return objectMapper.readValue(getPathToFile(), new TypeReference<>() {
-        });
+        return objectMapper.readValue(getPathToFile(), getJavaType());
     }
 
     @Override
     protected String getExtension() {
         return ".json";
+    }
+
+    private JavaType getJavaType() {
+        return objectMapper.getTypeFactory()
+                .constructParametricType(List.class, clazz);
     }
 }

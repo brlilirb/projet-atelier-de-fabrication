@@ -10,6 +10,7 @@ public class PosteServiceImpl extends EntityService<Poste> implements PosteServi
     private static PosteServiceImpl instance;
 
     private PosteServiceImpl() {
+        super(Poste.class);
     }
 
     public static PosteService getInstance() {
@@ -17,11 +18,6 @@ public class PosteServiceImpl extends EntityService<Poste> implements PosteServi
             instance = new PosteServiceImpl();
         }
         return instance;
-    }
-
-    @Override
-    protected String getFileName() {
-        return Poste.class.getSimpleName().toLowerCase();
     }
 
     @Override

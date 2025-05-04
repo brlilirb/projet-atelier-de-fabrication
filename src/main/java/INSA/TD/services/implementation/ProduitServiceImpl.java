@@ -10,6 +10,7 @@ public class ProduitServiceImpl extends EntityService<Produit> implements Produi
     private static ProduitService instance;
 
     private ProduitServiceImpl() {
+        super(Produit.class);
     }
 
     public static ProduitService getInstance() {
@@ -17,11 +18,6 @@ public class ProduitServiceImpl extends EntityService<Produit> implements Produi
             instance = new ProduitServiceImpl();
         }
         return instance;
-    }
-
-    @Override
-    protected String getFileName() {
-        return Produit.class.getSimpleName().toLowerCase();
     }
 
     @Override
