@@ -57,4 +57,9 @@ public abstract class EntityService<T extends AbstractIdentity> extends Identity
     public void load() {
         entities = entityDataSource.readData();
     }
+
+    @Override
+    public void deleteAll() {
+        entities.clear();
+    }
 }

@@ -3,12 +3,17 @@ package INSA.TD.models;
 import INSA.TD.models.etat.machine.Disponible;
 import INSA.TD.models.etat.machine.EtatMachine;
 import INSA.TD.utils.ConstantesUtils;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Machine extends Equipement {
     private String type;
     private float cout;
     private Coordonnee coordonnee;
+    @JsonIgnore
     private EtatMachine etatMachine;
+
+    public Machine() {
+    }
 
     public Machine(String type,
                    float ordonnee,
