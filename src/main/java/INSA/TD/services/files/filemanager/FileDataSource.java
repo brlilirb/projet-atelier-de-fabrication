@@ -1,4 +1,4 @@
-package INSA.TD.services.filemanager;
+package INSA.TD.services.files.filemanager;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class FileDataSource {
+public abstract class FileDataSource implements DataSource {
 
     private Path path;
 
@@ -48,7 +48,10 @@ public abstract class FileDataSource {
     }
 
     protected void setPath(String path) {
-        this.path = Path.of(path);
+        this.path = Path.of(path + getExtension()).normalize();
     }
+
+    protected abstract String getExtension();
+
 }
 

@@ -23,6 +23,11 @@ public class GammeServiceImpl extends EntityService<Gamme> implements GammeServi
     }
 
     @Override
+    protected String getFileName() {
+        return Gamme.class.getSimpleName().toLowerCase();
+    }
+
+    @Override
     public String getExistMessage() {
         return "La référence de la gamme existe déjà.";
     }

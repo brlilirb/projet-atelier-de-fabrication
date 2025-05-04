@@ -28,6 +28,11 @@ public class MachineServiceImpl extends EntityService<Machine> implements Machin
     }
 
     @Override
+    protected String getFileName() {
+        return Machine.class.getSimpleName().toLowerCase();
+    }
+
+    @Override
     public String getExistMessage() {
         return "La référence de la machine existe déjà.";
     }

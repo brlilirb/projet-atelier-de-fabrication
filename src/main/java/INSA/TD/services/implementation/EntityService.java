@@ -2,15 +2,21 @@ package INSA.TD.services.implementation;
 
 import INSA.TD.exceptions.ExistException;
 import INSA.TD.models.AbstractIdentity;
+import INSA.TD.services.SaveService;
 import INSA.TD.services.Service;
+import INSA.TD.services.files.EntityDataSource;
+import INSA.TD.services.files.filemanager.DataSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityService<T extends AbstractIdentity> extends IdentityService<T> implements Service<T> {
+public abstract class EntityService<T extends AbstractIdentity> extends IdentityService<T> implements Service<T>, SaveService {
 
     private static final String EXISTE_DEJA = "La référence existe déjà.";
     private List<T> entities = new ArrayList<>();
+    private DataSource entityDataSource = new EntityDataSource(getFileName());
+
+    protected abstract String getFileName();
 
     @Override
     public List<T> getAll() {
@@ -40,5 +46,15 @@ public class EntityService<T extends AbstractIdentity> extends IdentityService<T
     @Override
     public String getExistMessage() {
         return EXISTE_DEJA;
+    }
+
+    @Override
+    public void save() {
+        entityDataSource.writeData(entities);
+    }
+
+    @Override
+    public void load() {
+        entities = entityDataSource.readData();
     }
 }

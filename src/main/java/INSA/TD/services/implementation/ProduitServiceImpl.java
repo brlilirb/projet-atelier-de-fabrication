@@ -20,6 +20,11 @@ public class ProduitServiceImpl extends EntityService<Produit> implements Produi
     }
 
     @Override
+    protected String getFileName() {
+        return Produit.class.getSimpleName().toLowerCase();
+    }
+
+    @Override
     public String getExistMessage() {
         return "La référence du produit existe déjà.";
     }

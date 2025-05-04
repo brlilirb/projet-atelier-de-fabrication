@@ -1,4 +1,4 @@
-package INSA.TD.services.filemanager;
+package INSA.TD.services.files.filemanager;
 
 import INSA.TD.utils.StringUtils;
 
@@ -25,6 +25,11 @@ public class TXTDataSource extends FileDataSource {
     @SuppressWarnings("unchecked")
     protected <E> List<E> readValue() throws Exception {
         return (List<E>) Files.readAllLines(getPath());
+    }
+
+    @Override
+    protected String getExtension() {
+        return ".txt";
     }
 }
 

@@ -20,6 +20,11 @@ public class PosteServiceImpl extends EntityService<Poste> implements PosteServi
     }
 
     @Override
+    protected String getFileName() {
+        return Poste.class.getSimpleName().toLowerCase();
+    }
+
+    @Override
     public String getExistMessage() {
         return "La référence du poste existe déjà.";
     }

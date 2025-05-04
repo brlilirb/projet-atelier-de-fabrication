@@ -51,6 +51,11 @@ public class OperationServiceImpl extends EntityService<Operation> implements Op
     }
 
     @Override
+    protected String getFileName() {
+        return Operation.class.getSimpleName().toLowerCase();
+    }
+
+    @Override
     public String getExistMessage() {
         return "La référence de l'opération existe déjà.";
     }

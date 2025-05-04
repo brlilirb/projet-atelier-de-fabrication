@@ -1,4 +1,4 @@
-package INSA.TD.services.filemanager;
+package INSA.TD.services.files.filemanager;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,5 +24,10 @@ public class JSONDataSource extends FileDataSource {
     protected <E> List<E> readValue() throws Exception {
         return objectMapper.readValue(getPathToFile(), new TypeReference<>() {
         });
+    }
+
+    @Override
+    protected String getExtension() {
+        return ".json";
     }
 }
