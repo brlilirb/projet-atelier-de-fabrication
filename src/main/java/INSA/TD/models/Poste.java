@@ -8,6 +8,9 @@ import java.util.List;
 public class Poste extends Equipement {
     private List<Machine> listeMachines;
 
+    public Poste() {
+    }
+
     public Poste(List<Machine> listeMachines,
                  String dEquipement,
                  String refEquipement) {

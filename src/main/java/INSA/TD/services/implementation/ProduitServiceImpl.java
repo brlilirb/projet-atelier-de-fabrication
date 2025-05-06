@@ -10,7 +10,6 @@ public class ProduitServiceImpl extends EntityService<Produit> implements Produi
     private static ProduitService instance;
 
     private ProduitServiceImpl() {
-        super(Produit.class);
     }
 
     public static ProduitService getInstance() {

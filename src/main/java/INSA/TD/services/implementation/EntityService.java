@@ -6,6 +6,7 @@ import INSA.TD.services.SaveService;
 import INSA.TD.services.Service;
 import INSA.TD.services.files.EntityDataSource;
 import INSA.TD.services.files.filemanager.DataSource;
+import INSA.TD.utils.ClassUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,8 @@ public abstract class EntityService<T extends AbstractIdentity> extends Identity
     private List<T> entities = new ArrayList<>();
     private final DataSource entityDataSource;
 
-    EntityService(Class<T> clazz) {
-        entityDataSource = new EntityDataSource(getFileName(clazz), clazz);
-    }
-
-    private String getFileName(Class<T> clazz) {
-        return clazz.getSimpleName().toLowerCase();
+    EntityService() {
+        this.entityDataSource = new EntityDataSource(ClassUtils.getClassType(getClass())); // Permet de récupérer la classe qui est transmise dans <T>
     }
 
     @Override

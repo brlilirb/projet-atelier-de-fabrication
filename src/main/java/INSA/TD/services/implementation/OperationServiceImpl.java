@@ -16,7 +16,6 @@ public class OperationServiceImpl extends EntityService<Operation> implements Op
     private final EquipementService equipementService = EquipementServiceImpl.getInstance();
 
     private OperationServiceImpl() {
-        super(Operation.class);
     }
 
     public static OperationService getInstance() {

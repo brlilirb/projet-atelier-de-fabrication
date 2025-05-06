@@ -6,7 +6,15 @@ public class EntityDataSource extends AtelierDataSource {
 
     public static final String ENTITIES = "entities/";
 
-    public EntityDataSource(String fileName, Class<?> clazz) {
-        super(new JSONDataSource(ENTITIES + fileName, clazz));
+    public EntityDataSource(Class<?> clazz) {
+        super(new JSONDataSource(getPath(getFileName(clazz)), clazz));
+    }
+
+    private static String getPath(String fileName) {
+        return ENTITIES + fileName;
+    }
+
+    private static String getFileName(Class<?> clazz) {
+        return clazz.getSimpleName().toLowerCase(); // Récupère le nom de la classe pour le transformer en nom de fichier
     }
 }

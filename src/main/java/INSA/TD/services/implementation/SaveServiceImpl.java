@@ -10,6 +10,10 @@ public class SaveServiceImpl implements SaveService {
     private static SaveServiceImpl instance;
 
     private final SaveService machineService = MachineServiceImpl.getInstance();
+    private final SaveService gammeService = GammeServiceImpl.getInstance();
+    private final SaveService operationService = OperationServiceImpl.getInstance();
+    private final SaveService posteService = PosteServiceImpl.getInstance();
+    private final SaveService produitService = ProduitServiceImpl.getInstance();
 
     private SaveServiceImpl() {
     }
@@ -22,9 +26,8 @@ public class SaveServiceImpl implements SaveService {
     }
 
     private List<SaveService> getAllServices() {
-        return List.of(machineService);
+        return List.of(machineService, gammeService, operationService, posteService, produitService);
     }
-    //TODO mettre liste services
 
     @Override
     public void save() {
@@ -34,6 +37,5 @@ public class SaveServiceImpl implements SaveService {
     @Override
     public void load() {
         getAllServices().forEach(SaveService::load);
-
     }
 }

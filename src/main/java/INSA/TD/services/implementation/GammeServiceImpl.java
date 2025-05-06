@@ -13,7 +13,6 @@ public class GammeServiceImpl extends EntityService<Gamme> implements GammeServi
     private final OperationService operationService = OperationServiceImpl.getInstance();
 
     private GammeServiceImpl() {
-        super(Gamme.class);
     }
 
     public static GammeService getInstance() {

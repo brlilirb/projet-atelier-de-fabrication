@@ -9,6 +9,9 @@ public class Gamme extends AbstractIdentity {
     private String refProduit;
     private List<Operation> listeOperations;
 
+    public Gamme() {
+    }
+
     public Gamme(String ref,
                  List<Operation> ope,
                  String refProduit) {

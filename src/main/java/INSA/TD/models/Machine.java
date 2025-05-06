@@ -13,7 +13,6 @@ public class Machine extends Equipement {
     public Machine() {
     }
 
-    //TODO créer constructeurs vide pour autres classes
     public Machine(String type,
                    float ordonnee,
                    float abscisse,
