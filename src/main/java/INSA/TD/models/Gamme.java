@@ -43,6 +43,6 @@ public class Gamme extends AbstractIdentity {
 
     public String toString(String delimiter) {
         return super.toString() + delimiter
-                + ListUtils.listToString(listeOperations, delimiter);
+                + ListUtils.listRefToString(listeOperations, delimiter);
     }
 }

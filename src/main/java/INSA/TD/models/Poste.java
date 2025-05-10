@@ -33,7 +33,7 @@ public class Poste extends Equipement {
 
     public String toString(String delimiter) {
         return super.toString(delimiter) + delimiter
-                + ListUtils.listToString(listeMachines);
+                + ListUtils.listRefToString(listeMachines);
     }
 
     @Override
