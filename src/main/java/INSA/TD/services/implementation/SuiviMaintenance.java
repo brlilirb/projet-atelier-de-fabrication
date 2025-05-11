@@ -1,5 +1,10 @@
 package INSA.TD.services.implementation;
 
+import INSA.TD.utils.ConstantesUtils;
+import INSA.TD.utils.TimeUtils;
+
+import java.time.LocalDateTime;
+
 public class SuiviMaintenance {
 
     private final String date;
@@ -8,15 +13,16 @@ public class SuiviMaintenance {
 
     private final String refMachine;
 
-    private final String marche;
-    // ... Others fields
+    private final String etat;
+    //TODO utiliser enum etatInterne et etatExterne ? boolean ?
 
+    // ... Others fields
 
     public SuiviMaintenance(String[] args) {
         this.date = args[0];
         this.time = args[1];
         this.refMachine = args[2];
-        this.marche = args[3];
+        this.etat = args[3];
         // ... other fields
     }
 
@@ -24,15 +30,31 @@ public class SuiviMaintenance {
         return date;
     }
 
-    public String getRefMachine() {
-        return refMachine;
-    }
-
     public String getTime() {
         return time;
     }
 
-    public String getMarche() {
-        return marche;
+    public LocalDateTime getDateTime() {
+        return TimeUtils.convertStringToLocalDateTime(date + " " + time);
+    }
+
+    public String getRefMachine() {
+        return refMachine;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    @Override
+    public String toString() {
+        return toString(ConstantesUtils.SPACE);
+    }
+
+    public String toString(String delimiter) {
+        return date + delimiter +
+                time + delimiter +
+                refMachine + delimiter +
+                etat;
     }
 }
