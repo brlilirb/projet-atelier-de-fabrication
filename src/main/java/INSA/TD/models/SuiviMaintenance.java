@@ -1,4 +1,4 @@
-package INSA.TD.services.implementation;
+package INSA.TD.models;
 
 import INSA.TD.utils.ConstantesUtils;
 import INSA.TD.utils.TimeUtils;
@@ -13,7 +13,7 @@ public class SuiviMaintenance {
 
     private final String refMachine;
 
-    private final String etat;
+    private final String etat; // "A" ou "D"
     //TODO utiliser enum etatInterne et etatExterne ? boolean ?
 
     // ... Others fields
