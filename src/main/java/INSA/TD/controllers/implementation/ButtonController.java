@@ -1,7 +1,7 @@
 package INSA.TD.controllers.implementation;
 
 import javafx.stage.Stage;
-import INSA.TD.views.TestView;
+import INSA.TD.views.implementation.TestView;
 
 public class ButtonController {
 
@@ -9,10 +9,14 @@ public class ButtonController {
         TestView nStage = new TestView(stage,modifiable,autorisation);
     }
     public static void goToModifier(Stage stage, boolean modifiable, boolean autorisation){
-        TestView nStage = new TestView(stage,true,true);
+        TestView nStage = new TestView(stage,true,autorisation);
     }
     public static void goToSauvegarder(Stage stage, boolean modifiable, boolean autorisation){
-        TestView nStage = new TestView(stage,false,true);
+        TestView nStage = new TestView(stage,false,autorisation);
         // ajouter système pour sauvegarder les modifications
     }
+    public static void autorisation(Stage stage, boolean modifiable, boolean autorisation){
+        TestView nStage = new TestView(stage,modifiable,autorisation);
+    }
+
 }
