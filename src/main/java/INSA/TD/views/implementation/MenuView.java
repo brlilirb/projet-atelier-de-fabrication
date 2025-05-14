@@ -1,4 +1,4 @@
-package INSA.TD.views;
+package INSA.TD.views.implementation;
 
 import INSA.TD.controllers.implementation.ButtonController;
 
@@ -9,7 +9,6 @@ import javafx.scene.text.Text;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
-import javafx.application.Application;
 
 public class MenuView {
 
@@ -20,7 +19,7 @@ public class MenuView {
     private Button testButton = new Button("test");   // il faudra remplacer test par tous nos onglets
 
 
-    public void start(boolean autorisation, Stage stage) {
+    public MenuView( Stage stage,boolean modifiable,boolean autorisation) {
         VBox menu = new VBox(10, intro, testButton); // a voir si on peut mettre une liste dans la méthode Vbox
         menu.setPadding(new Insets(10)); // pour un petit décalage du bord
 
@@ -29,7 +28,7 @@ public class MenuView {
 
         ButtonController menuController=new ButtonController();
         testButton.setOnAction(event -> {
-            ButtonController.goToTestView( stage , modifiable, autorisation);
+            ButtonController.autorisation( stage , modifiable, autorisation);
         });
 
         Scene scene = new Scene(root, 1000, 600);
