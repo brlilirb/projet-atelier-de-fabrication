@@ -41,15 +41,14 @@ public class MaintenanceService implements SaveService {
 
         for (SuiviMaintenance event : machineEvents) {
             if (event.getEtat().equals("A")) { // Attention a bien donner l'heure de demarrage en debut de journee
-                lastStop = event.getDateTime();
-            } else if (event.getEtat().equals("D") && lastStop != null) {
-                // Clamp downtime to working hours
-                totalDowntime = totalDowntime.plus(clampToWorkHours(lastStop, event.getDateTime(), startTime, endTime));
-                if (lastStart != null) {
+                lastStop = event.getDateTime(); //dès qu'un arrêt est trouvé la date et l'heure sont stockés
+            } else if (event.getEtat().equals("D") && lastStop != null) { //dès qu'un démarrage est trouvé et qu'un arrêt est stocké la durée d'arrêt est stockée
+                totalDowntime = totalDowntime.plus(clampToWorkHours(lastStop, event.getDateTime(), startTime, endTime)); //calcul la durée entre un arrêt et un démarrage en prenant en compte les horaires d'une journée
+                if (lastStart != null) { //Si un démarrage et un arrêt sont enregistré la durée de fonctionnement est calculée
                     totalUptime = totalUptime.plus(clampToWorkHours(lastStart, lastStop, startTime, endTime));
                 }
-                lastStart = event.getDateTime();
-                lastStop = null;
+                lastStart = event.getDateTime(); //puisque "D" a été trouvé, l'heure de démarrage est enregistrée
+                lastStop = null; //l'heure d'arrêt est réinitialisée
             }
         }
 
@@ -63,25 +62,29 @@ public class MaintenanceService implements SaveService {
 
         return fiablility;
     }
-    //TODO stocker fiabilité comme attribut d'une machine ? pour pouvoir classer les machines en fonction de leur fiabilité
 
-    // Calculate duration within working hours
+    /*TODO stocker fiabilité comme attribut d'une machine ?
+       pour pouvoir classer les machines en fonction de leur fiabilité
+        ou utiliser map
+     */
+
+    // calcule la durée pendant les heures de travail
     private static Duration clampToWorkHours(LocalDateTime start, LocalDateTime end, LocalTime workStart, LocalTime workEnd) {
         Duration result = Duration.ZERO;
 
-        while (!start.toLocalDate().isAfter(end.toLocalDate())) {
+        while (!start.toLocalDate().isAfter(end.toLocalDate())) { //vérifie que la date de début est toujours avant la date de fin
             LocalDate currentDay = start.toLocalDate();
-            LocalDateTime dayStart = LocalDateTime.of(currentDay, workStart);
+            LocalDateTime dayStart = LocalDateTime.of(currentDay, workStart); //définit le début et la fin d'une journée de travail
             LocalDateTime dayEnd = LocalDateTime.of(currentDay, workEnd);
 
-            LocalDateTime effectiveStart = start.isAfter(dayStart) ? start : dayStart;
+            LocalDateTime effectiveStart = start.isAfter(dayStart) ? start : dayStart; //si le début ou la fin se situe en dehors des horaires de travail, définit le début ou la fin de la journée comme début ou fin
             LocalDateTime effectiveEnd = end.isBefore(dayEnd) ? end : dayEnd;
 
-            if (!effectiveEnd.isBefore(effectiveStart)) {
+            if (!effectiveEnd.isBefore(effectiveStart)) { //calcule la durée entre le début et la fin effectifs
                 result = result.plus(Duration.between(effectiveStart, effectiveEnd));
             }
 
-            start = LocalDateTime.of(currentDay.plusDays(1), LocalTime.MIDNIGHT);
+            start = LocalDateTime.of(currentDay.plusDays(1), LocalTime.MIDNIGHT); //passe au jour suivant
         }
 
         return result;
