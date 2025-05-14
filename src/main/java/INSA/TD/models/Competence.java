@@ -1,4 +1,10 @@
 package INSA.TD.models;
 
-public class Competence {
+import INSA.TD.services.Service;
+import INSA.TD.services.implementation.EntityService;
+
+import java.util.List;
+
+public class Competence extends EntityService {
+
 }
