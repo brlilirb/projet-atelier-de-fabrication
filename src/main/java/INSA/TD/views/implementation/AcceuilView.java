@@ -1,5 +1,6 @@
 package INSA.TD.views.implementation;
 
+import INSA.TD.controllers.implementation.AutorisationButtonCtrl;
 import INSA.TD.controllers.implementation.ButtonController;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -20,10 +21,10 @@ public class AcceuilView {
         Button btnChef = new Button("Chef d'atelier");
 
         btnOuvrier.setOnAction(_ -> {
-            ButtonController.autorisation( stage , modifiable, false);
+            AutorisationButtonCtrl.autorisation( stage , modifiable, false);
         });
         btnChef.setOnAction(_ -> {
-            ButtonController.autorisation( stage , modifiable, true);
+            AutorisationButtonCtrl.autorisation( stage , modifiable, true);
         });
 
         VBox layout = new VBox(20);
