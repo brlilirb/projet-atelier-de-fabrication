@@ -3,7 +3,7 @@ package INSA.TD.services.implementation;
 import INSA.TD.models.Fiabilite;
 import INSA.TD.models.Machine;
 import INSA.TD.models.SuiviMaintenance;
-import INSA.TD.services.MachineService;
+import INSA.TD.services.MachineSuiviService;
 import INSA.TD.services.MaintenanceService;
 import INSA.TD.services.files.MaintenanceDataSource;
 import INSA.TD.services.files.filemanager.DataSource;
@@ -22,11 +22,11 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
     private List<SuiviMaintenance> events = new ArrayList<>();
     private final DataSource dataSource;
-    private final MachineService machineService;
+    private final MachineSuiviService machineService;
 
     public MaintenanceServiceImpl() {
         this.dataSource = new MaintenanceDataSource();
-        this.machineService = MachineServiceImpl.getInstance();
+        this.machineService = MachineServiceImpl.getSuiviInstance();
     }
 
     public Fiabilite computeFiabilite(String machineId) {
@@ -88,6 +88,11 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     @Override
     public void load() {
         events = new ArrayList<>(createSuiviMaintenanceList(dataSource.readData()));
+        initNoExistedData();
+    }
+
+    private void initNoExistedData() {
+        machineService.addNoExistData(events);
     }
 
     public void addEvent(SuiviMaintenance event) {

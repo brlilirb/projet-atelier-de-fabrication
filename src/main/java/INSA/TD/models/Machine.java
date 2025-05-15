@@ -13,6 +13,10 @@ public class Machine extends Equipement {
     public Machine() {
     }
 
+    public Machine(String id) {
+        this.setId(id);
+    }
+
     public Machine(String type,
                    float ordonnee,
                    float abscisse,

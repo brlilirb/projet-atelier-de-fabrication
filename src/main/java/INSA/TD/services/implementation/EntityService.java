@@ -65,4 +65,12 @@ public abstract class EntityService<T extends AbstractIdentity> extends Identity
     public void deleteAll() {
         entities.clear();
     }
+
+    boolean existById(String id) {
+        return existById(entities, id);
+    }
+
+    void addAll(List<T> data) {
+        entities.addAll(data);
+    }
 }
