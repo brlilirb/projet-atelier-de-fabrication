@@ -10,6 +10,13 @@ public class Machine extends Equipement {
     private Coordonnee coordonnee;
     private EtatMachine etatMachine;
 
+    public Machine() {
+    }
+
+    public Machine(String id) {
+        this.setId(id);
+    }
+
     public Machine(String type,
                    float ordonnee,
                    float abscisse,

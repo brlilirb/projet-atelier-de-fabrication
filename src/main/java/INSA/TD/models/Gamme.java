@@ -9,6 +9,9 @@ public class Gamme extends AbstractIdentity {
     private String refProduit;
     private List<Operation> listeOperations;
 
+    public Gamme() {
+    }
+
     public Gamme(String ref,
                  List<Operation> ope,
                  String refProduit) {
@@ -40,6 +43,6 @@ public class Gamme extends AbstractIdentity {
 
     public String toString(String delimiter) {
         return super.toString() + delimiter
-                + ListUtils.listToString(listeOperations, delimiter);
+                + ListUtils.listRefToString(listeOperations, delimiter);
     }
 }
