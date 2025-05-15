@@ -8,7 +8,6 @@ import INSA.TD.services.MaintenanceService;
 import INSA.TD.services.files.MaintenanceDataSource;
 import INSA.TD.services.files.filemanager.DataSource;
 import INSA.TD.utils.ConstantesUtils;
-import INSA.TD.utils.StringUtils;
 import INSA.TD.utils.TimeUtils;
 
 import java.time.Duration;
@@ -69,14 +68,14 @@ public class MaintenanceServiceImpl implements MaintenanceService {
                 .toList();
     }
 
-    public Map<Machine, Fiabilite> sortMachineByFiability() {
+    public Map<Machine, Fiabilite> sortMachineByFiability(boolean order) {
         return computeAllFiabilites()
                 .stream()
-                .sorted(Comparator.comparing(Fiabilite::fiabilite))
+                .sorted(fiabiliteSortOrder(order))
                 .collect(Collectors.toMap(
                         fiabilite -> machineService.get(fiabilite.reference()),
                         fiabilite -> fiabilite,
-                        (oldValue, newValue) -> newValue,
+                        (_, newValue) -> newValue,
                         LinkedHashMap::new
                 ));
     }
@@ -88,7 +87,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
     @Override
     public void load() {
-        events = createSuiviMaintenanceList(StringUtils.convertToStringList(dataSource.readData()));
+        events = new ArrayList<>(createSuiviMaintenanceList(dataSource.readData()));
     }
 
     public void addEvent(SuiviMaintenance event) {
@@ -123,6 +122,10 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         }
 
         return result;
+    }
+
+    private static Comparator<Fiabilite> fiabiliteSortOrder(boolean order) {
+        return order ? Comparator.comparing(Fiabilite::fiabilite).reversed() : Comparator.comparing(Fiabilite::fiabilite);
     }
 
     private List<String> getMachinesId() {
