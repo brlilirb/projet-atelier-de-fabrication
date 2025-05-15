@@ -1,12 +1,17 @@
 package INSA.TD;
 
+import INSA.TD.controllers.InitController;
+import INSA.TD.controllers.implementation.InitControllerImpl;
+import INSA.TD.services.MachineService;
+import INSA.TD.services.implementation.MachineServiceImpl;
+import INSA.TD.services.implementation.MaintenanceServiceImpl;
+
 public class Main {
     public static void main(String[] args) {
 
-       /* InitController initController = new AtelierControllerImpl();
-        initController.init();*/
+        InitController initController = InitControllerImpl.getInstance();
 
-        /*MaintenanceServiceImpl maintenanceService = new MaintenanceServiceImpl();
+        /*MaintenanceServiceImpl maintenanceService = MaintenanceServiceImpl.getInstance();
         maintenanceService.addStringEvent("2025-05-10 10:23 mach_2 A");
         maintenanceService.addStringEvent("2025-05-10 12:15 mach_2 D");
         maintenanceService.addStringEvent("2025-05-10 18:41 mach_2 A");
@@ -29,9 +34,13 @@ public class Main {
         machineService.add(mach_1);
         machineService.add(mach_2);
 
-        Map map = maintenanceService.sortMachineByFiability(true);*/
+        initController.save();*/
 
-       /* SaveService maintenanceService = new MaintenanceServiceImpl();
-        maintenanceService.load();*/
+        initController.load();
+        MachineService machineService = MachineServiceImpl.getInstance();
+
+        MaintenanceServiceImpl maintenanceService = MaintenanceServiceImpl.getInstance();
+
+        maintenanceService.computeAllFiabilites();
     }
 }

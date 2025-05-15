@@ -14,8 +14,6 @@ public interface MaintenanceService extends SaveService {
 
     void addEvent(SuiviMaintenance event);
 
-    void addStringEvent(String event);
-
     void deleteAll();
 
     Map<Machine, Fiabilite> sortMachineByFiability(boolean order);

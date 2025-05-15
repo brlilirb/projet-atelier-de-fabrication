@@ -20,13 +20,22 @@ import java.util.stream.Collectors;
 
 public class MaintenanceServiceImpl implements MaintenanceService {
 
+    private static MaintenanceServiceImpl instance;
+
     private List<SuiviMaintenance> events = new ArrayList<>();
     private final DataSource dataSource;
     private final MachineSuiviService machineService;
 
-    public MaintenanceServiceImpl() {
+    private MaintenanceServiceImpl() {
         this.dataSource = new MaintenanceDataSource();
         this.machineService = MachineServiceImpl.getSuiviInstance();
+    }
+
+    public static MaintenanceServiceImpl getInstance() {
+        if (Objects.isNull(instance)) {
+            instance = new MaintenanceServiceImpl();
+        }
+        return instance;
     }
 
     public Fiabilite computeFiabilite(String machineId) {
@@ -63,7 +72,8 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     public List<Fiabilite> computeAllFiabilites() { //en partant du principe que les machines présentent dans le fichier de suivi ont été créée
-        return getMachinesId().stream()
+        return getMachinesId()
+                .stream()
                 .map(this::computeFiabilite)
                 .toList();
     }
@@ -97,10 +107,6 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
     public void addEvent(SuiviMaintenance event) {
         events.add(event);
-    }
-
-    public void addStringEvent(String event) {
-        events.addAll(createSuiviMaintenanceList(List.of(event)));
     }
 
     public void deleteAll() {

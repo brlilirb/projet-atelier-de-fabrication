@@ -1,7 +1,18 @@
 package INSA.TD.controllers;
 
-import INSA.TD.models.Machine;
+import INSA.TD.exceptions.ExistException;
 
-public interface Controller {
-    Machine getMachine(String reference);
+import java.util.List;
+
+public interface Controller<E> {
+
+    List<E> afficherTous();
+
+    E afficher(String id);
+
+    E ajouter(E entity) throws ExistException;
+
+    E modifier(E entity);
+
+    void supprimer(String id);
 }
