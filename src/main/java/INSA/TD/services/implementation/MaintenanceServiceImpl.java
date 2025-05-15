@@ -1,7 +1,10 @@
 package INSA.TD.services.implementation;
 
+import INSA.TD.models.Fiabilite;
+import INSA.TD.models.Machine;
 import INSA.TD.models.SuiviMaintenance;
-import INSA.TD.services.SaveService;
+import INSA.TD.services.MachineService;
+import INSA.TD.services.MaintenanceService;
 import INSA.TD.services.files.MaintenanceDataSource;
 import INSA.TD.services.files.filemanager.DataSource;
 import INSA.TD.utils.ConstantesUtils;
@@ -12,21 +15,22 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
-public class MaintenanceService implements SaveService {
+public class MaintenanceServiceImpl implements MaintenanceService {
 
     private List<SuiviMaintenance> events = new ArrayList<>();
     private final DataSource dataSource;
+    private final MachineService machineService;
 
-    public MaintenanceService() {
+    public MaintenanceServiceImpl() {
         this.dataSource = new MaintenanceDataSource();
+        this.machineService = MachineServiceImpl.getInstance();
     }
 
-    public double calculerFiabilite(String machineId) {
+    public Fiabilite computeFiabilite(String machineId) {
         List<SuiviMaintenance> machineEvents = getSortedEventsById(machineId); //assure que les events sont dans l'ordre chronologique
 
         Duration totalDowntime = Duration.ZERO;
@@ -56,13 +60,48 @@ public class MaintenanceService implements SaveService {
         System.out.println("  temps total d'arrêt: " + totalDowntime.toMinutes() + " mins");
         System.out.printf("  fiabilité: %.2f%%\n", fiablility * 100);
 
-        return fiablility;
+        return new Fiabilite(machineId, fiablility, totalDowntime, totalUptime);
     }
 
-    /*TODO stocker fiabilité comme attribut d'une machine ?
-       pour pouvoir classer les machines en fonction de leur fiabilité
-        ou utiliser map
-     */
+    public List<Fiabilite> computeAllFiabilites() { //en partant du principe que les machines présentent dans le fichier de suivi ont été créée
+        return getMachinesId().stream()
+                .map(this::computeFiabilite)
+                .toList();
+    }
+
+    public Map<Machine, Fiabilite> sortMachineByFiability() {
+        return computeAllFiabilites()
+                .stream()
+                .sorted(Comparator.comparing(Fiabilite::fiabilite))
+                .collect(Collectors.toMap(
+                        fiabilite -> machineService.get(fiabilite.reference()),
+                        fiabilite -> fiabilite,
+                        (oldValue, newValue) -> newValue,
+                        LinkedHashMap::new
+                ));
+    }
+
+    @Override
+    public void save() {
+        dataSource.writeData(events);
+    }
+
+    @Override
+    public void load() {
+        events = createSuiviMaintenanceList(StringUtils.convertToStringList(dataSource.readData()));
+    }
+
+    public void addEvent(SuiviMaintenance event) {
+        events.add(event);
+    }
+
+    public void addStringEvent(String event) {
+        events.addAll(createSuiviMaintenanceList(List.of(event)));
+    }
+
+    public void deleteAll() {
+        events.clear();
+    }
 
     //Calcule la durée pendant les heures de travail
     private static Duration clampToWorkHours(LocalDateTime start, LocalDateTime end) {
@@ -86,29 +125,14 @@ public class MaintenanceService implements SaveService {
         return result;
     }
 
-    @Override
-    public void save() {
-        dataSource.writeData(events);
+    private List<String> getMachinesId() {
+        return machineService.getAll()
+                .stream()
+                .map(Machine::getId)
+                .toList();
     }
 
-    @Override
-    public void load() {
-        events = splitValues(StringUtils.convertToStringList(dataSource.readData()));
-    }
-
-    public void addEvent(SuiviMaintenance event) {
-        events.add(event);
-    }
-
-    public void addStringEvent(String event) {
-        events.addAll(splitValues(List.of(event)));
-    }
-
-    public void deleteAll() {
-        events.clear();
-    }
-
-    private List<SuiviMaintenance> splitValues(List<String> values) {
+    private List<SuiviMaintenance> createSuiviMaintenanceList(List<String> values) {
         return values.stream()
                 .map(data -> data.split(ConstantesUtils.SPACE))
                 .map(SuiviMaintenance::new)
@@ -122,7 +146,8 @@ public class MaintenanceService implements SaveService {
     }
 
     private List<SuiviMaintenance> getSortedEventsById(String machineId) {
-        return getEventsById(machineId).stream()
+        return getEventsById(machineId)
+                .stream()
                 .sorted(Comparator.comparing(SuiviMaintenance::getDateTime))
                 .toList();
     }
