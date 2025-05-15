@@ -6,6 +6,7 @@ import INSA.TD.services.files.MaintenanceDataSource;
 import INSA.TD.services.files.filemanager.DataSource;
 import INSA.TD.utils.ConstantesUtils;
 import INSA.TD.utils.StringUtils;
+import INSA.TD.utils.TimeUtils;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -17,17 +18,12 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class MaintenanceService implements SaveService {
-    private static final String START_TIME = "06:00";
-    private static final String END_TIME = "20:00";
+
     private List<SuiviMaintenance> events = new ArrayList<>();
     private final DataSource dataSource;
-    private LocalTime startTime;
-    private LocalTime endTime;
 
     public MaintenanceService() {
         this.dataSource = new MaintenanceDataSource();
-        this.startTime = LocalTime.parse(START_TIME, ConstantesUtils.TIME_FORMATTER);
-        this.endTime = LocalTime.parse(END_TIME, ConstantesUtils.TIME_FORMATTER);
     }
 
     public double calculerFiabilite(String machineId) {
@@ -43,9 +39,9 @@ public class MaintenanceService implements SaveService {
             if (event.getEtat().equals("A")) { // Attention a bien donner l'heure de demarrage en debut de journee
                 lastStop = event.getDateTime(); //dès qu'un arrêt est trouvé la date et l'heure sont stockés
             } else if (event.getEtat().equals("D") && lastStop != null) { //dès qu'un démarrage est trouvé et qu'un arrêt est stocké la durée d'arrêt est stockée
-                totalDowntime = totalDowntime.plus(clampToWorkHours(lastStop, event.getDateTime(), startTime, endTime)); //calcul la durée entre un arrêt et un démarrage en prenant en compte les horaires d'une journée
+                totalDowntime = totalDowntime.plus(clampToWorkHours(lastStop, event.getDateTime())); //calcul la durée entre un arrêt et un démarrage en prenant en compte les horaires d'une journée
                 if (lastStart != null) { //Si un démarrage et un arrêt sont enregistré la durée de fonctionnement est calculée
-                    totalUptime = totalUptime.plus(clampToWorkHours(lastStart, lastStop, startTime, endTime));
+                    totalUptime = totalUptime.plus(clampToWorkHours(lastStart, lastStop));
                 }
                 lastStart = event.getDateTime(); //puisque "D" a été trouvé, l'heure de démarrage est enregistrée
                 lastStop = null; //l'heure d'arrêt est réinitialisée
@@ -68,14 +64,14 @@ public class MaintenanceService implements SaveService {
         ou utiliser map
      */
 
-    // calcule la durée pendant les heures de travail
-    private static Duration clampToWorkHours(LocalDateTime start, LocalDateTime end, LocalTime workStart, LocalTime workEnd) {
+    //Calcule la durée pendant les heures de travail
+    private static Duration clampToWorkHours(LocalDateTime start, LocalDateTime end) {
         Duration result = Duration.ZERO;
 
         while (!start.toLocalDate().isAfter(end.toLocalDate())) { //vérifie que la date de début est toujours avant la date de fin
             LocalDate currentDay = start.toLocalDate();
-            LocalDateTime dayStart = LocalDateTime.of(currentDay, workStart); //définit le début et la fin d'une journée de travail
-            LocalDateTime dayEnd = LocalDateTime.of(currentDay, workEnd);
+            LocalDateTime dayStart = LocalDateTime.of(currentDay, TimeUtils.getStartTime()); //définit le début et la fin d'une journée de travail
+            LocalDateTime dayEnd = LocalDateTime.of(currentDay, TimeUtils.getEndTime());
 
             LocalDateTime effectiveStart = start.isAfter(dayStart) ? start : dayStart; //si le début ou la fin se situe en dehors des horaires de travail, définit le début ou la fin de la journée comme début ou fin
             LocalDateTime effectiveEnd = end.isBefore(dayEnd) ? end : dayEnd;
