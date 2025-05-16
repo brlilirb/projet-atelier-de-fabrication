@@ -15,4 +15,6 @@ public interface Controller<E> {
     E modifier(E entity);
 
     void supprimer(String id);
+
+    List<E> rechercher(String id);
 }

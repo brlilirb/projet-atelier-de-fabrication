@@ -1,5 +1,7 @@
 package INSA.TD.models;
 
+import INSA.TD.utils.StringUtils;
+
 public abstract class AbstractIdentity {
 
     private String id;
@@ -9,7 +11,7 @@ public abstract class AbstractIdentity {
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = StringUtils.escapeSpaces(id);
     }
 
     @Override

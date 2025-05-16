@@ -35,4 +35,9 @@ public abstract class AbstractEntityController<T extends AbstractIdentity> imple
     public void supprimer(String id) {
         getService().delete(id);
     }
+
+    @Override
+    public List<T> rechercher(String id) {
+        return getService().search(id);
+    }
 }

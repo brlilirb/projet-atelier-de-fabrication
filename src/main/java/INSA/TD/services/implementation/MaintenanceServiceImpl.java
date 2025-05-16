@@ -5,6 +5,7 @@ import INSA.TD.models.Machine;
 import INSA.TD.models.SuiviMaintenance;
 import INSA.TD.services.MachineSuiviService;
 import INSA.TD.services.MaintenanceService;
+import INSA.TD.services.OperateurSuiviService;
 import INSA.TD.services.files.MaintenanceDataSource;
 import INSA.TD.services.files.filemanager.DataSource;
 import INSA.TD.utils.ConstantesUtils;
@@ -25,10 +26,12 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     private List<SuiviMaintenance> events = new ArrayList<>();
     private final DataSource dataSource;
     private final MachineSuiviService machineService;
+    private final OperateurSuiviService operateurService;
 
     private MaintenanceServiceImpl() {
         this.dataSource = new MaintenanceDataSource();
         this.machineService = MachineServiceImpl.getSuiviInstance();
+        this.operateurService = OperateurServiceImpl.getSuiviInstance();
     }
 
     public static MaintenanceServiceImpl getInstance() {
@@ -103,6 +106,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
     private void initNoExistedData() {
         machineService.addNoExistData(events);
+        operateurService.addNoExistData(events);
     }
 
     public void addEvent(SuiviMaintenance event) {
