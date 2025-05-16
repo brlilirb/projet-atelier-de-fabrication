@@ -18,4 +18,5 @@ public interface Service<E> {
 
     void deleteAll();
 
+    List<E> search(String value);
 }

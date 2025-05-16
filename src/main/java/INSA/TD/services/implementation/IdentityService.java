@@ -69,5 +69,19 @@ public abstract class IdentityService<E extends AbstractIdentity> {
         return entity;
     }
 
+    public List<E> search(List<E> list, String value) {
+        return search(list, getDefaultPredicate(value));
+    }
+
+    public List<E> search(List<E> list, Predicate<E> filter) {
+        return list.stream()
+                .filter(filter)
+                .toList();
+    }
+
     public abstract String getExistMessage();
+
+    protected Predicate<E> getDefaultPredicate(String value) {
+        return objet -> objet.getId().contains(value);
+    }
 }

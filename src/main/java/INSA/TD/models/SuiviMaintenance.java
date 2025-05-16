@@ -14,16 +14,18 @@ public class SuiviMaintenance {
     private final String refMachine;
 
     private final String etat; // "A" ou "D"
-    //TODO utiliser enum etatInterne et etatExterne ? boolean ?
 
-    // ... Others fields
+    private final String operateur;
+
+    private final String cause;
 
     public SuiviMaintenance(String[] args) {
         this.date = args[0];
         this.time = args[1];
         this.refMachine = args[2];
         this.etat = args[3];
-        // ... other fields
+        this.operateur = args[4];
+        this.cause = args[5];
     }
 
     public String getDate() {
@@ -46,6 +48,14 @@ public class SuiviMaintenance {
         return etat;
     }
 
+    public String getOperateur() {
+        return operateur;
+    }
+
+    public String getCause() {
+        return cause;
+    }
+
     @Override
     public String toString() {
         return toString(ConstantesUtils.SPACE);
@@ -55,6 +65,8 @@ public class SuiviMaintenance {
         return date + delimiter +
                 time + delimiter +
                 refMachine + delimiter +
-                etat;
+                etat + delimiter +
+                operateur + delimiter +
+                cause;
     }
 }
