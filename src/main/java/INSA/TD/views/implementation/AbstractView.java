@@ -9,10 +9,10 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Label;
 
+import javax.swing.*;
+
 public abstract class AbstractView {
 
-    //protected Text intro = new Text ("Menu");
-    //protected Button testButton = new Button("test");
     protected Button modifierButton = new Button("modifier");
     protected Button sauvegarderButton = new Button("sauvegarder");
 
@@ -21,36 +21,39 @@ public abstract class AbstractView {
     public BorderPane AbstractModifierView(Stage stage, boolean modifiable, boolean autorisation){
         BorderPane root= new BorderPane();
         root = ModifierVisible(root,modifiable,autorisation);
+        root = AffichageClasse(root,modifiable,autorisation);
+        if ((modifiable==true)&&(autorisation==true)) {
+
+            ButtonController menuController=new ButtonController();
+            sauvegarderButton.setOnAction(event -> {
+                ButtonController.goToSauvegarder( stage,  autorisation);
+            });
+
+        } else if((modifiable==false)&&(autorisation==true)) {
+
+            ButtonController menuController=new ButtonController();
+            modifierButton.setOnAction(event -> {
+                ButtonController.goToModifier( stage ,  autorisation);
+            });
+        }
+        return root;
+    }
+    public BorderPane AffichageClasse(BorderPane root, boolean modifiable, boolean autorisation){
         if (autorisation==false){
             Label message = new Label("Vous n'avez pas les autorisations pour modifier");
             HBox mot = new HBox(message);
             mot.setAlignment(Pos.BOTTOM_CENTER);
             root.setCenter(mot);
-
         } else if (modifiable==true) {
-
             Label message = new Label("Vous pouvez modifiez");
             HBox mot = new HBox(message);
             mot.setAlignment(Pos.BOTTOM_CENTER);
             root.setCenter(mot);
-
-            ButtonController menuController=new ButtonController();
-            sauvegarderButton.setOnAction(event -> {
-                ButtonController.goToSauvegarder( stage, modifiable, autorisation);
-            });
-
-        } else {
-
-
+        } else{
             Label message = new Label("Vous ne pouvez pas modifiez");
             HBox mot = new HBox(message);
             mot.setAlignment(Pos.BOTTOM_CENTER);
             root.setCenter(mot);
-
-            ButtonController menuController=new ButtonController();
-            modifierButton.setOnAction(event -> {
-                ButtonController.goToModifier( stage , modifiable, autorisation);
-            });
         }
         return root;
     }
@@ -73,4 +76,5 @@ public abstract class AbstractView {
         }
         return root;
     }
+
 }

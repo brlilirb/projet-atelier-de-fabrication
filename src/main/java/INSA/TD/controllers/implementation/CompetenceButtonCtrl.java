@@ -10,11 +10,11 @@ public class CompetenceButtonCtrl {
         CompetenceView nStage = new CompetenceView(stage,modifiable,autorisation);
     }
 
-    public static void goToModifier(Stage stage,  boolean modifiable, boolean autorisation){
+    public static void goToModifier(Stage stage, boolean autorisation){
         CompetenceView nStage = new CompetenceView(stage, true,autorisation);
     }
 
-    public static void goToSauvegarder(Stage stage, boolean modifiable, boolean autorisation){
+    public static void goToSauvegarder(Stage stage, boolean autorisation){
         CompetenceView nStage = new CompetenceView(stage,false,autorisation);
         // ajouter système pour sauvegarder les modifications
     }
