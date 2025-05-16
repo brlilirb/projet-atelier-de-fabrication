@@ -20,7 +20,7 @@ public class MenuView {
     protected boolean autorisation;     // à voir car je pense que Adil les a déjà set
 
     private static Text intro = new Text("Menu");
-    private static Button CompetenceBouton = new Button("Competence");   // il faudra remplacer test par tous nos onglets
+    private static Button CompetenceBouton = new Button("Competence");// il faudra remplacer test par tous nos onglets
     // il faut ajouter private static Button CompetenceBouton = new Button("Competence"); pour toutes les classes
 
     public MenuView( Stage stage,boolean modifiable,boolean autorisation) {
