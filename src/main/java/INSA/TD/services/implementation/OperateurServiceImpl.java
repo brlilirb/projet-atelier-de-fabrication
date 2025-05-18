@@ -32,7 +32,7 @@ public class OperateurServiceImpl extends AbstractSuiviService<Operateur> implem
 
     @Override
     public String getExistMessage() {
-        return "La référence de la machine existe déjà.";
+        return "La référence de l'opérateur existe déjà.";
     }
 
     @Override

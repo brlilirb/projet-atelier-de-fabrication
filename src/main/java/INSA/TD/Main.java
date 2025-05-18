@@ -1,9 +1,7 @@
 package INSA.TD;
 
 import INSA.TD.controllers.InitController;
-import INSA.TD.controllers.MachineController;
 import INSA.TD.controllers.implementation.InitControllerImpl;
-import INSA.TD.controllers.implementation.MachineControllerImpl;
 
 public class Main {
     public static void main(String[] args) {
@@ -33,16 +31,17 @@ public class Main {
         machineService.add(mach_1);
         machineService.add(mach_2);
 
-        initController.save();*/
+        */
 
         initController.load();
+        initController.save();
         /*MachineService machineService = MachineServiceImpl.getInstance();
 
         MaintenanceServiceImpl maintenanceService = MaintenanceServiceImpl.getInstance();
 
         maintenanceService.computeAllFiabilites();*/
 
-        MachineController machineController = MachineControllerImpl.getInstance();
-        machineController.afficherTous();
+       /* MachineController machineController = MachineControllerImpl.getInstance();
+        machineController.afficherTous();*/
     }
 }

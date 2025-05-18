@@ -41,6 +41,10 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         return instance;
     }
 
+    public List<SuiviMaintenance> getAll() {
+        return events;
+    }
+
     public Fiabilite computeFiabilite(String machineId) {
         List<SuiviMaintenance> machineEvents = getSortedEventsById(machineId); //assure que les events sont dans l'ordre chronologique
 
@@ -104,13 +108,16 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         initNoExistedData();
     }
 
-    private void initNoExistedData() {
-        machineService.addNoExistData(events);
-        operateurService.addNoExistData(events);
+    public SuiviMaintenance addEvent(SuiviMaintenance event) {
+        events.add(event);
+        return event;
     }
 
-    public void addEvent(SuiviMaintenance event) {
-        events.add(event);
+    public List<SuiviMaintenance> getSortedEventsById(String machineId) {
+        return getEventsById(machineId)
+                .stream()
+                .sorted(Comparator.comparing(SuiviMaintenance::getDateTime))
+                .toList();
     }
 
     public void deleteAll() {
@@ -118,6 +125,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     //Calcule la durée pendant les heures de travail
+
     private static Duration clampToWorkHours(LocalDateTime start, LocalDateTime end) {
         Duration result = Duration.ZERO;
 
@@ -139,8 +147,9 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         return result;
     }
 
-    private static Comparator<Fiabilite> fiabiliteSortOrder(boolean order) {
-        return order ? Comparator.comparing(Fiabilite::fiabilite).reversed() : Comparator.comparing(Fiabilite::fiabilite);
+    private void initNoExistedData() {
+        machineService.addNoExistData(events);
+        operateurService.addNoExistData(events);
     }
 
     private List<String> getMachinesId() {
@@ -163,14 +172,11 @@ public class MaintenanceServiceImpl implements MaintenanceService {
                 .toList();
     }
 
-    private List<SuiviMaintenance> getSortedEventsById(String machineId) {
-        return getEventsById(machineId)
-                .stream()
-                .sorted(Comparator.comparing(SuiviMaintenance::getDateTime))
-                .toList();
-    }
-
     private static Predicate<SuiviMaintenance> isIdEqual(String id) {
         return e -> e.getRefMachine().equals(id);
+    }
+
+    private static Comparator<Fiabilite> fiabiliteSortOrder(boolean order) {
+        return order ? Comparator.comparing(Fiabilite::fiabilite).reversed() : Comparator.comparing(Fiabilite::fiabilite);
     }
 }

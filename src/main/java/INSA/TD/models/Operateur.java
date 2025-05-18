@@ -6,6 +6,9 @@ public class Operateur extends Personne {
 
     private boolean libre;
 
+    public Operateur() {
+    }
+
     public Operateur(String id, String nom, String prenom) {
         this.setId(id);
         this.setNom(nom);
