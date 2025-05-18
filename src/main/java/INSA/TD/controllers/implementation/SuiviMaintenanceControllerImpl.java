@@ -40,13 +40,12 @@ public class SuiviMaintenanceControllerImpl implements SuiviMaintenanceControlle
 
     @Override
     public SuiviMaintenance modifier(SuiviMaintenance entity) {
-        return null;
+        return maintenanceService.update(entity);
     }
 
-    //TODO comment savoir lequel supprimer ? pas de id
     @Override
-    public void supprimer(String id) {
-
+    public void supprimer(SuiviMaintenance event) {
+        maintenanceService.deleteEvent(event);
     }
 
     @Override

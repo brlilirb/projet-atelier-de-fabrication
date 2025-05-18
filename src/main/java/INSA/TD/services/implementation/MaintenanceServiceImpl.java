@@ -120,12 +120,26 @@ public class MaintenanceServiceImpl implements MaintenanceService {
                 .toList();
     }
 
+    public SuiviMaintenance update(SuiviMaintenance event) {
+        int index = events.indexOf(event);
+        if (index != -1) {
+            events.set(index, event);
+            return event;
+        }
+        events.add(event);
+        return event;
+    }
+
+    @Override
+    public void deleteEvent(SuiviMaintenance event) {
+        events.remove(event);
+    }
+
     public void deleteAll() {
         events.clear();
     }
 
     //Calcule la durée pendant les heures de travail
-
     private static Duration clampToWorkHours(LocalDateTime start, LocalDateTime end) {
         Duration result = Duration.ZERO;
 
