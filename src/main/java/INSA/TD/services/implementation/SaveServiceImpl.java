@@ -14,6 +14,9 @@ public class SaveServiceImpl implements SaveService {
     private final SaveService operationService = OperationServiceImpl.getInstance();
     private final SaveService posteService = PosteServiceImpl.getInstance();
     private final SaveService produitService = ProduitServiceImpl.getInstance();
+    private final SaveService maintenanceService = MaintenanceServiceImpl.getInstance();
+    private final SaveService operateurService = OperateurServiceImpl.getInstance();
+
 
     private SaveServiceImpl() {
     }
@@ -26,7 +29,15 @@ public class SaveServiceImpl implements SaveService {
     }
 
     private List<SaveService> getAllServices() {
-        return List.of(machineService, gammeService, operationService, posteService, produitService);
+        return List.of(
+                machineService,
+                gammeService,
+                operationService,
+                posteService,
+                produitService,
+                maintenanceService,
+                operateurService
+        );
     }
 
     @Override

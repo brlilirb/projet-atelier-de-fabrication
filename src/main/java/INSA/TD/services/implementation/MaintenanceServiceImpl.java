@@ -5,6 +5,7 @@ import INSA.TD.models.Machine;
 import INSA.TD.models.SuiviMaintenance;
 import INSA.TD.services.MachineSuiviService;
 import INSA.TD.services.MaintenanceService;
+import INSA.TD.services.OperateurSuiviService;
 import INSA.TD.services.files.MaintenanceDataSource;
 import INSA.TD.services.files.filemanager.DataSource;
 import INSA.TD.utils.ConstantesUtils;
@@ -20,13 +21,28 @@ import java.util.stream.Collectors;
 
 public class MaintenanceServiceImpl implements MaintenanceService {
 
+    private static MaintenanceServiceImpl instance;
+
     private List<SuiviMaintenance> events = new ArrayList<>();
     private final DataSource dataSource;
     private final MachineSuiviService machineService;
+    private final OperateurSuiviService operateurService;
 
-    public MaintenanceServiceImpl() {
+    private MaintenanceServiceImpl() {
         this.dataSource = new MaintenanceDataSource();
         this.machineService = MachineServiceImpl.getSuiviInstance();
+        this.operateurService = OperateurServiceImpl.getSuiviInstance();
+    }
+
+    public static MaintenanceServiceImpl getInstance() {
+        if (Objects.isNull(instance)) {
+            instance = new MaintenanceServiceImpl();
+        }
+        return instance;
+    }
+
+    public List<SuiviMaintenance> getAll() {
+        return events;
     }
 
     public Fiabilite computeFiabilite(String machineId) {
@@ -63,7 +79,8 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     public List<Fiabilite> computeAllFiabilites() { //en partant du principe que les machines présentent dans le fichier de suivi ont été créée
-        return getMachinesId().stream()
+        return getMachinesId()
+                .stream()
                 .map(this::computeFiabilite)
                 .toList();
     }
@@ -91,16 +108,31 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         initNoExistedData();
     }
 
-    private void initNoExistedData() {
-        machineService.addNoExistData(events);
-    }
-
-    public void addEvent(SuiviMaintenance event) {
+    public SuiviMaintenance addEvent(SuiviMaintenance event) {
         events.add(event);
+        return event;
     }
 
-    public void addStringEvent(String event) {
-        events.addAll(createSuiviMaintenanceList(List.of(event)));
+    public List<SuiviMaintenance> getSortedEventsById(String machineId) {
+        return getEventsById(machineId)
+                .stream()
+                .sorted(Comparator.comparing(SuiviMaintenance::getDateTime))
+                .toList();
+    }
+
+    public SuiviMaintenance update(SuiviMaintenance event) {
+        int index = events.indexOf(event);
+        if (index != -1) {
+            events.set(index, event);
+            return event;
+        }
+        events.add(event);
+        return event;
+    }
+
+    @Override
+    public void deleteEvent(SuiviMaintenance event) {
+        events.remove(event);
     }
 
     public void deleteAll() {
@@ -129,8 +161,9 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         return result;
     }
 
-    private static Comparator<Fiabilite> fiabiliteSortOrder(boolean order) {
-        return order ? Comparator.comparing(Fiabilite::fiabilite).reversed() : Comparator.comparing(Fiabilite::fiabilite);
+    private void initNoExistedData() {
+        machineService.addNoExistData(events);
+        operateurService.addNoExistData(events);
     }
 
     private List<String> getMachinesId() {
@@ -153,14 +186,11 @@ public class MaintenanceServiceImpl implements MaintenanceService {
                 .toList();
     }
 
-    private List<SuiviMaintenance> getSortedEventsById(String machineId) {
-        return getEventsById(machineId)
-                .stream()
-                .sorted(Comparator.comparing(SuiviMaintenance::getDateTime))
-                .toList();
-    }
-
     private static Predicate<SuiviMaintenance> isIdEqual(String id) {
         return e -> e.getRefMachine().equals(id);
+    }
+
+    private static Comparator<Fiabilite> fiabiliteSortOrder(boolean order) {
+        return order ? Comparator.comparing(Fiabilite::fiabilite).reversed() : Comparator.comparing(Fiabilite::fiabilite);
     }
 }

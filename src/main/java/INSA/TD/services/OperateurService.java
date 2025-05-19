@@ -1,0 +1,7 @@
+package INSA.TD.services;
+
+import INSA.TD.models.Operateur;
+
+public interface OperateurService extends Service<Operateur>, SaveService {
+
+}

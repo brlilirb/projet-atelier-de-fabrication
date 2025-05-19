@@ -73,4 +73,8 @@ public abstract class EntityService<T extends AbstractIdentity> extends Identity
     void addAll(List<T> data) {
         entities.addAll(data);
     }
+
+    public List<T> search(String value) {
+        return search(entities, value);
+    }
 }

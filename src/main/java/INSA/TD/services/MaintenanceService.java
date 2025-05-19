@@ -12,11 +12,17 @@ public interface MaintenanceService extends SaveService {
 
     List<Fiabilite> computeAllFiabilites();
 
-    void addEvent(SuiviMaintenance event);
-
-    void addStringEvent(String event);
-
-    void deleteAll();
+    SuiviMaintenance addEvent(SuiviMaintenance event);
 
     Map<Machine, Fiabilite> sortMachineByFiability(boolean order);
+
+    List<SuiviMaintenance> getSortedEventsById(String machineId);
+
+    List<SuiviMaintenance> getAll();
+
+    SuiviMaintenance update(SuiviMaintenance event);
+
+    void deleteEvent(SuiviMaintenance event);
+
+    void deleteAll();
 }

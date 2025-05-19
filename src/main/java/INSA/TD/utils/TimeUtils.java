@@ -23,7 +23,7 @@ public class TimeUtils {
             return LocalTime.parse(time, ConstantesUtils.TIME_FORMATTER);
 //        System.out.println("Parsed LocalDateTime: " + dateTime);
         } catch (Exception e) {
-            System.err.println("Erreur lors de la conversion de la chaîne en LocalDateTime: " + e.getMessage());
+            System.err.println("Erreur lors de la conversion de la chaîne en LocalTime: " + e.getMessage());
         }
         return null;
     }

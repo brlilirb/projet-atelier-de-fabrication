@@ -12,4 +12,8 @@ public class StringUtils {
                 .map(Object::toString)
                 .toList();
     }
+
+    public static String escapeSpaces(String str) {
+        return str.replaceAll("\\s+", "");
+    }
 }
