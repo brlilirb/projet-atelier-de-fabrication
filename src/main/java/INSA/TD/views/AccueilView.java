@@ -8,9 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import static INSA.TD.utils.ConstantesUtils.DEFAULT_HEIGHT;
-import static INSA.TD.utils.ConstantesUtils.DEFAULT_WIDTH;
-
 public class AccueilView {
 
     private final Stage stage;
@@ -33,40 +30,32 @@ public class AccueilView {
         layout.getChildren().addAll(titre, btnOuvrier, btnChef);
         layout.setAlignment(Pos.CENTER);
 
-        updateView(
-                new Scene(layout, 400, 200),
-                "Page d'accueil"
-        );
+        showDefaultView(layout);
+    }
+
+    private void showDefaultView(Parent root) {
+        Scene scene = new Scene(root);
+        stage.setTitle("Page d'accueil");
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void showOuvrierComponent() {
         updateView(
-                new OuvrierView(stage),
+                new OuvrierView(),
                 "Ouvrier"
         );
     }
 
     private void showChefComponent() {
         updateView(
-                new ChefAtelierView(stage),
+                new ChefAtelierView(),
                 "Chef d'atelier"
         );
     }
 
-    private void updateView(Scene scene, String title) {
-        stage.setTitle(title);
-        stage.setScene(scene);
-        stage.show();
-    }
-
     private void updateView(Parent root, String title) {
-        updateView(
-                getScene(root),
-                title
-        );
-    }
-
-    private Scene getScene(Parent root) {
-        return new Scene(root, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        stage.getScene().setRoot(root);
+        stage.setTitle(title);
     }
 }
