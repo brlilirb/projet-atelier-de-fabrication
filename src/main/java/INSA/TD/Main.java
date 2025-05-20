@@ -1,16 +1,20 @@
 package INSA.TD;
 
+import INSA.TD.controllers.InitController;
+import INSA.TD.controllers.implementation.InitControllerImpl;
+import INSA.TD.views.AccueilView;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import INSA.TD.views.implementation.AcceuilView;
-import INSA.TD.models.Competence;
 
 public class Main extends Application {
-       @Override
+    @Override
     public void start(Stage primaryStage) {
-       // Competence model = new Competence();
-        AcceuilView view = new AcceuilView();
-        view.start(primaryStage);
+        InitController initController = InitControllerImpl.getInstance();
+        initController.load();
+
+        new AccueilView(primaryStage);
+
+        initController.save();
     }
 
     public static void main(String[] args) {

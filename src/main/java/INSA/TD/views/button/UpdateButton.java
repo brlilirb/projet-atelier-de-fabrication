@@ -1,4 +1,4 @@
-package INSA.TD.views.implementation.button;
+package INSA.TD.views.button;
 
 import javafx.scene.control.Button;
 

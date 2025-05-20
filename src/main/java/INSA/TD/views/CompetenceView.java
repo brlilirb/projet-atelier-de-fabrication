@@ -1,6 +1,6 @@
-package INSA.TD.views.implementation;
+package INSA.TD.views;
 
-import INSA.TD.controllers.implementation.CompetenceButtonCtrl;
+import INSA.TD.views.button.CompetenceButtonCtrl;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;

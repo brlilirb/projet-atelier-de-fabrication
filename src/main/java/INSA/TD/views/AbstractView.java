@@ -1,9 +1,7 @@
-package INSA.TD.views.implementation;
+package INSA.TD.views;
 
-import INSA.TD.controllers.implementation.ButtonController;
-import INSA.TD.views.implementation.button.SaveButton;
-import INSA.TD.views.implementation.button.UpdateButton;
-import javafx.geometry.Insets;
+import INSA.TD.views.button.SaveButton;
+import INSA.TD.views.button.UpdateButton;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,7 +20,7 @@ public abstract class AbstractView {
         root = ModifierVisible(root, modifiable, autorisation);
         root = AffichageClasse(root, modifiable, autorisation);
         if (autorisation) {
-            if (modifiable) {
+            /*if (modifiable) {
                 modifierButton.setOnAction(event -> {
                     ButtonController.goToSauvegarder(stage, autorisation);
                 });
@@ -30,7 +28,7 @@ public abstract class AbstractView {
                 sauvegarderButton.setOnAction(event -> {
                     ButtonController.goToModifier(stage, autorisation);
                 });
-            }
+            }*/
         }
         return root;
     }
@@ -56,7 +54,7 @@ public abstract class AbstractView {
     }
 
     public BorderPane ModifierVisible(BorderPane root, boolean modifiable, boolean autorisation) {
-        if (autorisation == false) {
+       /* if (autorisation == false) {
             root = MenuView.ListMenu(root);
         } else if (modifiable == true) {
             root = MenuView.ListMenu(root);
@@ -70,7 +68,7 @@ public abstract class AbstractView {
             modifierBox.setAlignment(Pos.BOTTOM_RIGHT);
             modifierBox.setPadding(new Insets(10));
             root.setBottom(modifierBox);
-        }
+        }*/
         return root;
     }
 
