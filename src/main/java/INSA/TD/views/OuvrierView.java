@@ -4,8 +4,6 @@ public class OuvrierView extends AbstractWorkerView {
 
     public OuvrierView() {
         super();
-
-
     }
 
 }

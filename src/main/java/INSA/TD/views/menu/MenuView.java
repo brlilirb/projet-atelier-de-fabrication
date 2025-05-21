@@ -2,58 +2,71 @@ package INSA.TD.views.menu;
 
 import INSA.TD.views.AbstractWorkerView;
 import INSA.TD.views.border.CustomBorderFactory;
-import INSA.TD.views.menu.button.MenuItemButton;
-import INSA.TD.views.menu.button.entity.GammeButton;
-import INSA.TD.views.menu.button.entity.MachineButton;
+import INSA.TD.views.menu.button.MenuListButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.function.Consumer;
+
+import static INSA.TD.config.ViewConfig.DEFAULT_MENU_SPACING;
+import static INSA.TD.config.ViewConfig.MENU_WIDTH;
+
 public class MenuView extends BorderPane {
 
-    private final boolean autorisation;
+    private final boolean autorisation;  // TODO remove
+
+    private final AbstractWorkerView abstractWorkerView;
+
+    private MenuListButton menuListButton;
 
     private final Text intro = new Text("Menu");
 
-    private final MenuItemButton machineButton = new MachineButton();
-    private final MenuItemButton gammeButton = new GammeButton();
-
     public MenuView(AbstractWorkerView abstractWorkerView, boolean autorisation) {
         this.autorisation = autorisation;
+        this.abstractWorkerView = abstractWorkerView;
+
         setBorder(CustomBorderFactory.getRightBorder());
 
         createListMenu();
-
-        machineButton.setOnAction(_ -> {
-            abstractWorkerView.setCenter(new VBox(10, new Text("Machine"), new Button("fezfezf")));
-//            CompetenceButtonCtrl.goToClasseView(stage, autorisation);
-        });
-
-        gammeButton.setOnAction(_ -> {
-            abstractWorkerView.setCenter(new VBox(10, new Text("Gamme"), new Button("mais non c'est une gamme")));
-//            CompetenceButtonCtrl.goToClasseView(stage, autorisation);
-        });
     }
 
     private void createListMenu() {
         VBox menu = new VBox();
+        menu.setFillWidth(true);
+        menu.setPrefWidth(MENU_WIDTH);
 
-        VBox menuLabel = new VBox(10, intro);
+        VBox menuLabel = new VBox(DEFAULT_MENU_SPACING, intro);
         menuLabel.setBorder(CustomBorderFactory.getBottomBorder());
-        menuLabel.setPadding(new Insets(10));
+        menuLabel.setPadding(new Insets(DEFAULT_MENU_SPACING));
         menuLabel.setAlignment(Pos.CENTER);
 
-        VBox menuItemList = new VBox(10, machineButton, gammeButton);
-        menuItemList.setPadding(new Insets(10));
+        createMenuListButton();
 
         menu.getChildren().setAll(
                 menuLabel,
-                menuItemList
+                menuListButton
         );
 
         this.setTop(menu);
+    }
+
+    protected void createMenuListButton() {
+        setMenuListButton(new MenuListButton(getSetParent()));
+    }
+
+    protected Consumer<Node> getSetParent() {
+        return abstractWorkerView::setBodyView;
+    }
+
+    public boolean isAutorisation() { // TODO remove autorisation
+        return autorisation;
+    }
+
+    public void setMenuListButton(MenuListButton menuListButton) {
+        this.menuListButton = menuListButton;
     }
 }
