@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static INSA.TD.config.ViewConfig.DEFAULT_MENU_SPACING;
+import static INSA.TD.config.ViewConfig.DEFAULT_SPACING;
 
 public class MenuListButton extends VBox {
 
@@ -18,7 +18,7 @@ public class MenuListButton extends VBox {
     private List<Node> menuList;
 
     public MenuListButton(Consumer<Node> consumer) {
-        super(DEFAULT_MENU_SPACING);
+        super(DEFAULT_SPACING);
         setPadding(new Insets(15));
         setFillWidth(true);
 

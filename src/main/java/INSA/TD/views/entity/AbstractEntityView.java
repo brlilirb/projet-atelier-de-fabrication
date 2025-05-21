@@ -1,33 +1,47 @@
 package INSA.TD.views.entity;
 
-import INSA.TD.controllers.Controller;
-import INSA.TD.utils.ClassUtils;
-import javafx.collections.ObservableList;
+import INSA.TD.models.AbstractIdentity;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.geometry.Insets;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.cell.TextFieldTableCell;
 
-import java.lang.reflect.Field;
+import static INSA.TD.config.ViewConfig.DEFAULT_SPACING;
 
-public abstract class AbstractEntityView<E> extends VBox {
-    private TableView<E> entityTableView;
+public abstract class AbstractEntityView<T extends AbstractIdentity> extends AbstractView<T> {
 
-    // creation de l'affichage de chaque liste d'objet
-    public void createListView() {
-        entityTableView = new TableView<>();
-        entityTableView.setItems((ObservableList<E>) getController().afficherTous());
+    private final TableView<T> tableView = new TableView<>();
 
-        // Utiliser la réflexion pour obtenir les champs de la classe
-        Field[] fields = ClassUtils.getClassType(getClass()).getDeclaredFields();
+    protected AbstractEntityView() {
+        super();
+        setSpacing(DEFAULT_SPACING);
+        setPadding(new Insets(DEFAULT_SPACING));
 
-        // Créer des colonnes pour chaque champ
-        for (Field field : fields) {
-            TableColumn<E, String> column = new TableColumn<>(field.getName());
-            column.setCellValueFactory(new PropertyValueFactory<>(field.getName()));
-            entityTableView.getColumns().add(column);
-        } //TODO à finir
+        getChildren().add(tableView);
+
+        tableView.setItems(getData());
+
+        initTableColumn();
     }
 
-    protected abstract Controller<E> getController();
+    @SuppressWarnings("unchecked")
+    protected void initTableColumn() {
+        TableColumn<T, String> referenceColumn = new TableColumn<>("Référence");
+        referenceColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getId()));
+        referenceColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        referenceColumn.setOnEditCommit(event -> { //TODO faire en sorte que ce ne soit pas possible pour l'ouvrier
+            event.getRowValue().setId(event.getNewValue());
+            getTableView().refresh(); //TODO utile ?
+        });
+        getTableView().getColumns().addAll(referenceColumn);
+
+        initSpecificTableColumns();
+    }
+
+    public TableView<T> getTableView() {
+        return tableView;
+    }
+
+    protected abstract void initSpecificTableColumns();
 }

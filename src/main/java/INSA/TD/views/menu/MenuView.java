@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
 
 import java.util.function.Consumer;
 
-import static INSA.TD.config.ViewConfig.DEFAULT_MENU_SPACING;
+import static INSA.TD.config.ViewConfig.DEFAULT_SPACING;
 import static INSA.TD.config.ViewConfig.MENU_WIDTH;
 
 public class MenuView extends BorderPane {
@@ -39,9 +39,9 @@ public class MenuView extends BorderPane {
         menu.setFillWidth(true);
         menu.setPrefWidth(MENU_WIDTH);
 
-        VBox menuLabel = new VBox(DEFAULT_MENU_SPACING, intro);
+        VBox menuLabel = new VBox(DEFAULT_SPACING, intro);
         menuLabel.setBorder(CustomBorderFactory.getBottomBorder());
-        menuLabel.setPadding(new Insets(DEFAULT_MENU_SPACING));
+        menuLabel.setPadding(new Insets(DEFAULT_SPACING));
         menuLabel.setAlignment(Pos.CENTER);
 
         createMenuListButton();

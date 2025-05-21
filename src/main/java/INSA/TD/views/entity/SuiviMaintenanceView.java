@@ -1,4 +1,6 @@
 package INSA.TD.views.entity;
 
-public class SuiviMaintenanceView {
+import javafx.scene.layout.VBox;
+
+public class SuiviMaintenanceView extends VBox {
 }

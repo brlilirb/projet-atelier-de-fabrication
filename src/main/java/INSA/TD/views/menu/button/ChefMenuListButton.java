@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.function.Consumer;
 
-import static INSA.TD.config.ViewConfig.DEFAULT_MENU_SPACING;
+import static INSA.TD.config.ViewConfig.DEFAULT_SPACING;
 
 public class ChefMenuListButton extends MenuListButton {
 
@@ -20,7 +20,7 @@ public class ChefMenuListButton extends MenuListButton {
 
     private void setOtherButtons() {
         VBox vBox = new VBox(
-                DEFAULT_MENU_SPACING,
+                DEFAULT_SPACING,
                 new TitleLabel("Gestion atelier"),
                 new OperateurButton(getConsumer()),
                 new SuiviMaintenanceButton(getConsumer())

@@ -17,6 +17,6 @@ public class SuiviMaintenanceButton extends MenuItemButton {
 
     @Override
     protected Node createNode() {
-        return EntityViewFactory.createGammeView();
+        return EntityViewFactory.createSuiviMaintenanceView();
     }
 }

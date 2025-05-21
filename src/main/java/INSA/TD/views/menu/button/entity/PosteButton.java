@@ -17,6 +17,6 @@ public class PosteButton extends MenuItemButton {
 
     @Override
     protected Node createNode() {
-        return EntityViewFactory.createGammeView();
+        return EntityViewFactory.createPosteView();
     }
 }
