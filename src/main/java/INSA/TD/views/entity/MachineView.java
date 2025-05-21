@@ -25,7 +25,6 @@ public class MachineView extends AbstractEntityView<Machine> {
         coutCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
         coutCol.setOnEditCommit(event -> {
             event.getRowValue().setCout(event.getNewValue().floatValue());
-            event.getRowValue().getCoordonnee().setOrdonnee(event.getNewValue().floatValue());
         });
 
         getTableView().getColumns().addAll(coutCol);
@@ -38,7 +37,6 @@ public class MachineView extends AbstractEntityView<Machine> {
         descriptionCol.setCellFactory(TextFieldTableCell.forTableColumn());
         descriptionCol.setOnEditCommit(event -> {
             event.getRowValue().setDesignation(event.getNewValue());
-            getTableView().refresh();
         });
         getTableView().getColumns().addAll(descriptionCol);
     }
