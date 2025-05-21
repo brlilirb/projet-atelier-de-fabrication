@@ -39,3 +39,5 @@ build/
 
 .idea/
 /nbactions.xml
+/entities/
+/maintenance/

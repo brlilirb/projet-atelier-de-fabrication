@@ -9,6 +9,7 @@ public abstract class EtatMachine {
 
     private final EtatExterne etatExterne;
 
+
     protected EtatMachine(EtatInterne etatInterne, EtatExterne etatExterne) {
         this.etatInterne = etatInterne;
         this.etatExterne = etatExterne;

@@ -8,6 +8,9 @@ public class Coordonnee {
 
     private float ordonnee;
 
+    public Coordonnee() {
+    }
+
     public Coordonnee(float abscisse, float ordonnee) {
         this.abscisse = abscisse;
         this.ordonnee = ordonnee;

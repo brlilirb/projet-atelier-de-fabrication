@@ -35,16 +35,11 @@ classDiagram
         -String prenom
     }
 
-    class Worker {
-        <<abstract>>
+    class Operateur {
         -boolean libre
     }
 
-    class Operateur {
-    }
-
     class ChefAtelier
-    class Mainteneur
 
     class Operation {
         -String refEquipement
@@ -112,10 +107,8 @@ classDiagram
 
     Equipement <|-- Poste: Héritage
     Equipement <|-- Machine: Héritage
-    Personne <|-- Worker: Héritage
     Personne <|-- ChefAtelier: Héritage
-    Worker <|-- Operateur: Héritage
-    Worker <|-- Mainteneur: Héritage
+    Personne <|-- Operateur: Héritage
     EtatMachine <|-- Operationnel: Héritage
     EtatMachine <|-- Arret: Héritage
     Operationnel <|-- Disponible: Héritage

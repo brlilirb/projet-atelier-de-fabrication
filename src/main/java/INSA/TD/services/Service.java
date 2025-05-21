@@ -17,4 +17,7 @@ public interface Service<E> {
 
     void delete(String id);
 
+    void deleteAll();
+
+    List<E> search(String value);
 }

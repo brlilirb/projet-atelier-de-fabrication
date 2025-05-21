@@ -2,19 +2,18 @@ package INSA.TD;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import INSA.TD.views.implementation.AcceuilView;
-import INSA.TD.models.Competence;
+import INSA.TD.views.implementation.AccueilView;
 
 public class Main extends Application {
-       @Override
+
+    @Override
     public void start(Stage primaryStage) {
-       // Competence model = new Competence();
-        AcceuilView view = new AcceuilView();
-        view.start(primaryStage);
+        // Appel de AccueilView pour afficher l'interface
+        AccueilView accueilView = new AccueilView();
+        accueilView.start(primaryStage);  // Affichage de la vue Accueil
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch(args);  // Lance l'application JavaFX
     }
-
 }

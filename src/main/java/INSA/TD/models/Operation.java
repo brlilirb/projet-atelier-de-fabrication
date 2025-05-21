@@ -6,6 +6,9 @@ public class Operation extends AbstractDescription {
     private String refEquipement;
     private float dureeOperation; //unite : heure
 
+    public Operation() {
+    }
+
     public Operation(String refOperation,
                      String dOperation,
                      String refequipement,

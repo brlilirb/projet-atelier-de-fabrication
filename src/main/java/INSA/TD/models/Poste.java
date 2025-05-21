@@ -8,6 +8,9 @@ import java.util.List;
 public class Poste extends Equipement {
     private List<Machine> listeMachines;
 
+    public Poste() {
+    }
+
     public Poste(List<Machine> listeMachines,
                  String dEquipement,
                  String refEquipement) {
@@ -30,7 +33,7 @@ public class Poste extends Equipement {
 
     public String toString(String delimiter) {
         return super.toString(delimiter) + delimiter
-                + ListUtils.listToString(listeMachines);
+                + ListUtils.listRefToString(listeMachines);
     }
 
     @Override
