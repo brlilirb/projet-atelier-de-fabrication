@@ -9,6 +9,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.NumberStringConverter;
+import INSA.TD.views.menu.MenuView;
 
 public class MachineView extends AbstractEntityView<Machine> {
 
@@ -20,8 +21,8 @@ public class MachineView extends AbstractEntityView<Machine> {
         TableColumn<Machine, Number> coutCol = initCoutColumn();
         TableColumn<Machine, String> typeCol = initTypeColumn();
 
-        getTableView().getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        getTableView().setEditable(true);
+        getTableView().getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);// permet de selectionné plusieurs ligne en m^me temps
+        getTableView().setEditable(MenuView.isAutorisation()); // TODO pensez à le mettre sans tous les table car autorsie ou non les modifications
 
         getTableView().getColumns().addAll(descriptionCol, coutCol, typeCol);
     }

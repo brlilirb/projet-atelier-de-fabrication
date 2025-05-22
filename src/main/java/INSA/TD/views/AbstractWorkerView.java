@@ -17,6 +17,7 @@ public abstract class AbstractWorkerView extends BorderPane {
         initMenuView();
     }
 
+
     public void initMenuView() {
         setLeft(menuView);
     }

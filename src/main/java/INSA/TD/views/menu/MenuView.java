@@ -17,7 +17,7 @@ import static INSA.TD.config.ViewConfig.MENU_WIDTH;
 
 public class MenuView extends BorderPane {
 
-    private final boolean autorisation;  // TODO remove
+    private static boolean autorisation;  // TODO regarder si on peut ameliorer
 
     private final AbstractWorkerView abstractWorkerView;
 
@@ -62,7 +62,7 @@ public class MenuView extends BorderPane {
         return abstractWorkerView::setBodyView;
     }
 
-    public boolean isAutorisation() { // TODO remove autorisation
+    public static boolean isAutorisation() { // TODO remove autorisation
         return autorisation;
     }
 
