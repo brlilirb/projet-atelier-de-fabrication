@@ -15,14 +15,15 @@ public class MachineView extends AbstractEntityView<Machine> {
     @Override
     @SuppressWarnings("unchecked")
     protected void initSpecificTableColumns() {
-        // TODO make other columns
+        // TODO comment faire pour coordonées et etatMachine
         TableColumn<Machine, String> descriptionCol = initDescriptionColumn();
         TableColumn<Machine, Number> coutCol = initCoutColumn();
+        TableColumn<Machine, String> typeCol = initTypeColumn();
 
         getTableView().getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         getTableView().setEditable(true);
 
-        getTableView().getColumns().addAll(descriptionCol, coutCol);
+        getTableView().getColumns().addAll(descriptionCol, coutCol, typeCol);
     }
 
     protected TableColumn<Machine, Number> initCoutColumn() {
@@ -43,6 +44,16 @@ public class MachineView extends AbstractEntityView<Machine> {
             event.getRowValue().setDesignation(event.getNewValue());
         });
         return descriptionCol;
+    }
+
+    protected TableColumn<Machine, String> initTypeColumn() {
+        TableColumn<Machine, String> typeCol = new TableColumn<>("Type");
+        typeCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getType()));
+        typeCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        typeCol.setOnEditCommit(event -> {
+            event.getRowValue().setType(event.getNewValue());
+        });
+        return typeCol;
     }
 
     @Override

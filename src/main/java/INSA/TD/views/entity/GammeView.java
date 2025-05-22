@@ -14,5 +14,7 @@ public class GammeView extends AbstractEntityView<Gamme> {
     @Override
     protected void initSpecificTableColumns() {
 
-    } //TODO a faire (cf exemple machine)
+    } /*TODO ajouter colonnes produit et opérations
+                -> ajouter cout gamme
+    */
 }

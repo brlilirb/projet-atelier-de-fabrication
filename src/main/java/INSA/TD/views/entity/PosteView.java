@@ -3,6 +3,10 @@ package INSA.TD.views.entity;
 import INSA.TD.controllers.PosteController;
 import INSA.TD.controllers.implementation.PosteControllerImpl;
 import INSA.TD.models.Poste;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 public class PosteView extends AbstractEntityView<Poste> {
     @Override
@@ -12,6 +16,21 @@ public class PosteView extends AbstractEntityView<Poste> {
 
     @Override
     protected void initSpecificTableColumns() {
+        TableColumn<Poste, String> descriptionCol = initDescriptionColumn();
 
-    }//TODO a faire (cf exemple machine)
+        getTableView().getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        getTableView().setEditable(true);
+
+        getTableView().getColumns().addAll(descriptionCol);
+    }//TODO rajouter liste machines
+
+    protected TableColumn<Poste, String> initDescriptionColumn() {
+        TableColumn<Poste, String> descriptionCol = new TableColumn<>("Description");
+        descriptionCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDesignation()));
+        descriptionCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        descriptionCol.setOnEditCommit(event -> {
+            event.getRowValue().setDesignation(event.getNewValue());
+        });
+        return descriptionCol;
+    }
 }
