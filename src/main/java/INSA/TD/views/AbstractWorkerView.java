@@ -9,11 +9,7 @@ public abstract class AbstractWorkerView extends BorderPane {
     private MenuView menuView;
 
     protected AbstractWorkerView() {
-        this(false);
-    }
-
-    protected AbstractWorkerView(boolean autorisation) { // TODO remove
-        this.menuView = new MenuView(this, autorisation);
+        this.menuView = new MenuView(this);
         initMenuView();
     }
 

@@ -17,16 +17,13 @@ import static INSA.TD.config.ViewConfig.MENU_WIDTH;
 
 public class MenuView extends BorderPane {
 
-    private final boolean autorisation;  // TODO remove
-
     private final AbstractWorkerView abstractWorkerView;
 
     private MenuListButton menuListButton;
 
     private final Text intro = new Text("Menu");
 
-    public MenuView(AbstractWorkerView abstractWorkerView, boolean autorisation) {
-        this.autorisation = autorisation;
+    public MenuView(AbstractWorkerView abstractWorkerView) {
         this.abstractWorkerView = abstractWorkerView;
 
         setBorder(CustomBorderFactory.getRightBorder());
@@ -60,10 +57,6 @@ public class MenuView extends BorderPane {
 
     protected Consumer<Node> getSetParent() {
         return abstractWorkerView::setBodyView;
-    }
-
-    public boolean isAutorisation() { // TODO remove autorisation
-        return autorisation;
     }
 
     public void setMenuListButton(MenuListButton menuListButton) {

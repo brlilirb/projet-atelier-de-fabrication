@@ -5,7 +5,6 @@ import INSA.TD.controllers.implementation.MachineControllerImpl;
 import INSA.TD.models.Machine;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.NumberStringConverter;
@@ -15,24 +14,43 @@ public class MachineView extends AbstractEntityView<Machine> {
     @Override
     @SuppressWarnings("unchecked")
     protected void initSpecificTableColumns() {
-        // TODO comment faire pour coordonées et etatMachine
+        // TODO comment faire pour etatMachine
         TableColumn<Machine, String> descriptionCol = initDescriptionColumn();
-        TableColumn<Machine, Number> coutCol = initCoutColumn();
         TableColumn<Machine, String> typeCol = initTypeColumn();
+        TableColumn<Machine, Number> coutCol = initCoutColumn();
+        TableColumn<Machine, Number> abscisseCol = initAbscisse();
+        TableColumn<Machine, Number> ordonneeCol = initOrdonnee();
 
-        getTableView().getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        getTableView().setEditable(true);
-
-        getTableView().getColumns().addAll(descriptionCol, coutCol, typeCol);
+        getTableView().getColumns().addAll(
+                descriptionCol,
+                typeCol,
+                coutCol,
+                abscisseCol,
+                ordonneeCol
+        );
     }
 
     protected TableColumn<Machine, Number> initCoutColumn() {
         TableColumn<Machine, Number> coutCol = new TableColumn<>("Cout");
         coutCol.setCellValueFactory(data -> new SimpleFloatProperty(data.getValue().getCout()));
         coutCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
-        coutCol.setOnEditCommit(event -> {
-            event.getRowValue().setCout(event.getNewValue().floatValue());
-        });
+        coutCol.setOnEditCommit(event -> event.getRowValue().setCout(event.getNewValue().floatValue()));
+        return coutCol;
+    }
+
+    protected TableColumn<Machine, Number> initAbscisse() {
+        TableColumn<Machine, Number> coutCol = new TableColumn<>("Abscisse");
+        coutCol.setCellValueFactory(data -> new SimpleFloatProperty(data.getValue().getCout()));
+        coutCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
+        coutCol.setOnEditCommit(event -> event.getRowValue().getCoordonnee().setAbscisse(event.getNewValue().floatValue()));
+        return coutCol;
+    }
+
+    protected TableColumn<Machine, Number> initOrdonnee() {
+        TableColumn<Machine, Number> coutCol = new TableColumn<>("Ordonnée");
+        coutCol.setCellValueFactory(data -> new SimpleFloatProperty(data.getValue().getCout()));
+        coutCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
+        coutCol.setOnEditCommit(event -> event.getRowValue().getCoordonnee().setOrdonnee(event.getNewValue().floatValue()));
         return coutCol;
     }
 
@@ -40,9 +58,7 @@ public class MachineView extends AbstractEntityView<Machine> {
         TableColumn<Machine, String> descriptionCol = new TableColumn<>("Description");
         descriptionCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDesignation()));
         descriptionCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        descriptionCol.setOnEditCommit(event -> {
-            event.getRowValue().setDesignation(event.getNewValue());
-        });
+        descriptionCol.setOnEditCommit(event -> event.getRowValue().setDesignation(event.getNewValue()));
         return descriptionCol;
     }
 
@@ -50,9 +66,7 @@ public class MachineView extends AbstractEntityView<Machine> {
         TableColumn<Machine, String> typeCol = new TableColumn<>("Type");
         typeCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getType()));
         typeCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        typeCol.setOnEditCommit(event -> {
-            event.getRowValue().setType(event.getNewValue());
-        });
+        typeCol.setOnEditCommit(event -> event.getRowValue().setType(event.getNewValue()));
         return typeCol;
     }
 

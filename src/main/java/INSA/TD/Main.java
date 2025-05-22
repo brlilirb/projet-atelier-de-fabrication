@@ -18,8 +18,7 @@ public class Main extends Application {
 
         new AccueilView(primaryStage);
 
-        initController.save();
-        primaryStage.setOnCloseRequest(event -> initController.save());
+        primaryStage.setOnCloseRequest(_ -> initController.save());
     }
 
     public static void main(String[] args) {

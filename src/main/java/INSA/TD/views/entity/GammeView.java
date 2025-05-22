@@ -12,6 +12,7 @@ public class GammeView extends AbstractEntityView<Gamme> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void initSpecificTableColumns() {
 
     } /*TODO ajouter colonnes produit et opérations
