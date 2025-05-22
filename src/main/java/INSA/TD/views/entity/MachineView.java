@@ -16,29 +16,33 @@ public class MachineView extends AbstractEntityView<Machine> {
     @SuppressWarnings("unchecked")
     protected void initSpecificTableColumns() {
         // TODO make other columns
-        initDescriptionColumn();
+        TableColumn<Machine, String> descriptionCol = initDescriptionColumn();
+        TableColumn<Machine, Number> coutCol = initCoutColumn();
 
         getTableView().getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         getTableView().setEditable(true);
+
+        getTableView().getColumns().addAll(descriptionCol, coutCol);
+    }
+
+    protected TableColumn<Machine, Number> initCoutColumn() {
         TableColumn<Machine, Number> coutCol = new TableColumn<>("Cout");
         coutCol.setCellValueFactory(data -> new SimpleFloatProperty(data.getValue().getCout()));
         coutCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
         coutCol.setOnEditCommit(event -> {
             event.getRowValue().setCout(event.getNewValue().floatValue());
         });
-
-        getTableView().getColumns().addAll(coutCol);
+        return coutCol;
     }
 
-    @SuppressWarnings("unchecked")
-    protected void initDescriptionColumn() {
+    protected TableColumn<Machine, String> initDescriptionColumn() {
         TableColumn<Machine, String> descriptionCol = new TableColumn<>("Description");
         descriptionCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDesignation()));
         descriptionCol.setCellFactory(TextFieldTableCell.forTableColumn());
         descriptionCol.setOnEditCommit(event -> {
             event.getRowValue().setDesignation(event.getNewValue());
         });
-        getTableView().getColumns().addAll(descriptionCol);
+        return descriptionCol;
     }
 
     @Override
