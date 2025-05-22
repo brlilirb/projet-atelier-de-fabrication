@@ -4,6 +4,7 @@ import INSA.TD.models.AbstractIdentity;
 import INSA.TD.views.button.DeleteButton;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -14,7 +15,7 @@ import static INSA.TD.config.ViewConfig.DEFAULT_SPACING;
 public abstract class AbstractEntityView<T extends AbstractIdentity> extends AbstractView<T> {
 
     private final TableView<T> tableView = new TableView<>();
-    private Button deleteButton = new DeleteButton();
+    private final Button deleteButton = new DeleteButton();
 
     protected AbstractEntityView() {
         super();
@@ -26,22 +27,22 @@ public abstract class AbstractEntityView<T extends AbstractIdentity> extends Abs
         tableView.setItems(getData());
 
         initTableColumn();
-        initListener();
-        
+
+        initDeleteButton();
+    }
+
+    private void initDeleteButton() {
         deleteButton.setVisible(false); //TODO ne pas afficher pour ouvrier
-        tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                deleteButton.setVisible(true);
-            } else {
-                deleteButton.setVisible(false);
+        tableView.getSelectionModel().selectedItemProperty().addListener((_, _, newValue) -> deleteButton.setVisible(newValue != null));
+        deleteButton.setOnAction(_ -> {
+            ObservableList<T> selectedItems = tableView.getSelectionModel().getSelectedItems();
+            for (T selected : selectedItems) {
+                if (selected != null) {
+                    getController().supprimer(selected.getId());
+                }
             }
-        });
-        deleteButton.setOnAction(event -> {
-            T selected = tableView.getSelectionModel().getSelectedItem();
-            if (selected != null) {
-                getData().remove(selected); // Supprimer l'objet sélectionné de la liste
-                deleteButton.setVisible(false); // Masquer le bouton après suppression
-            }
+            getData().removeAll(selectedItems); // Supprimer l'objet sélectionné de la liste
+            tableView.getSelectionModel().clearSelection();
         });
     }
 
@@ -60,8 +61,6 @@ public abstract class AbstractEntityView<T extends AbstractIdentity> extends Abs
             while (change.next()) {
                 if (change.wasAdded()) {
                     ajouter(change.getAddedSubList().getFirst());
-                } else if (change.wasRemoved()) {
-                    supprimer(change.getRemoved().getFirst().getId());
                 }
             }
         });
