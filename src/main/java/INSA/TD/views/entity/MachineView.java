@@ -5,11 +5,14 @@ import INSA.TD.controllers.implementation.MachineControllerImpl;
 import INSA.TD.models.Machine;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.NumberStringConverter;
 import INSA.TD.views.menu.MenuView;
+
+import java.util.List;
 
 public class MachineView extends AbstractEntityView<Machine> {
 
@@ -25,6 +28,9 @@ public class MachineView extends AbstractEntityView<Machine> {
         getTableView().setEditable(MenuView.isAutorisation()); // TODO pensez à le mettre sans tous les table car autorsie ou non les modifications
 
         getTableView().getColumns().addAll(descriptionCol, coutCol, typeCol);
+    }
+    public void updateTableData(List<Machine> machines) {
+        getData().setAll(machines);
     }
 
     protected TableColumn<Machine, Number> initCoutColumn() {
@@ -61,4 +67,7 @@ public class MachineView extends AbstractEntityView<Machine> {
     protected MachineController getController() {
         return MachineControllerImpl.getInstance();
     }
+
+
+
 }

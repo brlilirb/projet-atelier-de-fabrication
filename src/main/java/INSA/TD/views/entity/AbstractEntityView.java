@@ -31,7 +31,7 @@ public abstract class AbstractEntityView<T extends AbstractIdentity> extends Abs
         TableColumn<T, String> referenceColumn = new TableColumn<>("Référence");
         referenceColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getId()));
         referenceColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        referenceColumn.setOnEditCommit(event -> { //TODO faire en sorte que ce ne soit pas possible pour l'ouvrier
+        referenceColumn.setOnEditCommit(event -> {
             event.getRowValue().setId(event.getNewValue());
         });
         getTableView().getColumns().addAll(referenceColumn);

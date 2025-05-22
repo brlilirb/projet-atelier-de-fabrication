@@ -1,36 +1,28 @@
 package INSA.TD.views.entity;
 
-import INSA.TD.controllers.PosteController;
-import INSA.TD.controllers.implementation.PosteControllerImpl;
+import INSA.TD.models.Machine;
 import INSA.TD.models.Poste;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.TextFieldTableCell;
+import INSA.TD.views.entity.TableauPosteView;
+import INSA.TD.views.entity.MachineView;
+import INSA.TD.views.entity.PosteView;
+import javafx.scene.layout.HBox;
 
-public class PosteView extends AbstractEntityView<Poste> {
-    @Override
-    protected PosteController getController() {
-        return PosteControllerImpl.getInstance();
+import java.util.List;
+
+public class PosteView extends HBox {
+
+    private final TableauPosteView posteTableView = new TableauPosteView();
+    private final MachineView machineView = new MachineView();
+
+    public PosteView() {
+        setSpacing(20);
+        getChildren().addAll(posteTableView, machineView);
+
+        posteTableView.setOnVoirClicked(this::handleVoirMachinesDuPoste);
     }
 
-    @Override
-    protected void initSpecificTableColumns() {
-        TableColumn<Poste, String> descriptionCol = initDescriptionColumn();
-
-        getTableView().getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        getTableView().setEditable(true);
-
-        getTableView().getColumns().addAll(descriptionCol);
-    }//TODO rajouter liste machines
-
-    protected TableColumn<Poste, String> initDescriptionColumn() {
-        TableColumn<Poste, String> descriptionCol = new TableColumn<>("Description");
-        descriptionCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDesignation()));
-        descriptionCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        descriptionCol.setOnEditCommit(event -> {
-            event.getRowValue().setDesignation(event.getNewValue());
-        });
-        return descriptionCol;
+    private void handleVoirMachinesDuPoste(Poste poste) {
+        List<Machine> machinesDuPoste = poste.getListeMachines();
+        machineView.updateTableData(machinesDuPoste);
     }
 }
