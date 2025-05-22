@@ -19,5 +19,4 @@ public interface SuiviMaintenanceController {
     Fiabilite calculerFiabilite(String id);
 
     List<Fiabilite> calculerToutesFiabilites();
-    //TODO ajouter sortMachineByFiability ici ou dans MachineController ?
 }
