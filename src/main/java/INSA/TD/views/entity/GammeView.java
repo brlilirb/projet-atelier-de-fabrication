@@ -3,6 +3,9 @@ package INSA.TD.views.entity;
 import INSA.TD.controllers.GammeController;
 import INSA.TD.controllers.implementation.GammeControllerImpl;
 import INSA.TD.models.Gamme;
+import INSA.TD.views.entity.tableview.GammeTableView;
+import javafx.scene.Node;
+import javafx.scene.control.TableView;
 
 public class GammeView extends AbstractEntityView<Gamme> {
 
@@ -12,10 +15,12 @@ public class GammeView extends AbstractEntityView<Gamme> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    protected void initSpecificTableColumns() {
+    protected TableView<Gamme> createTableView() {
+        return new GammeTableView(getData());
+    }
 
-    } /*TODO ajouter colonnes produit et opérations
-                -> ajouter cout gamme
-    */
+    @Override
+    protected Node createSpecificNode() {
+        return null;
+    }
 }

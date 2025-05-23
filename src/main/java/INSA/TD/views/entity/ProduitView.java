@@ -3,9 +3,9 @@ package INSA.TD.views.entity;
 import INSA.TD.controllers.ProduitController;
 import INSA.TD.controllers.implementation.ProduitControllerImpl;
 import INSA.TD.models.Produit;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.TextFieldTableCell;
+import INSA.TD.views.entity.tableview.ProduitTableView;
+import javafx.scene.Node;
+import javafx.scene.control.TableView;
 
 public class ProduitView extends AbstractEntityView<Produit> {
 
@@ -15,18 +15,12 @@ public class ProduitView extends AbstractEntityView<Produit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    protected void initSpecificTableColumns() {
-        TableColumn<Produit, String> descriptionCol = initDescriptionColumn();
-
-        getTableView().getColumns().addAll(descriptionCol);
+    protected TableView<Produit> createTableView() {
+        return new ProduitTableView(getData());
     }
 
-    protected TableColumn<Produit, String> initDescriptionColumn() {
-        TableColumn<Produit, String> descriptionCol = new TableColumn<>("Description");
-        descriptionCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDesignation()));
-        descriptionCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        descriptionCol.setOnEditCommit(event -> event.getRowValue().setDesignation(event.getNewValue()));
-        return descriptionCol;
+    @Override
+    protected Node createSpecificNode() {
+        return null;
     }
 }

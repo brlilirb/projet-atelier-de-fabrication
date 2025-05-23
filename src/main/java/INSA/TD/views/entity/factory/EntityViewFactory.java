@@ -1,4 +1,6 @@
-package INSA.TD.views.entity;
+package INSA.TD.views.entity.factory;
+
+import INSA.TD.views.entity.*;
 
 public class EntityViewFactory {
 

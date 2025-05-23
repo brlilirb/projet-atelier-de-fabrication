@@ -3,9 +3,9 @@ package INSA.TD.views.entity;
 import INSA.TD.controllers.OperateurController;
 import INSA.TD.controllers.implementation.OperateurControllerImpl;
 import INSA.TD.models.Operateur;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.TextFieldTableCell;
+import INSA.TD.views.entity.tableview.OperateurTableView;
+import javafx.scene.Node;
+import javafx.scene.control.TableView;
 
 public class OperateurView extends AbstractEntityView<Operateur> {
 
@@ -15,27 +15,12 @@ public class OperateurView extends AbstractEntityView<Operateur> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    protected void initSpecificTableColumns() {
-        TableColumn<Operateur, String> nomCol = initNomColumn();
-        TableColumn<Operateur, String> prenomCol = initPrenomColumn();
-
-        getTableView().getColumns().addAll(nomCol, prenomCol); //TODO ajouter libre, checkbox ?
+    protected TableView<Operateur> createTableView() {
+        return new OperateurTableView(getData());
     }
 
-    protected TableColumn<Operateur, String> initNomColumn() {
-        TableColumn<Operateur, String> nomCol = new TableColumn<>("Nom");
-        nomCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNom()));
-        nomCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        nomCol.setOnEditCommit(event -> event.getRowValue().setNom(event.getNewValue()));
-        return nomCol;
-    }
-
-    protected TableColumn<Operateur, String> initPrenomColumn() {
-        TableColumn<Operateur, String> prenomCol = new TableColumn<>("Prénom");
-        prenomCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPrenom()));
-        prenomCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        prenomCol.setOnEditCommit(event -> event.getRowValue().setPrenom(event.getNewValue()));
-        return prenomCol;
+    @Override
+    protected Node createSpecificNode() {
+        return null;
     }
 }

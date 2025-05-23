@@ -13,6 +13,7 @@ public class Main extends Application {
         InitController initController = InitControllerImpl.getInstance();
         initController.load();
 
+        primaryStage.setMaximized(true);
         primaryStage.setMinHeight(ConstantesUtils.DEFAULT_HEIGHT);
         primaryStage.setMinWidth(ConstantesUtils.DEFAULT_WIDTH);
 

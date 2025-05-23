@@ -4,13 +4,11 @@ import INSA.TD.controllers.UserController;
 import INSA.TD.controllers.implementation.UserControllerImpl;
 import INSA.TD.models.AbstractIdentity;
 import INSA.TD.views.button.DeleteButton;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import static INSA.TD.config.ViewConfig.DEFAULT_SPACING;
@@ -18,12 +16,15 @@ import static INSA.TD.config.ViewConfig.DEFAULT_SPACING;
 public abstract class AbstractEntityView<T extends AbstractIdentity> extends AbstractView<T> {
 
     private final UserController userController;
-    private final TableView<T> tableView = new TableView<>();
+    private final TableView<T> tableView;
     private final Button deleteButton = new DeleteButton();
+    private final Node specificNode;
 
     protected AbstractEntityView() {
         super();
+        tableView = createTableView();
         userController = UserControllerImpl.getInstance();
+        specificNode = createSpecificNode();
         setSpacing(DEFAULT_SPACING);
         setPadding(new Insets(DEFAULT_SPACING));
 
@@ -31,10 +32,6 @@ public abstract class AbstractEntityView<T extends AbstractIdentity> extends Abs
 
         getTableView().getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         getTableView().setEditable(userController.getUser().autorisation());
-
-        initTableColumn();
-
-        tableView.setItems(getData());
 
         deleteButton.setVisible(userController.getUser().autorisation());
         if (userController.getUser().autorisation()) {
@@ -57,25 +54,6 @@ public abstract class AbstractEntityView<T extends AbstractIdentity> extends Abs
         });
     }
 
-    @SuppressWarnings("unchecked")
-    protected void initTableColumn() {
-        TableColumn<T, String> referenceColumn = new TableColumn<>("Référence");
-        referenceColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getId()));
-        getTableView().getColumns().addAll(referenceColumn);
-
-        initSpecificTableColumns();
-    }
-
-    public void initListener() {
-        getData().addListener((ListChangeListener<T>) change -> {
-            while (change.next()) {
-                if (change.wasAdded()) {
-                    ajouter(change.getAddedSubList().getFirst());
-                }
-            }
-        });
-    }
-
     protected UserController getUserController() {
         return userController;
     }
@@ -84,5 +62,7 @@ public abstract class AbstractEntityView<T extends AbstractIdentity> extends Abs
         return tableView;
     }
 
-    protected abstract void initSpecificTableColumns();
+    protected abstract TableView<T> createTableView();
+
+    protected abstract Node createSpecificNode();
 }

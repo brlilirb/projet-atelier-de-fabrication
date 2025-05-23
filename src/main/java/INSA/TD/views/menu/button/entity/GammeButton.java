@@ -1,6 +1,6 @@
 package INSA.TD.views.menu.button.entity;
 
-import INSA.TD.views.entity.EntityViewFactory;
+import INSA.TD.views.entity.factory.EntityViewFactory;
 import INSA.TD.views.menu.button.MenuItemButton;
 import javafx.scene.Node;
 
