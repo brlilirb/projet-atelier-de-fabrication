@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.TextFieldTableCell;
 
-public class OperateurTableView extends AbstractTableView<Operateur> {
+public class OperateurTableView extends AbstractEntityTableView<Operateur> {
 
     public OperateurTableView(ObservableList<Operateur> data) {
         super(data);

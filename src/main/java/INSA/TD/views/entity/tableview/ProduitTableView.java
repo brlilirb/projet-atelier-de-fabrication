@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.TextFieldTableCell;
 
-public class ProduitTableView extends AbstractTableView<Produit> {
+public class ProduitTableView extends AbstractEntityTableView<Produit> {
 
     public ProduitTableView(ObservableList<Produit> data) {
         super(data);

@@ -7,14 +7,13 @@ import INSA.TD.views.entity.factory.EtatMachineFactory;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.NumberStringConverter;
 
-public class MachineTableView extends AbstractTableView<Machine> {
+public class MachineTableView extends AbstractEntityTableView<Machine> {
 
     public MachineTableView(ObservableList<Machine> data) {
         super(data);
@@ -85,7 +84,7 @@ public class MachineTableView extends AbstractTableView<Machine> {
         etatMachineColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getEtatMachine()));
         etatMachineColumn.setCellFactory(ComboBoxTableCell.forTableColumn(
                 StringConverterUtils.toEtatMachineStringConverter(),
-                FXCollections.observableArrayList(EtatMachineFactory.getEtatsMachine())
+                EtatMachineFactory.getObservableEtatsMachine()
         ));
         etatMachineColumn.setOnEditCommit(event -> event.getRowValue().setEtatMachine(event.getNewValue()));
         etatMachineColumn.setMinWidth(200);

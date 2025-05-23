@@ -6,6 +6,13 @@ public class CustomBorderFactory {
 
     private final static double DEFAULT_BORDER_SIZE = 2;
 
+    private CustomBorderFactory() {
+    }
+
+    public static Border getFilledBorder() {
+        return getBorder(DEFAULT_BORDER_SIZE, DEFAULT_BORDER_SIZE, DEFAULT_BORDER_SIZE, DEFAULT_BORDER_SIZE);
+    }
+
     public static Border getTopBorder() {
         return getBorder(DEFAULT_BORDER_SIZE, 0, 0, 0);
     }

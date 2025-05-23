@@ -3,7 +3,7 @@ package INSA.TD.views.entity.tableview;
 import INSA.TD.models.Gamme;
 import javafx.collections.ObservableList;
 
-public class GammeTableView extends AbstractTableView<Gamme> {
+public class GammeTableView extends AbstractEntityTableView<Gamme> {
 
     public GammeTableView(ObservableList<Gamme> data) {
         super(data);

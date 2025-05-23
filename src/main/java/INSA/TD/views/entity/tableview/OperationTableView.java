@@ -8,7 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.NumberStringConverter;
 
-public class OperationTableView extends AbstractTableView<Operation> {
+public class OperationTableView extends AbstractEntityTableView<Operation> {
 
     public OperationTableView(ObservableList<Operation> data) {
         super(data);

@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.TextFieldTableCell;
 
-public class PosteTableView extends AbstractTableView<Poste> {
+public class PosteTableView extends AbstractEntityTableView<Poste> {
 
     public PosteTableView(ObservableList<Poste> data) {
         super(data);
