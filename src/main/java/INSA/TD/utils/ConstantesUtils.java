@@ -11,6 +11,9 @@ public class ConstantesUtils {
     public static final String START_TIME = "06:00";
     public static final String END_TIME = "20:00";
 
+    public static final double DEFAULT_WIDTH = 1000;
+    public static final double DEFAULT_HEIGHT = 600;
+
     private ConstantesUtils() {
     }
 
