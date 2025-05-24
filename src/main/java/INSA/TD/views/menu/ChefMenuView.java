@@ -5,8 +5,8 @@ import INSA.TD.views.menu.button.ChefMenuListButton;
 
 public class ChefMenuView extends MenuView {
 
-    public ChefMenuView(AbstractWorkerView abstractWorkerView, boolean autorisation) {
-        super(abstractWorkerView, autorisation);
+    public ChefMenuView(AbstractWorkerView abstractWorkerView) {
+        super(abstractWorkerView);
     }
 
     @Override

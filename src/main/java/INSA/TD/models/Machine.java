@@ -15,6 +15,8 @@ public class Machine extends Equipement {
 
     public Machine(String id) {
         this.setId(id);
+        coordonnee = new Coordonnee();
+        etatMachine = new Disponible();
     }
 
     public Machine(String type,

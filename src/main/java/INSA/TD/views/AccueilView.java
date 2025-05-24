@@ -1,5 +1,7 @@
 package INSA.TD.views;
 
+import INSA.TD.controllers.UserController;
+import INSA.TD.controllers.implementation.UserControllerImpl;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,9 +12,11 @@ import javafx.stage.Stage;
 
 public class AccueilView {
 
+    private final UserController userController;
     private final Stage stage;
 
     public AccueilView(Stage stage) {
+        userController = UserControllerImpl.getInstance();
         this.stage = stage;
         start();
     }
@@ -41,6 +45,7 @@ public class AccueilView {
     }
 
     private void showOuvrierComponent() {
+        userController.createOuvrier();
         updateView(
                 new OuvrierView(),
                 "Ouvrier"
@@ -48,6 +53,7 @@ public class AccueilView {
     }
 
     private void showChefComponent() {
+        userController.createChefAtelier();
         updateView(
                 new ChefAtelierView(),
                 "Chef d'atelier"

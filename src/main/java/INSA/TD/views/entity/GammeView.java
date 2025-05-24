@@ -3,6 +3,10 @@ package INSA.TD.views.entity;
 import INSA.TD.controllers.GammeController;
 import INSA.TD.controllers.implementation.GammeControllerImpl;
 import INSA.TD.models.Gamme;
+import INSA.TD.views.entity.form.AbstractForm;
+import INSA.TD.views.entity.tableview.GammeTableView;
+import javafx.scene.Node;
+import javafx.scene.control.TableView;
 
 public class GammeView extends AbstractEntityView<Gamme> {
 
@@ -12,7 +16,17 @@ public class GammeView extends AbstractEntityView<Gamme> {
     }
 
     @Override
-    protected void initSpecificTableColumns() {
+    protected TableView<Gamme> createTableView() {
+        return new GammeTableView(getData());
+    }
 
-    } //TODO a faire (cf exemple machine)
+    @Override
+    protected AbstractForm<Gamme> createAddForm() {
+        return null;
+    }
+
+    @Override
+    protected Node createSpecificNode() {
+        return null;
+    }
 }

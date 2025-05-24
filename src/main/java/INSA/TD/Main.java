@@ -13,13 +13,13 @@ public class Main extends Application {
         InitController initController = InitControllerImpl.getInstance();
         initController.load();
 
+        primaryStage.setMaximized(true);
         primaryStage.setMinHeight(ConstantesUtils.DEFAULT_HEIGHT);
         primaryStage.setMinWidth(ConstantesUtils.DEFAULT_WIDTH);
 
         new AccueilView(primaryStage);
 
-        initController.save();
-        primaryStage.setOnCloseRequest(event -> initController.save());
+        primaryStage.setOnCloseRequest(_ -> initController.save());
     }
 
     public static void main(String[] args) {
