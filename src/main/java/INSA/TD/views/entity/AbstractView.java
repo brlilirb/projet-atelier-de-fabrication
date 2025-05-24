@@ -6,16 +6,15 @@ import INSA.TD.models.AbstractIdentity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.BorderPane;
 
 import java.util.List;
 
-public abstract class AbstractView<T extends AbstractIdentity> extends VBox implements Controller<T> { // TODO remake an interface
+public abstract class AbstractView<T extends AbstractIdentity> extends BorderPane implements Controller<T> { // TODO remake an interface
 
     private ObservableList<T> data;
 
     protected AbstractView() {
-        super(ViewConfig.DEFAULT_SPACING);
         setPadding(new Insets(ViewConfig.DEFAULT_SPACING));
 
         setData(afficherTous());

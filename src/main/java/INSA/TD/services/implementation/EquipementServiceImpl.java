@@ -40,6 +40,11 @@ public class EquipementServiceImpl extends IdentityService<Equipement> implement
     }
 
     @Override
+    public List<Equipement> getAllEquipements() {
+        return concatEquipementList();
+    }
+
+    @Override
     public Equipement getEquipementById(String id) {
         return getById(concatEquipementList(), id);
     }
