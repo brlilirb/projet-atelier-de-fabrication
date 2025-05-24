@@ -47,7 +47,7 @@ public class MachineForm extends AbstractForm<Machine> {
 
         etatMachineChoiceBox = new ChoiceBoxBlock<>(
                 "Etat machine",
-                EtatMachineFactory.getObservableEtatsMachine(),
+                EtatMachineFactory.getEtatMachines(),
                 new Disponible(),
                 StringConverterUtils.toEtatMachineStringConverter()
         );

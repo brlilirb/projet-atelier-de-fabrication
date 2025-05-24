@@ -55,9 +55,9 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         LocalDateTime lastStart = null;
 
         for (SuiviMaintenance event : machineEvents) {
-            if (event.getEtat().equals("A")) { // Attention a bien donner l'heure de demarrage en debut de journee
+            if (event.getEtat().equalsIgnoreCase("A")) { // Attention a bien donner l'heure de demarrage en debut de journee
                 lastStop = event.getDateTime(); //dès qu'un arrêt est trouvé la date et l'heure sont stockés
-            } else if (event.getEtat().equals("D") && lastStop != null) { //dès qu'un démarrage est trouvé et qu'un arrêt est stocké la durée d'arrêt est stockée
+            } else if (event.getEtat().equalsIgnoreCase("D") && lastStop != null) { //dès qu'un démarrage est trouvé et qu'un arrêt est stocké la durée d'arrêt est stockée
                 totalDowntime = totalDowntime.plus(clampToWorkHours(lastStop, event.getDateTime())); //calcul la durée entre un arrêt et un démarrage en prenant en compte les horaires d'une journée
                 if (lastStart != null) { //Si un démarrage et un arrêt sont enregistré la durée de fonctionnement est calculée
                     totalUptime = totalUptime.plus(clampToWorkHours(lastStart, lastStop));

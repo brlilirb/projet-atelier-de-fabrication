@@ -9,8 +9,8 @@ import java.util.Objects;
 
 public class NumberTextFieldBlock extends VBox {
 
-    private Label label;
-    private NumberTextField textField;
+    private final Label label;
+    private final NumberTextField textField;
 
     public NumberTextFieldBlock(String label) {
         this.label = new TitleLabel(label);

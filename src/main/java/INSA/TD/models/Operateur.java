@@ -16,6 +16,13 @@ public class Operateur extends Personne {
         this.libre = true;
     }
 
+    public Operateur(String id, String nom, String prenom, boolean libre) {
+        this.setId(id);
+        this.setNom(nom);
+        this.setPrenom(prenom);
+        this.libre = libre;
+    }
+
     public Operateur(String id) {
         this.setId(id);
         this.libre = true;

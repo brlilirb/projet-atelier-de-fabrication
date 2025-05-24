@@ -8,8 +8,8 @@ import javafx.scene.layout.VBox;
 
 public class TextFieldBlock extends VBox {
 
-    private Label label;
-    private CustomTextField textField;
+    private final Label label;
+    private final CustomTextField textField;
 
     public TextFieldBlock(String label) {
         this.label = new TitleLabel(label);

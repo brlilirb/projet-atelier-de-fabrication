@@ -7,6 +7,7 @@ import INSA.TD.controllers.implementation.PosteControllerImpl;
 import INSA.TD.models.Machine;
 import INSA.TD.models.Poste;
 import INSA.TD.views.entity.form.AbstractForm;
+import INSA.TD.views.entity.form.PosteForm;
 import INSA.TD.views.entity.tableview.MachineTableView;
 import INSA.TD.views.entity.tableview.PosteTableView;
 import INSA.TD.views.label.H1TitleLabel;
@@ -50,7 +51,7 @@ public class PosteView extends AbstractEntityView<Poste> {
 
     @Override
     protected AbstractForm<Poste> createAddForm() {
-        return null;
+        return new PosteForm(this::addValue);
     }
 
     @Override

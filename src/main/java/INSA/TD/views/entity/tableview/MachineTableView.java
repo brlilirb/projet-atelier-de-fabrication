@@ -84,7 +84,7 @@ public class MachineTableView extends AbstractEntityTableView<Machine> {
         etatMachineColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getEtatMachine()));
         etatMachineColumn.setCellFactory(ComboBoxTableCell.forTableColumn(
                 StringConverterUtils.toEtatMachineStringConverter(),
-                EtatMachineFactory.getObservableEtatsMachine()
+                EtatMachineFactory.getEtatMachines()
         ));
         etatMachineColumn.setOnEditCommit(event -> event.getRowValue().setEtatMachine(event.getNewValue()));
         etatMachineColumn.setMinWidth(200);

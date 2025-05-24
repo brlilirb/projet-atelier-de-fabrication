@@ -1,12 +1,18 @@
 package INSA.TD.views.entity.tableview;
 
+import INSA.TD.controllers.implementation.EquipementControllerImpl;
+import INSA.TD.models.AbstractIdentity;
 import INSA.TD.models.Operation;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.NumberStringConverter;
+
+import java.util.List;
 
 public class OperationTableView extends AbstractEntityTableView<Operation> {
 
@@ -19,9 +25,10 @@ public class OperationTableView extends AbstractEntityTableView<Operation> {
     protected void initSpecificTableColumns() {
         TableColumn<Operation, String> descriptionCol = initDescriptionColumn();
         TableColumn<Operation, Number> dureeCol = initDureeColumn();
+        TableColumn<Operation, String> refEquipementCol = initRefProduitColumn();
 
-        getColumns().addAll(descriptionCol, dureeCol);
-    }//TODO ajouter équipement; ref ou objet complet ?
+        getColumns().addAll(descriptionCol, dureeCol, refEquipementCol);
+    }
 
     protected TableColumn<Operation, String> initDescriptionColumn() {
         TableColumn<Operation, String> descriptionCol = new TableColumn<>("Description");
@@ -38,5 +45,25 @@ public class OperationTableView extends AbstractEntityTableView<Operation> {
         dureeCol.setOnEditCommit(event -> event.getRowValue().setDureeOperation(event.getNewValue().floatValue()));
         dureeCol.setMinWidth(200);
         return dureeCol;
+    }
+
+    private TableColumn<Operation, String> initRefProduitColumn() {
+        TableColumn<Operation, String> refEquipementCol = new TableColumn<>("Référence équipement");
+        refEquipementCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getRefEquipement()));
+        refEquipementCol.setCellFactory(ComboBoxTableCell.forTableColumn(getAllEquipements()));
+        refEquipementCol.setOnEditCommit(event -> event.getRowValue().setRefEquipement(event.getNewValue()));
+        return refEquipementCol;
+    }
+
+    private ObservableList<String> getAllEquipements() {
+        return FXCollections.observableArrayList(getAllEquipementIds());
+    }
+
+    private List<String> getAllEquipementIds() {
+        return EquipementControllerImpl.getInstance()
+                .afficherTous()
+                .stream()
+                .map(AbstractIdentity::getId)
+                .toList();
     }
 }

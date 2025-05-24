@@ -61,6 +61,7 @@ public class PosteTableView extends AbstractEntityTableView<Poste> {
                 };
             }
         });
+        voirCol.setSortable(false);
         return voirCol;
     }
 
