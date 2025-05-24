@@ -26,7 +26,7 @@ public class PosteTableView extends AbstractEntityTableView<Poste> {
         TableColumn<Poste, Void> voirCol = initVoirColumn();
 
         getColumns().addAll(descriptionCol, voirCol);
-    }//TODO rajouter liste machines
+    }
 
     protected TableColumn<Poste, String> initDescriptionColumn() {
         TableColumn<Poste, String> descriptionCol = new TableColumn<>("Description");

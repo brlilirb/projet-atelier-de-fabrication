@@ -9,6 +9,7 @@ import INSA.TD.models.Poste;
 import INSA.TD.views.entity.form.AbstractForm;
 import INSA.TD.views.entity.tableview.MachineTableView;
 import INSA.TD.views.entity.tableview.PosteTableView;
+import INSA.TD.views.label.H1TitleLabel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -21,12 +22,13 @@ public class PosteView extends AbstractEntityView<Poste> {
 
     private final EquipementController equipementController;
     private ObservableList<Machine> machinesDuPoste;
-    private final PosteTableView posteTableView;
+    private MachineTableView machineTableView;
 
     public PosteView() {
         super();
+        machinesDuPoste = FXCollections.observableArrayList();
         equipementController = EquipementControllerImpl.getInstance();
-        posteTableView = new PosteTableView(getData());
+        this.setTop(new H1TitleLabel("Postes"));
     }
 
     @Override
@@ -41,6 +43,8 @@ public class PosteView extends AbstractEntityView<Poste> {
 
     @Override
     protected TableView<Poste> createTableView() {
+        PosteTableView posteTableView = new PosteTableView(getData());
+        posteTableView.setOnVoirClicked(this::handleVoirMachinesDuPoste);
         return posteTableView;
     }
 
@@ -51,8 +55,8 @@ public class PosteView extends AbstractEntityView<Poste> {
 
     @Override
     protected Node createSpecificNode() {
-        posteTableView.setOnVoirClicked(this::handleVoirMachinesDuPoste); //TODO fix bug
-        return new MachineTableView(machinesDuPoste);
+        machineTableView = new MachineTableView(getMachinesDuPoste());
+        return machineTableView;
     }
 
     public ObservableList<Machine> getMachinesDuPoste() {
@@ -65,5 +69,6 @@ public class PosteView extends AbstractEntityView<Poste> {
 
     private void handleVoirMachinesDuPoste(Poste poste) {
         setMachinesDuPoste(poste.getListeMachines());
+        machineTableView.setItems(getMachinesDuPoste());
     }
 }
