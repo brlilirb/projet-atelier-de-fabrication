@@ -21,8 +21,24 @@ public abstract class AbstractForm<T> extends VBox {
     private Consumer<T> consumer;
     private final Button button = new AddButton();
     private final Label errorLabel = new ErrorLabel();
+    private T entity;
 
-    protected AbstractForm() {
+    protected AbstractForm(Consumer<T> consumer) {
+        this.consumer = consumer;
+        button.setOnAction(_ -> handleAddAction());
+        errorLabel.setVisible(false);
+        createForm();
+    }
+
+    protected AbstractForm(Consumer<T> consumer, T entity) {
+        this.entity = entity;
+        this.consumer = consumer;
+        button.setOnAction(_ -> handleAddAction());
+        errorLabel.setVisible(false);
+        createForm();
+    }
+
+    private void createForm() {
         setSpacing(ViewConfig.DEFAULT_SPACING);
         setPadding(new Insets(ViewConfig.DEFAULT_SPACING));
         setMaxWidth(500);
@@ -30,13 +46,6 @@ public abstract class AbstractForm<T> extends VBox {
                 new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY)
         ));
         initForm();
-    }
-
-    protected AbstractForm(Consumer<T> consumer) {
-        this();
-        this.consumer = consumer;
-        button.setOnAction(_ -> handleAddAction());
-        errorLabel.setVisible(false);
     }
 
     protected void initForm() {
@@ -58,4 +67,8 @@ public abstract class AbstractForm<T> extends VBox {
     protected abstract Node initFields();
 
     protected abstract void handleAddAction();
+
+    protected T getEntity() {
+        return entity;
+    }
 }

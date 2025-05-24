@@ -34,4 +34,8 @@ public class CheckBoxListBlock<T> extends VBox {
     public ObservableList<T> getSelectedItems() {
         return getCheckBoxListField().getSelectedItems();
     }
+
+    public void setSelectedItems(ObservableList<T> items) {
+        getCheckBoxListField().setItems(items);
+    }
 }
