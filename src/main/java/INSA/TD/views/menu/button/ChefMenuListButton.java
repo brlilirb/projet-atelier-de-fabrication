@@ -13,8 +13,8 @@ import static INSA.TD.config.ViewConfig.DEFAULT_SPACING;
 
 public class ChefMenuListButton extends MenuListButton {
 
-    public ChefMenuListButton(Consumer<Node> consumer) {
-        super(consumer);
+    public ChefMenuListButton(Consumer<Node> consumer, Runnable runnable) {
+        super(consumer, runnable);
         setOtherButtons();
     }
 

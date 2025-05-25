@@ -23,7 +23,10 @@ public class MenuView extends BorderPane {
 
     private final Text intro = new Text("Menu");
 
-    public MenuView(AbstractWorkerView abstractWorkerView) {
+    private final Runnable runnable;
+
+    public MenuView(AbstractWorkerView abstractWorkerView, Runnable runnable) {
+        this.runnable = runnable;
         this.abstractWorkerView = abstractWorkerView;
 
         setBorder(CustomBorderFactory.getRightBorder());
@@ -52,7 +55,7 @@ public class MenuView extends BorderPane {
     }
 
     protected void createMenuListButton() {
-        setMenuListButton(new MenuListButton(getSetParent()));
+        setMenuListButton(new MenuListButton(getSetParent(), runnable));
     }
 
     protected Consumer<Node> getSetParent() {
@@ -61,5 +64,9 @@ public class MenuView extends BorderPane {
 
     public void setMenuListButton(MenuListButton menuListButton) {
         this.menuListButton = menuListButton;
+    }
+
+    public Runnable getRunnable() {
+        return runnable;
     }
 }

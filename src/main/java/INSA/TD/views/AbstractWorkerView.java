@@ -7,11 +7,14 @@ import javafx.scene.layout.BorderPane;
 
 public abstract class AbstractWorkerView extends BorderPane {
 
+    private final Runnable runnable;
     private MenuView menuView;
 
-    protected AbstractWorkerView() {
-        this.menuView = new MenuView(this);
+    protected AbstractWorkerView(Runnable runnable) {
+        this.runnable = runnable;
+        this.menuView = new MenuView(this, runnable);
         initMenuView();
+        setCenter(new DefaultView());
     }
 
     public void initMenuView() {
@@ -28,5 +31,9 @@ public abstract class AbstractWorkerView extends BorderPane {
 
     public void setMenuView(MenuView menuView) {
         this.menuView = menuView;
+    }
+
+    public Runnable getRunnable() {
+        return runnable;
     }
 }

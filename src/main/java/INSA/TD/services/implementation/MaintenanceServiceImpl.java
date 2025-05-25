@@ -15,6 +15,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -50,34 +51,45 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     public Fiabilite computeFiabilite(String machineId) {
         List<SuiviMaintenance> machineEvents = getSortedEventsById(machineId); //assure que les events sont dans l'ordre chronologique
 
+        long dayNumbers = 1;
+
+        List<LocalDate> dates = getDistinctLocalDate(machineEvents);
+
+        if (dates.size() > 1) {
+            dayNumbers = Math.abs(ChronoUnit.DAYS.between(
+                    dates.getFirst(),
+                    dates.getLast()
+            ));
+        }
+
         Duration totalDowntime = Duration.ZERO;
-        Duration totalUptime = Duration.ZERO;
+        Duration totalUptime = Duration.between(TimeUtils.getStartTime(), TimeUtils.getEndTime()).multipliedBy(dayNumbers);
 
         LocalDateTime lastStop = null;
-        LocalDateTime lastStart = null;
 
         for (SuiviMaintenance event : machineEvents) {
             if (event.getEtat().equalsIgnoreCase("A")) { // Attention a bien donner l'heure de demarrage en debut de journee
                 lastStop = event.getDateTime(); //dès qu'un arrêt est trouvé la date et l'heure sont stockés
             } else if (event.getEtat().equalsIgnoreCase("D") && lastStop != null) { //dès qu'un démarrage est trouvé et qu'un arrêt est stocké la durée d'arrêt est stockée
                 totalDowntime = totalDowntime.plus(clampToWorkHours(lastStop, event.getDateTime())); //calcul la durée entre un arrêt et un démarrage en prenant en compte les horaires d'une journée
-                if (lastStart != null) { //Si un démarrage et un arrêt sont enregistré la durée de fonctionnement est calculée
-                    totalUptime = totalUptime.plus(clampToWorkHours(lastStart, lastStop));
-                }
-                lastStart = event.getDateTime(); //puisque "D" a été trouvé, l'heure de démarrage est enregistrée
                 lastStop = null; //l'heure d'arrêt est réinitialisée
             }
         }
 
-        long totalMinutes = totalUptime.plus(totalDowntime).toMinutes();
+        long totalMinutes = totalUptime.toMinutes();
+        totalUptime = totalUptime.minus(totalDowntime);
         double fiablility = totalMinutes > 0 ? (double) totalUptime.toMinutes() / totalMinutes : 0;
 
-        System.out.println("Machine: " + machineId);
-        System.out.println("  temps total de fonctionnement: " + totalUptime.toMinutes() + " mins");
-        System.out.println("  temps total d'arrêt: " + totalDowntime.toMinutes() + " mins");
-        System.out.printf("  fiabilité: %.2f%%\n", fiablility * 100);
+        return new Fiabilite(machineId, fiablility, totalDowntime, totalUptime, dayNumbers);
+    }
 
-        return new Fiabilite(machineId, fiablility, totalDowntime, totalUptime);
+    private List<LocalDate> getDistinctLocalDate(List<SuiviMaintenance> suiviMaintenances) {
+        return suiviMaintenances.stream()
+                .map(SuiviMaintenance::getDateTime)
+                .map(LocalDateTime::toLocalDate)
+                .distinct()
+                .sorted()
+                .toList();
     }
 
     public List<Fiabilite> computeAllFiabilites() { //en partant du principe que les machines présentent dans le fichier de suivi ont été créée

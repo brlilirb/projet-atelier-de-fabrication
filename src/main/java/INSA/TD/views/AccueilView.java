@@ -47,7 +47,7 @@ public class AccueilView {
     private void showOuvrierComponent() {
         userController.createOuvrier();
         updateView(
-                new OuvrierView(),
+                new OuvrierView(this::showChefComponent),
                 "Ouvrier"
         );
     }
@@ -55,7 +55,7 @@ public class AccueilView {
     private void showChefComponent() {
         userController.createChefAtelier();
         updateView(
-                new ChefAtelierView(),
+                new ChefAtelierView(this::showOuvrierComponent),
                 "Chef d'atelier"
         );
     }

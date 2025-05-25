@@ -10,7 +10,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.util.List;
 
-public abstract class AbstractView<T extends AbstractIdentity> extends BorderPane implements Controller<T> { // TODO remake an interface
+public abstract class AbstractView<T extends AbstractIdentity> extends BorderPane implements Controller<T> {
 
     private ObservableList<T> data;
 

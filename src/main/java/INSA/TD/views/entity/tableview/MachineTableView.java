@@ -52,7 +52,8 @@ public class MachineTableView extends AbstractEntityTableView<Machine> {
                 abscisseCol,
                 ordonneeCol,
                 fiabiliteCol,
-                etatMachineCol
+                etatMachineCol,
+                voirCol
         );
 
         fiabiliteCol.setVisible(getUser().autorisation());

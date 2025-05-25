@@ -5,12 +5,12 @@ import INSA.TD.views.menu.button.ChefMenuListButton;
 
 public class ChefMenuView extends MenuView {
 
-    public ChefMenuView(AbstractWorkerView abstractWorkerView) {
-        super(abstractWorkerView);
+    public ChefMenuView(AbstractWorkerView abstractWorkerView, Runnable runnable) {
+        super(abstractWorkerView, runnable);
     }
 
     @Override
     protected void createMenuListButton() {
-        setMenuListButton(new ChefMenuListButton(getSetParent()));
+        setMenuListButton(new ChefMenuListButton(getSetParent(), getRunnable()));
     }
 }
