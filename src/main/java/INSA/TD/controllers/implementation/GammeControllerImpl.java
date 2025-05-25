@@ -25,4 +25,14 @@ public class GammeControllerImpl extends AbstractEntityController<Gamme> impleme
     protected GammeService getService() {
         return gammeService;
     }
+
+    @Override
+    public double calculerCout(Gamme gamme) {
+        return gammeService.calculerCout(gamme);
+    }
+
+    @Override
+    public double calculerDuree(Gamme gamme) {
+        return gammeService.calculerDuree(gamme);
+    }
 }

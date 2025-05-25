@@ -20,9 +20,7 @@ public interface MaintenanceService extends SaveService {
 
     List<SuiviMaintenance> getAll();
 
-    SuiviMaintenance update(SuiviMaintenance event);
-
-    void deleteEvent(SuiviMaintenance event);
+    void deleteEvent(Long id);
 
     void deleteAll();
 }

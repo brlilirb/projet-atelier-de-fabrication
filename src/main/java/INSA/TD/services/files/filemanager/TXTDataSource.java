@@ -3,7 +3,6 @@ package INSA.TD.services.files.filemanager;
 import INSA.TD.utils.StringUtils;
 
 import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class TXTDataSource extends FileDataSource {
@@ -16,8 +15,7 @@ public class TXTDataSource extends FileDataSource {
     protected <E> void writeValue(List<E> data) throws Exception {
         Files.write(
                 getPath(),
-                StringUtils.convertToStringList(data),
-                StandardOpenOption.CREATE
+                StringUtils.convertToStringList(data)
         );
     }
 

@@ -4,6 +4,7 @@ import INSA.TD.models.Machine;
 import INSA.TD.models.SuiviMaintenance;
 import INSA.TD.services.MachineService;
 import INSA.TD.services.MachineSuiviService;
+import INSA.TD.services.PosteService;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -11,6 +12,8 @@ import java.util.function.Function;
 public class MachineServiceImpl extends AbstractSuiviService<Machine> implements MachineService, MachineSuiviService {
 
     private static MachineServiceImpl instance;
+
+    private final PosteService posteService = PosteServiceImpl.getInstance();
 
     private MachineServiceImpl() {
     }
@@ -28,6 +31,12 @@ public class MachineServiceImpl extends AbstractSuiviService<Machine> implements
             instance = new MachineServiceImpl();
         }
         return instance;
+    }
+
+    @Override
+    public void delete(String id) {
+        posteService.clearMachine(id);
+        super.delete(id);
     }
 
     @Override

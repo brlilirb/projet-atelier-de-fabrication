@@ -51,6 +51,15 @@ public class OperationServiceImpl extends EntityService<Operation> implements Op
     }
 
     @Override
+    public void clearEquipement(String refEquipement) {
+        for (Operation operation : getAll()) {
+            if (operation.getRefEquipement().equals(refEquipement)) {
+                operation.setRefEquipement(null);
+            }
+        }
+    }
+
+    @Override
     public String getExistMessage() {
         return "La référence de l'opération existe déjà.";
     }
