@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -64,7 +65,7 @@ public class GammeForm extends AbstractForm<Gamme> {
             getErrorLabel().setVisible(false);
             Gamme gamme = new Gamme(
                     referenceTextField.getText(),
-                    operationListView.getSelectedItems(),
+                    new ArrayList<>(operationListView.getSelectedItems()),
                     produitChoiceBox.getValue()
             );
 

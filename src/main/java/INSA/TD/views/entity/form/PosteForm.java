@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -55,7 +56,7 @@ public class PosteForm extends AbstractForm<Poste> {
         if (!Objects.isNull(referenceTextField.getText()) && !referenceTextField.getText().isEmpty()) {
             getErrorLabel().setVisible(false);
             Poste poste = new Poste(
-                    machineListView.getSelectedItems(),
+                    new ArrayList<>(machineListView.getSelectedItems()),
                     descriptionTextField.getText(),
                     referenceTextField.getText()
             );
