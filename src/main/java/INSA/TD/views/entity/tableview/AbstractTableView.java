@@ -1,11 +1,10 @@
 package INSA.TD.views.entity.tableview;
 
-import INSA.TD.models.AbstractIdentity;
 import javafx.collections.ObservableList;
 import javafx.scene.CacheHint;
 import javafx.scene.control.TableView;
 
-public abstract class AbstractTableView<T extends AbstractIdentity> extends TableView<T> {
+public abstract class AbstractTableView<T> extends TableView<T> {
 
     protected AbstractTableView(ObservableList<T> data) {
         setMaxHeight(500);

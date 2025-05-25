@@ -34,11 +34,11 @@ public class MenuListButton extends VBox {
 
     public List<Node> getMenuList() {
         return new ArrayList<>(List.of(
-                new GammeButton(consumer),
                 new MachineButton(consumer),
-                new OperationButton(consumer),
                 new PosteButton(consumer),
-                new ProduitButton(consumer)
+                new ProduitButton(consumer),
+                new OperationButton(consumer),
+                new GammeButton(consumer)
         ));
     }
 

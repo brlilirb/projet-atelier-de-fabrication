@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 
 public class SuiviMaintenance {
 
+    private Long id;
+
     private final String date;
 
     private final String time;
@@ -23,9 +25,38 @@ public class SuiviMaintenance {
         this.date = args[0];
         this.time = args[1];
         this.refMachine = args[2];
-        this.etat = args[3];
+        this.etat = args[3].toUpperCase();
         this.operateur = args[4];
-        this.cause = args[5];
+        this.cause = args[5].toLowerCase();
+    }
+
+    public SuiviMaintenance(Long id, String date, String time, String refMachine, String etat, String operateur, String cause) {
+        this(
+                date,
+                time,
+                refMachine,
+                etat,
+                operateur,
+                cause
+        );
+        setId(id);
+    }
+
+    public SuiviMaintenance(String date, String time, String refMachine, String etat, String operateur, String cause) {
+        this.date = date;
+        this.time = time;
+        this.refMachine = refMachine;
+        this.etat = etat;
+        this.operateur = operateur;
+        this.cause = cause;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDate() {

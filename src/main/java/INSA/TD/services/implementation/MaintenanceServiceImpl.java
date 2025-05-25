@@ -19,6 +19,8 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static INSA.TD.utils.ConstantesUtils.SUIVI_MAINTENANCE_ID;
+
 public class MaintenanceServiceImpl implements MaintenanceService {
 
     private static MaintenanceServiceImpl instance;
@@ -55,9 +57,9 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         LocalDateTime lastStart = null;
 
         for (SuiviMaintenance event : machineEvents) {
-            if (event.getEtat().equals("A")) { // Attention a bien donner l'heure de demarrage en debut de journee
+            if (event.getEtat().equalsIgnoreCase("A")) { // Attention a bien donner l'heure de demarrage en debut de journee
                 lastStop = event.getDateTime(); //dès qu'un arrêt est trouvé la date et l'heure sont stockés
-            } else if (event.getEtat().equals("D") && lastStop != null) { //dès qu'un démarrage est trouvé et qu'un arrêt est stocké la durée d'arrêt est stockée
+            } else if (event.getEtat().equalsIgnoreCase("D") && lastStop != null) { //dès qu'un démarrage est trouvé et qu'un arrêt est stocké la durée d'arrêt est stockée
                 totalDowntime = totalDowntime.plus(clampToWorkHours(lastStop, event.getDateTime())); //calcul la durée entre un arrêt et un démarrage en prenant en compte les horaires d'une journée
                 if (lastStart != null) { //Si un démarrage et un arrêt sont enregistré la durée de fonctionnement est calculée
                     totalUptime = totalUptime.plus(clampToWorkHours(lastStart, lastStop));
@@ -120,19 +122,13 @@ public class MaintenanceServiceImpl implements MaintenanceService {
                 .toList();
     }
 
-    public SuiviMaintenance update(SuiviMaintenance event) {
-        int index = events.indexOf(event);
-        if (index != -1) {
-            events.set(index, event);
-            return event;
-        }
-        events.add(event);
-        return event;
-    }
-
     @Override
-    public void deleteEvent(SuiviMaintenance event) {
-        events.remove(event);
+    public void deleteEvent(Long id) {
+        events = new ArrayList<>(
+                events.stream()
+                        .filter(e -> !e.getId().equals(id))
+                        .toList()
+        );
     }
 
     public void deleteAll() {
@@ -177,6 +173,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         return values.stream()
                 .map(data -> data.split(ConstantesUtils.SPACE))
                 .map(SuiviMaintenance::new)
+                .peek(e -> e.setId(SUIVI_MAINTENANCE_ID.getAndIncrement()))
                 .toList();
     }
 

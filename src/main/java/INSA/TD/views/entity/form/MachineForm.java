@@ -5,12 +5,11 @@ import INSA.TD.models.etat.machine.Disponible;
 import INSA.TD.models.etat.machine.EtatMachine;
 import INSA.TD.utils.StringConverterUtils;
 import INSA.TD.views.entity.factory.EtatMachineFactory;
-import INSA.TD.views.entity.factory.TextFormatterFactory;
+import INSA.TD.views.entity.form.field.ChoiceBoxBlock;
+import INSA.TD.views.entity.form.field.NumberTextFieldBlock;
+import INSA.TD.views.entity.form.field.TextFieldBlock;
 import INSA.TD.views.label.H1TitleLabel;
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.VBox;
 
 import java.util.Objects;
@@ -18,13 +17,13 @@ import java.util.function.Consumer;
 
 public class MachineForm extends AbstractForm<Machine> {
 
-    private TextField referenceTextField;
-    private TextField descriptionTextField;
-    private TextField typeTextField;
-    private TextFormatter<Number> coutTextFormatter;
-    private TextFormatter<Number> abscisseTextFormatter;
-    private TextFormatter<Number> ordonneeTextFormatter;
-    private ChoiceBox<EtatMachine> etatMachineChoiceBox;
+    private TextFieldBlock referenceTextField;
+    private TextFieldBlock descriptionTextField;
+    private TextFieldBlock typeTextField;
+    private NumberTextFieldBlock coutTextField;
+    private NumberTextFieldBlock abscisseTextField;
+    private NumberTextFieldBlock ordonneeTextField;
+    private ChoiceBoxBlock<EtatMachine> etatMachineChoiceBox;
 
     public MachineForm(Consumer<Machine> consumer) {
         super(consumer);
@@ -34,33 +33,24 @@ public class MachineForm extends AbstractForm<Machine> {
     protected Node initFields() {
         VBox vbox = new VBox(10);
 
-        referenceTextField = new TextField();
-        referenceTextField.setPromptText("Référence");
+        referenceTextField = new TextFieldBlock("Référence");
 
-        descriptionTextField = new TextField();
-        descriptionTextField.setPromptText("Désignation"); // TODO verification
+        descriptionTextField = new TextFieldBlock("Désignation");
 
-        typeTextField = new TextField();
-        typeTextField.setPromptText("Type"); // TODO verification
+        typeTextField = new TextFieldBlock("Type");
 
-        TextField coutTextField = new TextField();
-        coutTextField.setPromptText("Cout");
-        coutTextFormatter = TextFormatterFactory.getNumberTextFormatter();
-        coutTextField.setTextFormatter(coutTextFormatter);
+        coutTextField = new NumberTextFieldBlock("Coût");
 
-        TextField abscisseTextField = new TextField();
-        abscisseTextField.setPromptText("Abscisse");
-        abscisseTextFormatter = TextFormatterFactory.getNumberTextFormatter();
-        abscisseTextField.setTextFormatter(abscisseTextFormatter);
+        abscisseTextField = new NumberTextFieldBlock("Abscisse");
 
-        TextField ordonneeTextField = new TextField();
-        ordonneeTextField.setPromptText("Ordonnee");
-        ordonneeTextFormatter = TextFormatterFactory.getNumberTextFormatter();
-        ordonneeTextField.setTextFormatter(ordonneeTextFormatter);
+        ordonneeTextField = new NumberTextFieldBlock("Ordonnée");
 
-        etatMachineChoiceBox = new ChoiceBox<>(EtatMachineFactory.getObservableEtatsMachine());
-        etatMachineChoiceBox.setValue(new Disponible());
-        etatMachineChoiceBox.setConverter(StringConverterUtils.toEtatMachineStringConverter());
+        etatMachineChoiceBox = new ChoiceBoxBlock<>(
+                "Etat machine",
+                EtatMachineFactory.getEtatMachines(),
+                new Disponible(),
+                StringConverterUtils.toEtatMachineStringConverter()
+        );
 
         vbox.getChildren().addAll(
                 new H1TitleLabel("Création machine"),
@@ -71,28 +61,30 @@ public class MachineForm extends AbstractForm<Machine> {
                 abscisseTextField,
                 ordonneeTextField,
                 etatMachineChoiceBox
-
         );
         return vbox;
     }
 
     @Override
     protected void handleAddAction() {
-        if (!Objects.isNull(referenceTextField.getText())) { //TODO finir vérification référence nulle et afficher message dans ce cas
+        if (!Objects.isNull(referenceTextField.getText()) && !referenceTextField.getText().isEmpty()) {
+            getErrorLabel().setVisible(false);
             Machine machine = new Machine(
                     typeTextField.getText(),
-                    ordonneeTextFormatter.getValue() == null ? 0 : ordonneeTextFormatter.getValue().floatValue(),
-                    abscisseTextFormatter.getValue() == null ? 0 : abscisseTextFormatter.getValue().floatValue(),
-                    coutTextFormatter.getValue() == null ? 0 : coutTextFormatter.getValue().floatValue(),
+                    ordonneeTextField.getFloatValue(),
+                    abscisseTextField.getFloatValue(),
+                    coutTextField.getFloatValue(),
                     descriptionTextField.getText(),
-                    referenceTextField.getText()
+                    referenceTextField.getText(),
+                    etatMachineChoiceBox.getValue()
             );
-            if (Objects.nonNull(getConsumer())) { // TODO verification
+
+            if (Objects.nonNull(getConsumer())) {
                 getConsumer().accept(machine);
             }
         } else {
-            this.getChildren().forEach(node -> node.setStyle("-fx-border-color: red;"));
+            getErrorLabel().setText("La référence ne doit pas être vide.");
+            getErrorLabel().setVisible(true);
         }
-
     }
 }

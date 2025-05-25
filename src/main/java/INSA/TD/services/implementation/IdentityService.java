@@ -3,6 +3,7 @@ package INSA.TD.services.implementation;
 import INSA.TD.exceptions.ExistException;
 import INSA.TD.models.AbstractIdentity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -16,9 +17,11 @@ public abstract class IdentityService<E extends AbstractIdentity> {
     }
 
     public List<E> deleteById(List<E> list, String id) {
-        return list.stream()
-                .filter(Predicate.not(isIdEqual(id)))
-                .toList();
+        return new ArrayList<>(
+                list.stream()
+                        .filter(Predicate.not(isIdEqual(id)))
+                        .toList()
+        );
     }
 
     private static <E extends AbstractIdentity> Predicate<E> isIdEqual(String id) {

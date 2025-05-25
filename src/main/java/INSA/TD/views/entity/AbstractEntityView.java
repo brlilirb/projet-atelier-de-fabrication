@@ -1,12 +1,12 @@
 package INSA.TD.views.entity;
 
+import INSA.TD.config.ViewConfig;
 import INSA.TD.controllers.UserController;
 import INSA.TD.controllers.implementation.UserControllerImpl;
 import INSA.TD.models.AbstractIdentity;
 import INSA.TD.views.button.AddButton;
 import INSA.TD.views.button.DeleteButton;
 import INSA.TD.views.entity.form.AbstractForm;
-import INSA.TD.views.label.ErrorLabel;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -15,6 +15,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 import java.util.Objects;
 
@@ -27,17 +28,23 @@ public abstract class AbstractEntityView<T extends AbstractIdentity> extends Abs
     private final Button deleteButton = new DeleteButton();
     private final Button addButton = new AddButton();
     private final BorderPane borderPane = new BorderPane();
+    private final VBox vbox = new VBox(ViewConfig.DEFAULT_SPACING);
     private final Node specificNode;
+    private AbstractForm<T> addForm;
 
     protected AbstractEntityView() {
         super();
         tableView = createTableView();
         userController = UserControllerImpl.getInstance();
         specificNode = createSpecificNode();
-        setSpacing(DEFAULT_SPACING);
         setPadding(new Insets(DEFAULT_SPACING));
 
-        getChildren().addAll(tableView, borderPane);
+        vbox.getChildren().addAll(tableView, borderPane);
+        vbox.setSpacing(DEFAULT_SPACING);
+        vbox.setPadding(new Insets(DEFAULT_SPACING));
+
+        setCenter(vbox);
+        setRight(specificNode);
 
         getTableView().getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         getTableView().setEditable(userController.getUser().autorisation());
@@ -72,22 +79,26 @@ public abstract class AbstractEntityView<T extends AbstractIdentity> extends Abs
     }
 
     protected void addValue(T entity) {
-        if (Objects.nonNull(entity) && getData().stream().noneMatch(e -> e.getId().equals(entity.getId()))) {
+        if (Objects.nonNull(entity) && checkUnique(entity)) {
             getData().add(entity);
             getController().ajouter(entity);
             borderPane.setCenter(null);
             borderPane.setBottom(null);
         } else {
-            borderPane.setBottom(
-                    new ErrorLabel("La référence existe déjà, veuillez en saisir une autre.")
-            );
+            addForm.getErrorLabel().setText("La référence existe déjà, veuillez en saisir une autre.");
+            addForm.getErrorLabel().setVisible(true);
         }
+    }
+
+    protected boolean checkUnique(T entity) {
+        return Objects.isNull(getController().afficher(entity.getId()));
     }
 
     private void initAddButton() {
         addButton.setOnAction(_ -> {
             if (Objects.isNull(borderPane.getCenter())) {
-                borderPane.setCenter(createAddForm());
+                addForm = createAddForm();
+                borderPane.setCenter(addForm);
             }
         });
     }
