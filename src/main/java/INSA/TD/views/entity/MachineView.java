@@ -7,6 +7,7 @@ import INSA.TD.controllers.implementation.MachineControllerImpl;
 import INSA.TD.models.Machine;
 import INSA.TD.views.entity.form.MachineForm;
 import INSA.TD.views.entity.tableview.MachineTableView;
+import INSA.TD.views.label.TitleBox;
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
 
@@ -19,6 +20,7 @@ public class MachineView extends AbstractEntityView<Machine> {
     public MachineView() {
         super();
         equipementController = EquipementControllerImpl.getInstance();
+        setTop(new TitleBox("Machines"));
     }
 
     @Override

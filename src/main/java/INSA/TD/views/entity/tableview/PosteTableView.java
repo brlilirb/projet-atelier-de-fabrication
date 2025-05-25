@@ -40,7 +40,7 @@ public class PosteTableView extends AbstractEntityTableView<Poste> {
         TableColumn<Poste, Void> voirCol = new TableColumn<>("Machines");
         voirCol.setCellFactory(new Callback<>() {
             @Override
-            public TableCell<Poste, Void> call(final TableColumn<Poste, Void> param) {//définir qu'il y a un boutton dans les cellules
+            public TableCell<Poste, Void> call(final TableColumn<Poste, Void> param) {//définir qu'il y a un bouton dans les cellules
                 return new TableCell<>() {
                     private final Button btn = new Button("Voir");
 

@@ -19,6 +19,8 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static INSA.TD.utils.ConstantesUtils.SUIVI_MAINTENANCE_ID;
+
 public class MaintenanceServiceImpl implements MaintenanceService {
 
     private static MaintenanceServiceImpl instance;
@@ -120,19 +122,13 @@ public class MaintenanceServiceImpl implements MaintenanceService {
                 .toList();
     }
 
-    public SuiviMaintenance update(SuiviMaintenance event) {
-        int index = events.indexOf(event);
-        if (index != -1) {
-            events.set(index, event);
-            return event;
-        }
-        events.add(event);
-        return event;
-    }
-
     @Override
-    public void deleteEvent(SuiviMaintenance event) {
-        events.remove(event);
+    public void deleteEvent(Long id) {
+        events = new ArrayList<>(
+                events.stream()
+                        .filter(e -> !e.getId().equals(id))
+                        .toList()
+        );
     }
 
     public void deleteAll() {
@@ -177,6 +173,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         return values.stream()
                 .map(data -> data.split(ConstantesUtils.SPACE))
                 .map(SuiviMaintenance::new)
+                .peek(e -> e.setId(SUIVI_MAINTENANCE_ID.getAndIncrement()))
                 .toList();
     }
 

@@ -12,7 +12,7 @@ import INSA.TD.views.entity.form.MachinesPosteForm;
 import INSA.TD.views.entity.form.PosteForm;
 import INSA.TD.views.entity.tableview.MachineTableView;
 import INSA.TD.views.entity.tableview.PosteTableView;
-import INSA.TD.views.label.H1TitleLabel;
+import INSA.TD.views.label.TitleBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -39,10 +39,7 @@ public class PosteView extends AbstractEntityView<Poste> {
     public PosteView() {
         machinesDuPoste = FXCollections.observableArrayList();
         equipementController = EquipementControllerImpl.getInstance();
-        VBox titleVBox = new VBox(ViewConfig.DEFAULT_SPACING);
-        titleVBox.setPadding(new Insets(ViewConfig.DEFAULT_SPACING));
-        titleVBox.getChildren().add(new H1TitleLabel("Postes"));
-        setTop(titleVBox);
+        setTop(new TitleBox("Postes"));
     }
 
     @Override
@@ -121,14 +118,13 @@ public class PosteView extends AbstractEntityView<Poste> {
     }
 
     private void initPosteActionComponents() {
-        if (getUserController().getUser().autorisation()) {
-            deleteMachineButton = new Button("Supprimer machine(s)");
-            deleteMachineButton.setDisable(true);
-            addMachineButton = new Button("Ajouter machine(s)");
-            addMachineButton.setDisable(true);
-            buttonBar = new ButtonBar();
-            buttonBar.getButtons().addAll(deleteMachineButton, addMachineButton);
-        }
+        deleteMachineButton = new Button("Supprimer machine(s)");
+        deleteMachineButton.setDisable(true);
+        addMachineButton = new Button("Ajouter machine(s)");
+        addMachineButton.setDisable(true);
+        buttonBar = new ButtonBar();
+        buttonBar.getButtons().addAll(deleteMachineButton, addMachineButton);
+        buttonBar.setVisible(getUserController().getUser().autorisation());
     }
 
     protected void addMachines(Poste poste) {

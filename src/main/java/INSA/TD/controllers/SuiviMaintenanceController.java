@@ -12,9 +12,7 @@ public interface SuiviMaintenanceController {
 
     SuiviMaintenance ajouter(SuiviMaintenance event);
 
-    SuiviMaintenance modifier(SuiviMaintenance entity);
-
-    void supprimer(SuiviMaintenance event);
+    void supprimer(Long id);
 
     Fiabilite calculerFiabilite(String id);
 

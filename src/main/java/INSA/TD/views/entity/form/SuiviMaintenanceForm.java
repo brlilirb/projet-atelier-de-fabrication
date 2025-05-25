@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static INSA.TD.utils.ConstantesUtils.SUIVI_MAINTENANCE_ID;
+
 public class SuiviMaintenanceForm extends AbstractForm<SuiviMaintenance> {
 
     private DatePickerBlock dateTextField;
@@ -34,33 +36,41 @@ public class SuiviMaintenanceForm extends AbstractForm<SuiviMaintenance> {
     @Override
     protected Node initFields() {
         VBox vbox = new VBox(10);
+        int width = 200;
 
         dateTextField = new DatePickerBlock("Date");
+        dateTextField.getDatePicker().setPrefWidth(200);
 
         timePickerBlock = new TimePickerBlock("Heure");
+        timePickerBlock.getTimePicker().setPrefWidth(width);
 
         referenceMachineTextField = new ChoiceBoxBlock<>(
                 "Référence machine",
                 getAllEquipements()
         );
+        referenceMachineTextField.getChoiceBox().getSelectionModel().selectFirst();
+        referenceMachineTextField.getChoiceBox().setPrefWidth(width);
 
         etatTextField = new ChoiceBoxBlock<>(
                 "Etat",
                 EtatMachineFactory.getEtats()
         );
         etatTextField.getChoiceBox().getSelectionModel().selectFirst();
+        etatTextField.getChoiceBox().setPrefWidth(width);
 
         operateurTextField = new ChoiceBoxBlock<>(
                 "Opérateur",
                 getAllOperateurs()
         );
         operateurTextField.getChoiceBox().getSelectionModel().selectFirst();
+        operateurTextField.getChoiceBox().setPrefWidth(width);
 
         causeTextField = new ChoiceBoxBlock<>(
                 "Cause",
                 EtatMachineFactory.getCauses()
         );
         causeTextField.getChoiceBox().getSelectionModel().selectFirst();
+        causeTextField.getChoiceBox().setPrefWidth(width);
 
         vbox.getChildren().addAll(
                 new H1TitleLabel("Création suivi maintenance"),
@@ -76,17 +86,20 @@ public class SuiviMaintenanceForm extends AbstractForm<SuiviMaintenance> {
 
     @Override
     protected void handleAddAction() {
-        if (Objects.isNull(referenceMachineTextField.getValue()) && referenceMachineTextField.getValue().isEmpty()
-                && Objects.isNull(dateTextField.getDate()) && dateTextField.getDate().isEmpty()
-                && Objects.isNull(timePickerBlock.getTime()) && timePickerBlock.getTime().isEmpty()
-                && Objects.isNull(etatTextField.getValue()) && etatTextField.getValue().isEmpty()) {
+        if (Objects.nonNull(referenceMachineTextField.getValue()) && !referenceMachineTextField.getValue().isEmpty()
+                && Objects.nonNull(dateTextField.getDate()) && !dateTextField.getDate().isEmpty()
+                && Objects.nonNull(timePickerBlock.getTime()) && !timePickerBlock.getTime().isEmpty()
+                && Objects.nonNull(etatTextField.getValue()) && !etatTextField.getValue().isEmpty()
+                && Objects.nonNull(operateurTextField.getValue()) && !operateurTextField.getValue().isEmpty()
+                && Objects.nonNull(causeTextField.getValue()) && !causeTextField.getValue().isEmpty()) {
             SuiviMaintenance suiviMaintenance = new SuiviMaintenance(
+                    SUIVI_MAINTENANCE_ID.getAndIncrement(),
                     dateTextField.getDate(),
                     timePickerBlock.getTime(),
                     referenceMachineTextField.getValue(),
                     etatTextField.getValue(),
                     operateurTextField.getValue(),
-                    causeTextField.getValue()
+                    causeTextField.getValue().toLowerCase()
             );
 
             if (Objects.nonNull(getConsumer())) {

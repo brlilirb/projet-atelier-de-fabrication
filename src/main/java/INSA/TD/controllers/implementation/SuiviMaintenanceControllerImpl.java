@@ -39,13 +39,8 @@ public class SuiviMaintenanceControllerImpl implements SuiviMaintenanceControlle
     }
 
     @Override
-    public SuiviMaintenance modifier(SuiviMaintenance entity) {
-        return maintenanceService.update(entity);
-    }
-
-    @Override
-    public void supprimer(SuiviMaintenance event) {
-        maintenanceService.deleteEvent(event);
+    public void supprimer(Long id) {
+        maintenanceService.deleteEvent(id);
     }
 
     @Override

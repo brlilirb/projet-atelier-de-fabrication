@@ -1,11 +1,16 @@
 package INSA.TD.utils;
 
+import INSA.TD.models.Fiabilite;
 import INSA.TD.models.Machine;
 import INSA.TD.models.Operation;
 import INSA.TD.models.etat.machine.EtatMachine;
 import javafx.util.StringConverter;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.Objects;
+
+import static INSA.TD.utils.ConstantesUtils.PERCENT_FORMAT;
 
 public class StringConverterUtils {
 
@@ -21,7 +26,11 @@ public class StringConverterUtils {
 
             @Override
             public LocalDate fromString(String string) {
-                return (string == null || string.isEmpty()) ? null : LocalDate.parse(string, ConstantesUtils.DATE_FORMATTER);
+                try {
+                    return (string == null || string.isEmpty()) ? null : LocalDate.parse(string, ConstantesUtils.DATE_FORMATTER);
+                } catch (Exception e) {
+                    return null;
+                }
             }
         };
     }
@@ -81,6 +90,23 @@ public class StringConverterUtils {
             @Override
             public Boolean fromString(String string) {
                 return "Libre".equals(string);
+            }
+        };
+    }
+
+    public static StringConverter<Fiabilite> toFiabiliteStringConverter() {
+        NumberFormat percentFormat = PERCENT_FORMAT;
+        percentFormat.setMaximumFractionDigits(2);
+
+        return new StringConverter<>() {
+            @Override
+            public String toString(Fiabilite fiabilite) {
+                return Objects.nonNull(fiabilite) ? percentFormat.format(fiabilite.fiabilite()) : "";
+            }
+
+            @Override
+            public Fiabilite fromString(String string) {
+                return null;
             }
         };
     }

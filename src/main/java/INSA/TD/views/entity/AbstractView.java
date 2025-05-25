@@ -32,7 +32,6 @@ public abstract class AbstractView<T extends AbstractIdentity> extends BorderPan
 
     @Override
     public T ajouter(T entity) {
-        // TODO warning when entity already exist
         return getController().ajouter(entity);
     }
 
